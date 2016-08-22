@@ -6,9 +6,12 @@ import com.mauriciotogneri.greencoffee.annotations.When;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
+import java.util.Arrays;
 
+// https://github.com/googlesamples/android-testing/blob/master/runner/AndroidJunitRunnerSample/app/src/androidTest/java/com/example/android/testing/androidjunitrunnersample/CalculatorAddParameterizedTest.java
 public class ApplicationTest extends GreenCoffeeTest
 {
     @Rule
@@ -19,10 +22,24 @@ public class ApplicationTest extends GreenCoffeeTest
     private static final String INVALID_USERNAME = "guest";
     private static final String INVALID_PASSWORD = "5678";
 
+    private final String param;
+
+    @Parameters
+    public static Iterable<Object> data()
+    {
+        return Arrays.asList(new Object[] {"aaa", "bbb", "ccc"});
+    }
+
+    public ApplicationTest(String param)
+    {
+        this.param = param;
+    }
+
     @Test
     public void init() throws IOException
     {
-        start(fromAssets("assets/login.feature"), this, activityTestRule);
+        System.out.println(param);
+        // start(fromAssets("assets/login.feature"), this, activityTestRule);
     }
 
     @Given("^an empty login form$")

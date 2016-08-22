@@ -6,6 +6,12 @@ Feature: Login screen to authenticate users
   Background:
     Given an empty login form
 
+  Scenario: Valid username and password
+    When I introduce a valid username
+    And  I introduce a valid password
+    And  I press the login button
+    Then I see the main screen
+
   Scenario: Username not introduced
     When I introduce a valid password
     And  I press the login button
@@ -33,9 +39,3 @@ Feature: Login screen to authenticate users
     And  I introduce an invalid password
     And  I press the login button
     Then I see an error message with 'Invalid credentials'
-
-  Scenario: Valid username and password
-    When I introduce a valid username
-    And  I introduce a valid password
-    And  I press the login button
-    Then I see the main screen

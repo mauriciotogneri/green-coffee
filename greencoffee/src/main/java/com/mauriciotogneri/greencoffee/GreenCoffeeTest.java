@@ -3,7 +3,6 @@ package com.mauriciotogneri.greencoffee;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.filters.LargeTest;
-import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.greencoffee.annotations.Given;
@@ -11,6 +10,7 @@ import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import gherkin.ast.GherkinDocument;
 import gherkin.ast.ScenarioDefinition;
 import gherkin.ast.Step;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(Parameterized.class)
 @LargeTest
 public class GreenCoffeeTest
 {
