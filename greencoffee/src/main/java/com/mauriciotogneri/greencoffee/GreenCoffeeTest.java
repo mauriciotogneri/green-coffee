@@ -1,7 +1,5 @@
 package com.mauriciotogneri.greencoffee;
 
-import android.content.Context;
-import android.content.res.AssetManager;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Pair;
@@ -90,7 +88,7 @@ public class GreenCoffeeTest
         return null;
     }
 
-    private void processFeature(Feature feature, List<StepDefinition> stepDefinitions) throws Exception
+    private void processFeature(Feature feature, List<StepDefinition> stepDefinitions) throws IOException
     {
         for (ScenarioDefinition scenario : feature.getChildren())
         {
@@ -98,7 +96,7 @@ public class GreenCoffeeTest
         }
     }
 
-    private void processScenario(ScenarioDefinition scenario, List<StepDefinition> stepDefinitions) throws Exception
+    private void processScenario(ScenarioDefinition scenario, List<StepDefinition> stepDefinitions) throws IOException
     {
         for (Step step : scenario.getSteps())
         {
@@ -106,7 +104,7 @@ public class GreenCoffeeTest
         }
     }
 
-    private void processStep(Step step, List<StepDefinition> stepDefinitions) throws Exception
+    private void processStep(Step step, List<StepDefinition> stepDefinitions) throws IOException
     {
         String keyword = step.getKeyword().trim();
         String text = step.getText().trim();
@@ -123,11 +121,11 @@ public class GreenCoffeeTest
         throw new RuntimeException(String.format("Step definition not found for: '%s: %s'", keyword, text));
     }
 
-    protected String fromAssets(String featurePath, Context context) throws IOException
+    protected String fromAssets(String featurePath) throws IOException
     {
-        AssetManager assetManager = context.getAssets();
+        InputStream stream = getClass().getClassLoader().getResourceAsStream(featurePath);
 
-        return fromInputStream(assetManager.open(featurePath));
+        return fromInputStream(stream);
     }
 
     protected String fromInputStream(InputStream featureInput) throws IOException

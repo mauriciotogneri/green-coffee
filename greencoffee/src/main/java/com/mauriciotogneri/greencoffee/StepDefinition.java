@@ -1,5 +1,6 @@
 package com.mauriciotogneri.greencoffee;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,7 +27,7 @@ public class StepDefinition
         return this.keyword.equals(keyword) && matcher.find();
     }
 
-    public void invoke(String text) throws Exception
+    public void invoke(String text) throws IOException
     {
         Matcher matcher = pattern.matcher(text);
 
@@ -39,7 +40,14 @@ public class StepDefinition
                 parameters[i] = matcher.group(i + 1);
             }
 
-            method.invoke(target, parameters);
+            try
+            {
+                method.invoke(target, parameters);
+            }
+            catch (Exception e)
+            {
+                throw new IOException(e);
+            }
         }
     }
 }

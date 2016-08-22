@@ -24,7 +24,7 @@ public class ApplicationTest extends GreenCoffeeTest
     @Test
     public void init() throws IOException
     {
-        start(fromAssets("test.feature", activityTestRule.getActivity()), this);
+        start(fromAssets("assets/test.feature"), this);
     }
 
     @Given("^some precondition$")
