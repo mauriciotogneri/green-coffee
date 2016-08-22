@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
 
-public class ApplicationTest extends GreenCoffeeTest
+public class ApplicationTest extends GreenCoffee
 {
     @Rule
     public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);

@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StepDefinition
+class StepDefinition
 {
     private final Pattern pattern;
     private final Method method;

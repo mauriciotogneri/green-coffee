@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,15 @@ public class GreenCoffeeConfig
         return fromInputStream(stream);
     }
 
+    public List<Scenario> fromUrl(String featureUrl) throws IOException
+    {
+        URL url = new URL(featureUrl);
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        urlConnection.setRequestMethod("GET");
+
+        return fromInputStream(urlConnection.getInputStream());
+    }
+
     public List<Scenario> fromInputStream(InputStream featureInput) throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(featureInput));
@@ -41,7 +52,7 @@ public class GreenCoffeeConfig
         return scenarios(builder.toString());
     }
 
-    public List<Scenario> scenarios(String featureSource)
+    private List<Scenario> scenarios(String featureSource)
     {
         List<Scenario> result = new ArrayList<>();
 

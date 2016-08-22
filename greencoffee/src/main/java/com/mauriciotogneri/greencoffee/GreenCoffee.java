@@ -4,6 +4,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.text.TextUtils;
 
+import com.mauriciotogneri.greencoffee.annotations.And;
+import com.mauriciotogneri.greencoffee.annotations.But;
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
@@ -26,11 +28,11 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import gherkin.ast.Step;
 
 @RunWith(Parameterized.class)
-public class GreenCoffeeTest
+public class GreenCoffee
 {
     private final Scenario scenario;
 
-    public GreenCoffeeTest(Scenario scenario)
+    public GreenCoffee(Scenario scenario)
     {
         this.scenario = scenario;
     }
@@ -44,9 +46,11 @@ public class GreenCoffeeTest
             logDescription("\t\t", scenario.description());
         }
 
+        List<StepDefinition> stepDefinitions = stepDefinitions(target);
+
         for (Step step : scenario.steps())
         {
-            processStep(step, stepDefinitions(target));
+            processStep(step, stepDefinitions);
         }
     }
 
@@ -89,6 +93,20 @@ public class GreenCoffeeTest
         if (then != null)
         {
             return then.value();
+        }
+
+        And and = method.getAnnotation(And.class);
+
+        if (and != null)
+        {
+            return and.value();
+        }
+
+        But but = method.getAnnotation(But.class);
+
+        if (but != null)
+        {
+            return but.value();
         }
 
         return null;
