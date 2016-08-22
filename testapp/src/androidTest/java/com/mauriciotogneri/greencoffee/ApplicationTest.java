@@ -1,5 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.support.test.rule.ActivityTestRule;
+
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
@@ -9,37 +11,34 @@ import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
-import java.util.Arrays;
 
-// https://github.com/googlesamples/android-testing/blob/master/runner/AndroidJunitRunnerSample/app/src/androidTest/java/com/example/android/testing/androidjunitrunnersample/CalculatorAddParameterizedTest.java
 public class ApplicationTest extends GreenCoffeeTest
 {
     @Rule
-    public ControlledActivityTestRule<LoginActivity> activityTestRule = new ControlledActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "1234";
     private static final String INVALID_USERNAME = "guest";
     private static final String INVALID_PASSWORD = "5678";
 
-    private final String param;
-
-    @Parameters
-    public static Iterable<Object> data()
+    public ApplicationTest(Scenario scenario)
     {
-        return Arrays.asList(new Object[] {"aaa", "bbb", "ccc"});
+        super(scenario);
     }
 
-    public ApplicationTest(String param)
+    @Parameters
+    public static Iterable<Scenario> data() throws IOException
     {
-        this.param = param;
+        GreenCoffeeConfig config = new GreenCoffeeConfig();
+
+        return config.fromAssets("assets/login.feature");
     }
 
     @Test
     public void init() throws IOException
     {
-        System.out.println(param);
-        // start(fromAssets("assets/login.feature"), this, activityTestRule);
+        start(this);
     }
 
     @Given("^an empty login form$")

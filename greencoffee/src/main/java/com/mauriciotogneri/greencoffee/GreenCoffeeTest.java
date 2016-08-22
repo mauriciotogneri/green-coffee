@@ -2,7 +2,6 @@ package com.mauriciotogneri.greencoffee;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
-import android.support.test.filters.LargeTest;
 import android.text.TextUtils;
 
 import com.mauriciotogneri.greencoffee.annotations.Given;
@@ -12,10 +11,7 @@ import com.mauriciotogneri.greencoffee.annotations.When;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,29 +23,30 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import gherkin.AstBuilder;
-import gherkin.Parser;
-import gherkin.ast.Feature;
-import gherkin.ast.GherkinDocument;
-import gherkin.ast.ScenarioDefinition;
 import gherkin.ast.Step;
 
 @RunWith(Parameterized.class)
-@LargeTest
 public class GreenCoffeeTest
 {
-    protected void start(String featureSource, Object target, ControlledActivityTestRule<?> activityTestRule)
+    private final Scenario scenario;
+
+    public GreenCoffeeTest(Scenario scenario)
     {
-        try
+        this.scenario = scenario;
+    }
+
+    protected void start(Object target) throws IOException
+    {
+        log(String.format("\tScenario: %s", scenario.name()));
+
+        if (!TextUtils.isEmpty(scenario.description()))
         {
-            List<StepDefinition> stepDefinitions = stepDefinitions(target);
-            Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
-            GherkinDocument gherkinDocument = parser.parse(featureSource);
-            processFeature(gherkinDocument.getFeature(), stepDefinitions, activityTestRule);
+            logDescription("\t\t", scenario.description());
         }
-        catch (Exception e)
+
+        for (Step step : scenario.steps())
         {
-            throw new RuntimeException(e);
+            processStep(step, stepDefinitions(target));
         }
     }
 
@@ -97,66 +94,6 @@ public class GreenCoffeeTest
         return null;
     }
 
-    private void processFeature(Feature feature, List<StepDefinition> stepDefinitions, ControlledActivityTestRule<?> activityTestRule) throws IOException
-    {
-        log(String.format("Feature: %s", feature.getName()));
-
-        if (!TextUtils.isEmpty(feature.getDescription()))
-        {
-            logDescription("\t", feature.getDescription());
-        }
-
-        List<ScenarioDefinition> backgrounds = filterScenariosBy(feature, "Background");
-        List<ScenarioDefinition> scenarios = filterScenariosBy(feature, "Scenario");
-
-        for (int i = 0; i < scenarios.size(); i++)
-        {
-            ScenarioDefinition scenario = scenarios.get(i);
-
-            for (ScenarioDefinition background : backgrounds)
-            {
-                processScenario(background, stepDefinitions);
-            }
-
-            processScenario(scenario, stepDefinitions);
-
-            if (i < (scenarios.size() - 1))
-            {
-                activityTestRule.restartActivity();
-            }
-        }
-    }
-
-    private List<ScenarioDefinition> filterScenariosBy(Feature feature, String keyword)
-    {
-        List<ScenarioDefinition> backgrounds = new ArrayList<>();
-
-        for (ScenarioDefinition scenario : feature.getChildren())
-        {
-            if (TextUtils.equals(scenario.getKeyword(), keyword))
-            {
-                backgrounds.add(scenario);
-            }
-        }
-
-        return backgrounds;
-    }
-
-    private void processScenario(ScenarioDefinition scenario, List<StepDefinition> stepDefinitions) throws IOException
-    {
-        log(String.format("\tScenario: %s", scenario.getName()));
-
-        if (!TextUtils.isEmpty(scenario.getDescription()))
-        {
-            logDescription("\t\t", scenario.getDescription());
-        }
-
-        for (Step step : scenario.getSteps())
-        {
-            processStep(step, stepDefinitions);
-        }
-    }
-
     private void processStep(Step step, List<StepDefinition> stepDefinitions) throws IOException
     {
         String keyword = step.getKeyword().trim();
@@ -174,29 +111,6 @@ public class GreenCoffeeTest
         }
 
         throw new RuntimeException(String.format("Step definition not found for: '%s: %s'", keyword, text));
-    }
-
-    protected String fromAssets(String featurePath) throws IOException
-    {
-        InputStream stream = getClass().getClassLoader().getResourceAsStream(featurePath);
-
-        return fromInputStream(stream);
-    }
-
-    protected String fromInputStream(InputStream featureInput) throws IOException
-    {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(featureInput));
-        StringBuilder builder = new StringBuilder();
-        String line;
-
-        while ((line = reader.readLine()) != null)
-        {
-            builder.append(line).append("\n");
-        }
-
-        reader.close();
-
-        return builder.toString();
     }
 
     private void logDescription(String tab, String description)
