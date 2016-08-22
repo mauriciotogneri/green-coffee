@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Green Coffee</string>
+    <string name="app_name">Green Coffee Test App</string>
+
+    <string name="dialog.button.ok">Ok</string>
+
+    <string name="login.title">Login</string>
+    <string name="login.username">Username</string>
+    <string name="login.password">Password</string>
+    <string name="login.doLogin">Login</string>
+    <string name="login.username.error">Username invalid</string>
+    <string name="login.password.error">Password invalid</string>
+    <string name="login.error">Invalid credentials</string>
+
+    <string name="main.title">Main screen</string>
 
 </resources>
