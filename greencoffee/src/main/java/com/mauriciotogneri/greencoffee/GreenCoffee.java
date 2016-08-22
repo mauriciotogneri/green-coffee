@@ -13,7 +13,6 @@ import com.mauriciotogneri.greencoffee.annotations.When;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +36,7 @@ public class GreenCoffee
         this.scenario = scenario;
     }
 
-    protected void start(Object target) throws IOException
+    protected void start(Object target)
     {
         log(String.format("\tScenario: %s", scenario.name()));
 
@@ -112,7 +111,7 @@ public class GreenCoffee
         return null;
     }
 
-    private void processStep(Step step, List<StepDefinition> stepDefinitions) throws IOException
+    private void processStep(Step step, List<StepDefinition> stepDefinitions)
     {
         String keyword = step.getKeyword().trim();
         String text = step.getText().trim();
@@ -165,12 +164,12 @@ public class GreenCoffee
         onView(withText(resourceId)).perform(typeText(text));
     }
 
-    protected void isVisibleWithId(@IdRes int resourceId)
+    protected void isDisplayedWithId(@IdRes int resourceId)
     {
         onView(withId(resourceId)).check(matches(isDisplayed()));
     }
 
-    protected void isVisibleWithText(@StringRes int resourceId)
+    protected void isDisplayedWithText(@StringRes int resourceId)
     {
         onView(withText(resourceId)).check(matches(isDisplayed()));
     }

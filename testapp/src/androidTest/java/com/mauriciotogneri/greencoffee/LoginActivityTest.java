@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
 
-public class ApplicationTest extends GreenCoffee
+public class LoginActivityTest extends GreenCoffee
 {
     @Rule
     public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
@@ -22,7 +22,7 @@ public class ApplicationTest extends GreenCoffee
     private static final String INVALID_USERNAME = "guest";
     private static final String INVALID_PASSWORD = "5678";
 
-    public ApplicationTest(Scenario scenario)
+    public LoginActivityTest(Scenario scenario)
     {
         super(scenario);
     }
@@ -30,13 +30,11 @@ public class ApplicationTest extends GreenCoffee
     @Parameters
     public static Iterable<Scenario> data() throws IOException
     {
-        GreenCoffeeConfig config = new GreenCoffeeConfig();
-
-        return config.fromAssets("assets/login.feature");
+        return new GreenCoffeeConfig().fromAssets("assets/login.feature");
     }
 
     @Test
-    public void init() throws IOException
+    public void test()
     {
         start(this);
     }
@@ -81,24 +79,24 @@ public class ApplicationTest extends GreenCoffee
     @Then("^I see an error message with 'Invalid username'$")
     public void iSeeAnErrorMessageWithInvalidUsername()
     {
-        isVisibleWithText(R.string.login_username_error);
+        isDisplayedWithText(R.string.login_username_error);
     }
 
     @Then("^I see an error message with 'Invalid password'$")
     public void iSeeAnErrorMessageWithInvalidPassword()
     {
-        isVisibleWithText(R.string.login_password_error);
+        isDisplayedWithText(R.string.login_password_error);
     }
 
     @Then("^I see an error message with 'Invalid credentials'$")
     public void iSeeAnErrorMessageWithInvalidCredentials()
     {
-        isVisibleWithText(R.string.login_credentials_error);
+        isDisplayedWithText(R.string.login_credentials_error);
     }
 
     @Then("^I see the main screen$")
     public void iSeeTheMainScreen()
     {
-        isVisibleWithText(R.string.main_title);
+        isDisplayedWithText(R.string.main_title);
     }
 }

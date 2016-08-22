@@ -20,6 +20,11 @@ import gherkin.ast.Step;
 
 public class GreenCoffeeConfig
 {
+    public List<Scenario> fromString(String featureSource)
+    {
+        return scenarios(featureSource);
+    }
+
     public List<Scenario> fromAssets(String featurePath) throws IOException
     {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(featurePath);
@@ -54,14 +59,14 @@ public class GreenCoffeeConfig
 
     private List<Scenario> scenarios(String featureSource)
     {
-        List<Scenario> result = new ArrayList<>();
-
         Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
         GherkinDocument gherkinDocument = parser.parse(featureSource);
         Feature feature = gherkinDocument.getFeature();
 
         List<ScenarioDefinition> backgrounds = filterScenariosBy(feature, "Background");
         List<ScenarioDefinition> scenarios = filterScenariosBy(feature, "Scenario");
+
+        List<Scenario> result = new ArrayList<>();
 
         for (ScenarioDefinition scenarioDefinition : scenarios)
         {
