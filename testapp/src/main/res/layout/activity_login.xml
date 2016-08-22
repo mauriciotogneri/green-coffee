@@ -9,7 +9,7 @@
     android:padding="20dp">
 
     <EditText
-        android:id="@+id/login.username"
+        android:id="@+id/login.input.username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -17,7 +17,7 @@
         android:inputType="text" />
 
     <EditText
-        android:id="@+id/login.password"
+        android:id="@+id/login.input.password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -25,7 +25,7 @@
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/login.doLogin"
+        android:id="@+id/login.button.doLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login.doLogin" />

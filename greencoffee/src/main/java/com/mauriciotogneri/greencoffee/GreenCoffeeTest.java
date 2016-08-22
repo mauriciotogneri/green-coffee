@@ -218,9 +218,19 @@ public class GreenCoffeeTest
         onView(withId(resourceId)).perform(click());
     }
 
+    protected void clickWithText(@StringRes int resourceId)
+    {
+        onView(withText(resourceId)).perform(click());
+    }
+
     protected void typeTextWithId(@IdRes int resourceId, String text)
     {
         onView(withId(resourceId)).perform(typeText(text));
+    }
+
+    protected void typeTextWithText(@StringRes int resourceId, String text)
+    {
+        onView(withText(resourceId)).perform(typeText(text));
     }
 
     protected void isVisibleWithId(@IdRes int resourceId)

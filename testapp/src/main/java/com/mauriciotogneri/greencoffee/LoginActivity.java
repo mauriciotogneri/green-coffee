@@ -18,13 +18,13 @@ public class LoginActivity extends AppCompatActivity
 
         setContentView(R.layout.activity_login);
 
-        findViewById(R.id.login_doLogin).setOnClickListener(new OnClickListener()
+        findViewById(R.id.login_button_doLogin).setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                EditText username = (EditText) findViewById(R.id.login_username);
-                EditText password = (EditText) findViewById(R.id.login_password);
+                EditText username = (EditText) findViewById(R.id.login_input_username);
+                EditText password = (EditText) findViewById(R.id.login_input_password);
 
                 login(username.getText().toString(), password.getText().toString());
             }
@@ -35,8 +35,15 @@ public class LoginActivity extends AppCompatActivity
     {
         if (validForm(username, password))
         {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            if (validCredentials(username, password))
+            {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            }
+            else
+            {
+                errorDialog(R.string.login_credentials_error);
+            }
         }
     }
 
@@ -56,6 +63,11 @@ public class LoginActivity extends AppCompatActivity
         }
 
         return true;
+    }
+
+    private boolean validCredentials(String username, String password)
+    {
+        return TextUtils.equals(username, "admin") && TextUtils.equals(password, "1234");
     }
 
     private void errorDialog(int message)

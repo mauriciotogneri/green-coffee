@@ -15,6 +15,9 @@ public class ApplicationTest extends GreenCoffeeTest
     public ControlledActivityTestRule<LoginActivity> activityTestRule = new ControlledActivityTestRule<>(LoginActivity.class);
 
     private static final String VALID_USERNAME = "admin";
+    private static final String VALID_PASSWORD = "1234";
+    private static final String INVALID_USERNAME = "guest";
+    private static final String INVALID_PASSWORD = "5678";
 
     @Test
     public void init() throws IOException
@@ -25,14 +28,14 @@ public class ApplicationTest extends GreenCoffeeTest
     @Given("^an empty login form$")
     public void anEmptyLoginForm()
     {
-        typeTextWithId(R.id.login_username, "");
-        typeTextWithId(R.id.login_password, "");
+        typeTextWithId(R.id.login_input_username, "");
+        typeTextWithId(R.id.login_input_password, "");
     }
 
     @When("^I press the login button$")
     public void iPressTheLoginButton()
     {
-        clickWithId(R.id.login_doLogin);
+        clickWithId(R.id.login_button_doLogin);
     }
 
     @Then("^I see an error message with 'Invalid username'$")
@@ -48,8 +51,26 @@ public class ApplicationTest extends GreenCoffeeTest
     }
 
     @When("^I introduce a valid username$")
-    public void iIntroduceAUsername()
+    public void iIntroduceAValidUsername()
     {
-        typeTextWithId(R.id.login_username, VALID_USERNAME);
+        typeTextWithId(R.id.login_input_username, VALID_USERNAME);
+    }
+
+    @When("^I introduce a valid password$")
+    public void iIntroduceAValidPassword()
+    {
+        typeTextWithId(R.id.login_input_password, VALID_PASSWORD);
+    }
+
+    @When("^I introduce an invalid username$")
+    public void iIntroduceAnInvalidUsername()
+    {
+        typeTextWithId(R.id.login_input_username, INVALID_USERNAME);
+    }
+
+    @When("^I introduce an invalid password$")
+    public void iIntroduceAInvalidPassword()
+    {
+        typeTextWithId(R.id.login_input_password, INVALID_PASSWORD);
     }
 }
