@@ -2,7 +2,7 @@ package com.mauriciotogneri.greencoffee;
 
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
-import android.util.Pair;
+import android.text.TextUtils;
 
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
@@ -29,14 +29,14 @@ import gherkin.ast.Step;
 @LargeTest
 public class GreenCoffeeTest
 {
-    protected void start(String featureSource, Object target)
+    protected void start(String featureSource, Object target, ControlledActivityTestRule<?> activityTestRule)
     {
         try
         {
             List<StepDefinition> stepDefinitions = stepDefinitions(target);
             Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
             GherkinDocument gherkinDocument = parser.parse(featureSource);
-            processFeature(gherkinDocument.getFeature(), stepDefinitions);
+            processFeature(gherkinDocument.getFeature(), stepDefinitions, activityTestRule);
         }
         catch (Exception e)
         {
@@ -50,11 +50,11 @@ public class GreenCoffeeTest
 
         for (Method method : target.getClass().getDeclaredMethods())
         {
-            Pair<String, String> pair = keyAndText(method);
+            String expression = expression(method);
 
-            if (pair != null)
+            if (expression != null)
             {
-                StepDefinition stepDefinition = new StepDefinition(pair.first, pair.second, method, target);
+                StepDefinition stepDefinition = new StepDefinition(expression, method, target);
                 stepDefinitions.add(stepDefinition);
             }
         }
@@ -62,42 +62,101 @@ public class GreenCoffeeTest
         return stepDefinitions;
     }
 
-    private Pair<String, String> keyAndText(Method method)
+    private String expression(Method method)
     {
         Given given = method.getAnnotation(Given.class);
 
         if (given != null)
         {
-            return new Pair<>("Given", given.value());
+            return given.value();
         }
 
         When when = method.getAnnotation(When.class);
 
         if (when != null)
         {
-            return new Pair<>("When", when.value());
+            return when.value();
         }
 
         Then then = method.getAnnotation(Then.class);
 
         if (then != null)
         {
-            return new Pair<>("Then", then.value());
+            return then.value();
         }
 
         return null;
     }
 
-    private void processFeature(Feature feature, List<StepDefinition> stepDefinitions) throws IOException
+    private void processFeature(Feature feature, List<StepDefinition> stepDefinitions, ControlledActivityTestRule<?> activityTestRule) throws IOException
     {
+        log(String.format("Feature: %s", feature.getName()));
+
+        if (!TextUtils.isEmpty(feature.getDescription()))
+        {
+            logDescription("\t", feature.getDescription());
+        }
+
+        List<ScenarioDefinition> backgrounds = backgrounds(feature);
+        List<ScenarioDefinition> scenarios = scenarios(feature);
+
+        for (int i = 0; i < scenarios.size(); i++)
+        {
+            ScenarioDefinition scenario = scenarios.get(i);
+
+            for (ScenarioDefinition background : backgrounds)
+            {
+                processScenario(background, stepDefinitions);
+            }
+
+            processScenario(scenario, stepDefinitions);
+
+            if (i < (scenarios.size() - 1))
+            {
+                activityTestRule.restartActivity();
+            }
+        }
+    }
+
+    private List<ScenarioDefinition> backgrounds(Feature feature)
+    {
+        List<ScenarioDefinition> backgrounds = new ArrayList<>();
+
         for (ScenarioDefinition scenario : feature.getChildren())
         {
-            processScenario(scenario, stepDefinitions);
+            if (TextUtils.equals(scenario.getKeyword(), "Background"))
+            {
+                backgrounds.add(scenario);
+            }
         }
+
+        return backgrounds;
+    }
+
+    private List<ScenarioDefinition> scenarios(Feature feature)
+    {
+        List<ScenarioDefinition> backgrounds = new ArrayList<>();
+
+        for (ScenarioDefinition scenario : feature.getChildren())
+        {
+            if (TextUtils.equals(scenario.getKeyword(), "Scenario"))
+            {
+                backgrounds.add(scenario);
+            }
+        }
+
+        return backgrounds;
     }
 
     private void processScenario(ScenarioDefinition scenario, List<StepDefinition> stepDefinitions) throws IOException
     {
+        log(String.format("\tScenario: %s", scenario.getName()));
+
+        if (!TextUtils.isEmpty(scenario.getDescription()))
+        {
+            logDescription("\t\t", scenario.getDescription());
+        }
+
         for (Step step : scenario.getSteps())
         {
             processStep(step, stepDefinitions);
@@ -109,9 +168,11 @@ public class GreenCoffeeTest
         String keyword = step.getKeyword().trim();
         String text = step.getText().trim();
 
+        log(String.format("\t\t%s %s", keyword, text));
+
         for (StepDefinition stepDefinition : stepDefinitions)
         {
-            if (stepDefinition.matches(keyword, text))
+            if (stepDefinition.matches(text))
             {
                 stepDefinition.invoke(text);
                 return;
@@ -142,5 +203,19 @@ public class GreenCoffeeTest
         reader.close();
 
         return builder.toString();
+    }
+
+    private void logDescription(String tab, String description)
+    {
+        for (String line : description.split("\n"))
+        {
+            log(String.format("%s%s", tab, line.trim()));
+        }
+    }
+
+    private void log(String message)
+    {
+        System.out.println(message);
+        System.out.flush();
     }
 }
