@@ -12,7 +12,7 @@
         android:id="@+id/login.input.username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="20dp"
         android:hint="@string/login.username"
         android:inputType="text" />
 
@@ -20,7 +20,7 @@
         android:id="@+id/login.input.password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="30dp"
         android:hint="@string/login.password"
         android:inputType="textPassword" />
 

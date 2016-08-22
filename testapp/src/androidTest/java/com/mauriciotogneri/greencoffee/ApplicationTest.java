@@ -38,18 +38,6 @@ public class ApplicationTest extends GreenCoffeeTest
         clickWithId(R.id.login_button_doLogin);
     }
 
-    @Then("^I see an error message with 'Invalid username'$")
-    public void iSeeAnErrorMessageWithInvalidUsername()
-    {
-        isVisibleWithText(R.string.login_username_error);
-    }
-
-    @Then("^I see an error message with 'Invalid password'$")
-    public void iSeeAnErrorMessageWithInvalidPassword()
-    {
-        isVisibleWithText(R.string.login_password_error);
-    }
-
     @When("^I introduce a valid username$")
     public void iIntroduceAValidUsername()
     {
@@ -72,5 +60,29 @@ public class ApplicationTest extends GreenCoffeeTest
     public void iIntroduceAInvalidPassword()
     {
         typeTextWithId(R.id.login_input_password, INVALID_PASSWORD);
+    }
+
+    @Then("^I see an error message with 'Invalid username'$")
+    public void iSeeAnErrorMessageWithInvalidUsername()
+    {
+        isVisibleWithText(R.string.login_username_error);
+    }
+
+    @Then("^I see an error message with 'Invalid password'$")
+    public void iSeeAnErrorMessageWithInvalidPassword()
+    {
+        isVisibleWithText(R.string.login_password_error);
+    }
+
+    @Then("^I see an error message with 'Invalid credentials'$")
+    public void iSeeAnErrorMessageWithInvalidCredentials()
+    {
+        isVisibleWithText(R.string.login_credentials_error);
+    }
+
+    @Then("^I see the main screen$")
+    public void iSeeTheMainScreen()
+    {
+        isVisibleWithText(R.string.main_title);
     }
 }
