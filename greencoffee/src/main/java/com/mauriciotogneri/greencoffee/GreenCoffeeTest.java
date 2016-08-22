@@ -13,6 +13,7 @@ import com.mauriciotogneri.greencoffee.annotations.When;
 import org.junit.runner.RunWith;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Method;
@@ -30,12 +31,11 @@ import gherkin.ast.Step;
 @LargeTest
 public class GreenCoffeeTest
 {
-    protected void start(String featurePath, Context context, Object target)
+    protected void start(String featureSource, Object target)
     {
         try
         {
             List<StepDefinition> stepDefinitions = stepDefinitions(target);
-            String featureSource = featureSource(featurePath, context);
             Parser<GherkinDocument> parser = new Parser<>(new AstBuilder());
             GherkinDocument gherkinDocument = parser.parse(featureSource);
             processFeature(gherkinDocument.getFeature(), stepDefinitions);
@@ -123,12 +123,16 @@ public class GreenCoffeeTest
         throw new RuntimeException(String.format("Step definition not found for: '%s: %s'", keyword, text));
     }
 
-    private String featureSource(String path, Context context) throws Exception
+    protected String fromAssets(String featurePath, Context context) throws IOException
     {
         AssetManager assetManager = context.getAssets();
-        InputStream inputStream = assetManager.open(path);
 
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        return fromInputStream(assetManager.open(featurePath));
+    }
+
+    protected String fromInputStream(InputStream featureInput) throws IOException
+    {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(featureInput));
         StringBuilder builder = new StringBuilder();
         String line;
 

@@ -9,6 +9,8 @@ import com.mauriciotogneri.greencoffee.annotations.When;
 import org.junit.Rule;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -20,9 +22,9 @@ public class ApplicationTest extends GreenCoffeeTest
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Test
-    public void init()
+    public void init() throws IOException
     {
-        start("test.feature", activityTestRule.getActivity(), this);
+        start(fromAssets("test.feature", activityTestRule.getActivity()), this);
     }
 
     @Given("^some precondition$")
