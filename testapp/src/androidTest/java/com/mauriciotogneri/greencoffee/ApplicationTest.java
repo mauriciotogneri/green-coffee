@@ -9,14 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 
-import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
-
 public class ApplicationTest extends GreenCoffeeTest
 {
     @Rule
@@ -33,31 +25,31 @@ public class ApplicationTest extends GreenCoffeeTest
     @Given("^an empty login form$")
     public void anEmptyLoginForm()
     {
-        onView(withId(R.id.login_username)).perform(typeText(""));
-        onView(withId(R.id.login_password)).perform(typeText(""));
+        typeTextWithId(R.id.login_username, "");
+        typeTextWithId(R.id.login_password, "");
     }
 
     @When("^I press the login button$")
     public void iPressTheLoginButton()
     {
-        onView(withId(R.id.login_doLogin)).perform(click());
+        clickWithId(R.id.login_doLogin);
     }
 
     @Then("^I see an error message with 'Invalid username'$")
     public void iSeeAnErrorMessageWithInvalidUsername()
     {
-        onView(withText(R.string.login_username_error)).check(matches(isDisplayed()));
+        isVisibleWithText(R.string.login_username_error);
     }
 
     @Then("^I see an error message with 'Invalid password'$")
     public void iSeeAnErrorMessageWithInvalidPassword()
     {
-        onView(withText(R.string.login_password_error)).check(matches(isDisplayed()));
+        isVisibleWithText(R.string.login_password_error);
     }
 
     @When("^I introduce a valid username$")
     public void iIntroduceAUsername()
     {
-        onView(withId(R.id.login_username)).perform(typeText(VALID_USERNAME));
+        typeTextWithId(R.id.login_username, VALID_USERNAME);
     }
 }

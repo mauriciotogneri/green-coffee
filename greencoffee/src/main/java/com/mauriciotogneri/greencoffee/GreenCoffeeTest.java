@@ -1,5 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.support.annotation.IdRes;
+import android.support.annotation.StringRes;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 import android.text.TextUtils;
@@ -18,6 +20,13 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import gherkin.AstBuilder;
 import gherkin.Parser;
 import gherkin.ast.Feature;
@@ -97,8 +106,8 @@ public class GreenCoffeeTest
             logDescription("\t", feature.getDescription());
         }
 
-        List<ScenarioDefinition> backgrounds = backgrounds(feature);
-        List<ScenarioDefinition> scenarios = scenarios(feature);
+        List<ScenarioDefinition> backgrounds = filterScenariosBy(feature, "Background");
+        List<ScenarioDefinition> scenarios = filterScenariosBy(feature, "Scenario");
 
         for (int i = 0; i < scenarios.size(); i++)
         {
@@ -118,28 +127,13 @@ public class GreenCoffeeTest
         }
     }
 
-    private List<ScenarioDefinition> backgrounds(Feature feature)
+    private List<ScenarioDefinition> filterScenariosBy(Feature feature, String keyword)
     {
         List<ScenarioDefinition> backgrounds = new ArrayList<>();
 
         for (ScenarioDefinition scenario : feature.getChildren())
         {
-            if (TextUtils.equals(scenario.getKeyword(), "Background"))
-            {
-                backgrounds.add(scenario);
-            }
-        }
-
-        return backgrounds;
-    }
-
-    private List<ScenarioDefinition> scenarios(Feature feature)
-    {
-        List<ScenarioDefinition> backgrounds = new ArrayList<>();
-
-        for (ScenarioDefinition scenario : feature.getChildren())
-        {
-            if (TextUtils.equals(scenario.getKeyword(), "Scenario"))
+            if (TextUtils.equals(scenario.getKeyword(), keyword))
             {
                 backgrounds.add(scenario);
             }
@@ -217,5 +211,25 @@ public class GreenCoffeeTest
     {
         System.out.println(message);
         System.out.flush();
+    }
+
+    protected void clickWithId(@IdRes int resourceId)
+    {
+        onView(withId(resourceId)).perform(click());
+    }
+
+    protected void typeTextWithId(@IdRes int resourceId, String text)
+    {
+        onView(withId(resourceId)).perform(typeText(text));
+    }
+
+    protected void isVisibleWithId(@IdRes int resourceId)
+    {
+        onView(withId(resourceId)).check(matches(isDisplayed()));
+    }
+
+    protected void isVisibleWithText(@StringRes int resourceId)
+    {
+        onView(withText(resourceId)).check(matches(isDisplayed()));
     }
 }

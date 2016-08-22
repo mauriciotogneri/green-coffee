@@ -41,7 +41,7 @@ android
 dependencies
 {
     compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
-
     compile 'com.android.support.test:runner:0.5'
     compile 'com.android.support.test:rules:0.5'
+    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
 }
