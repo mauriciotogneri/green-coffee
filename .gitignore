@@ -24,5 +24,5 @@ gradle.properties
 .gradle
 gradle/
 /build
-/app/build
+/testapp/build
 **/build

@@ -1,1 +1,1 @@
-include ':app', ':greencoffee'
+include ':testapp', ':greencoffee'
