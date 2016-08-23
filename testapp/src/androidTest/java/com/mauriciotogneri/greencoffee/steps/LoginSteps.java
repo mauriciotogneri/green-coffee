@@ -1,41 +1,19 @@
-package com.mauriciotogneri.greencoffee;
+package com.mauriciotogneri.greencoffee.steps;
 
-import android.support.test.rule.ActivityTestRule;
+import com.mauriciotogneri.greencoffee.GreenCoffeeSteps;
+import com.mauriciotogneri.greencoffee.R;
+import com.mauriciotogneri.greencoffee.annotations.Given;
+import com.mauriciotogneri.greencoffee.annotations.Then;
+import com.mauriciotogneri.greencoffee.annotations.When;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runners.Parameterized.Parameters;
-
-import java.io.IOException;
-
-public class LoginActivityTest extends GreenCoffee
+public class LoginSteps extends GreenCoffeeSteps
 {
-    @Rule
-    public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
-
     private static final String VALID_USERNAME = "admin";
     private static final String VALID_PASSWORD = "1234";
     private static final String INVALID_USERNAME = "guest";
     private static final String INVALID_PASSWORD = "5678";
 
-    public LoginActivityTest(Scenario scenario)
-    {
-        super(scenario);
-    }
-
-    @Parameters
-    public static Iterable<Scenario> data() throws IOException
-    {
-        return new GreenCoffeeConfig().fromAssets("assets/login.feature");
-    }
-
-    @Test
-    public void test()
-    {
-        start(this);
-    }
-
-    /*@Given("^I see an empty login form$")
+    @Given("^I see an empty login form$")
     public void iSeeAnEmptyLoginForm()
     {
         containsTextWithId(R.id.login_input_username, "");
@@ -106,5 +84,5 @@ public class LoginActivityTest extends GreenCoffee
     public void iSeeTheContactsScreen()
     {
         isDisplayedWithText(R.string.contacts_title);
-    }*/
+    }
 }

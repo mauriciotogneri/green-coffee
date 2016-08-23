@@ -2,16 +2,12 @@ package com.mauriciotogneri.greencoffee;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
-import android.text.TextUtils;
 
 import com.mauriciotogneri.greencoffee.annotations.And;
 import com.mauriciotogneri.greencoffee.annotations.But;
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
-
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -25,46 +21,20 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import gherkin.ast.Step;
 
-@RunWith(Parameterized.class)
-public class GreenCoffee
+public class GreenCoffeeSteps
 {
-    private final Scenario scenario;
-
-    public GreenCoffee(Scenario scenario)
-    {
-        this.scenario = scenario;
-    }
-
-    protected void start(Object target)
-    {
-        log(String.format("\tScenario: %s", scenario.name()));
-
-        if (!TextUtils.isEmpty(scenario.description()))
-        {
-            logDescription("\t\t", scenario.description());
-        }
-
-        List<StepDefinition> stepDefinitions = stepDefinitions(target);
-
-        for (Step step : scenario.steps())
-        {
-            processStep(step, stepDefinitions);
-        }
-    }
-
-    private List<StepDefinition> stepDefinitions(Object target)
+    public List<StepDefinition> stepDefinitions()
     {
         List<StepDefinition> stepDefinitions = new ArrayList<>();
 
-        for (Method method : target.getClass().getDeclaredMethods())
+        for (Method method : getClass().getDeclaredMethods())
         {
             String expression = expression(method);
 
             if (expression != null)
             {
-                StepDefinition stepDefinition = new StepDefinition(expression, method, target);
+                StepDefinition stepDefinition = new StepDefinition(expression, method, this);
                 stepDefinitions.add(stepDefinition);
             }
         }
@@ -110,39 +80,6 @@ public class GreenCoffee
         }
 
         return null;
-    }
-
-    private void processStep(Step step, List<StepDefinition> stepDefinitions)
-    {
-        String keyword = step.getKeyword().trim();
-        String text = step.getText().trim();
-
-        log(String.format("\t\t%s %s", keyword, text));
-
-        for (StepDefinition stepDefinition : stepDefinitions)
-        {
-            if (stepDefinition.matches(text))
-            {
-                stepDefinition.invoke(text);
-                return;
-            }
-        }
-
-        throw new RuntimeException(String.format("Step definition not found for: '%s: %s'", keyword, text));
-    }
-
-    private void logDescription(String tab, String description)
-    {
-        for (String line : description.split("\n"))
-        {
-            log(String.format("%s%s", tab, line.trim()));
-        }
-    }
-
-    private void log(String message)
-    {
-        System.out.println(message);
-        System.out.flush();
     }
 
     protected void clickWithId(@IdRes int resourceId)
