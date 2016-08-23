@@ -11,10 +11,13 @@ import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
 
+@RunWith(Parameterized.class)
 public class ContactListFeatureTest extends GreenCoffeeTest
 {
     @Rule

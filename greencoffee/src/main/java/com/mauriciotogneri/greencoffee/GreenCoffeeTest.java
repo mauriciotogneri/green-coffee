@@ -4,14 +4,10 @@ import android.text.TextUtils;
 
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-
 import java.util.List;
 
 import gherkin.ast.Step;
 
-@RunWith(Parameterized.class)
 public class GreenCoffeeTest
 {
     private final Scenario scenario;

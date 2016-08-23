@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/mauriciotogneri/green-coffee.svg?branch=master)](https://travis-ci.org/mauriciotogneri/green-coffee)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mauriciotogneri/green-coffee/blob/master/LICENSE.txt)
+[![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 
 # Green Coffee
 **Green Coffee** is an Android library that allows you to declare Cucumber step definitions in your instrumentation tests.
