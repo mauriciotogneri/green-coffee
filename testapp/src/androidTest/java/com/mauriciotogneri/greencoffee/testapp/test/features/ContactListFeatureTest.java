@@ -6,7 +6,7 @@ import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.testapp.LoginActivity;
 import com.mauriciotogneri.greencoffee.Scenario;
-import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactSteps;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
 
 import org.junit.Rule;
@@ -15,12 +15,12 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
 
-public class ContactsFeatureTest extends GreenCoffeeTest
+public class ContactListFeatureTest extends GreenCoffeeTest
 {
     @Rule
     public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
 
-    public ContactsFeatureTest(Scenario scenario)
+    public ContactListFeatureTest(Scenario scenario)
     {
         super(scenario);
     }
@@ -34,6 +34,6 @@ public class ContactsFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(new LoginSteps(), new ContactSteps());
+        start(new LoginSteps(), new ContactListSteps());
     }
 }

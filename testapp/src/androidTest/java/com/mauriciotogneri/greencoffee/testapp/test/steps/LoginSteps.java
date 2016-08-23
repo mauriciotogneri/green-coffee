@@ -63,20 +63,20 @@ public class LoginSteps extends GreenCoffeeSteps
         typeTextWithId(R.id.login_input_password, password);
     }
 
-    @Then("^I see an error message with 'Invalid username'$")
-    public void iSeeAnErrorMessageWithInvalidUsername()
+    @Then("^I see an error message saying 'Invalid username'$")
+    public void iSeeAnErrorMessageSayingInvalidUsername()
     {
         isDisplayedWithText(R.string.login_username_error);
     }
 
-    @Then("^I see an error message with 'Invalid password'$")
-    public void iSeeAnErrorMessageWithInvalidPassword()
+    @Then("^I see an error message saying 'Invalid password'$")
+    public void iSeeAnErrorMessageSayingInvalidPassword()
     {
         isDisplayedWithText(R.string.login_password_error);
     }
 
-    @Then("^I see an error message with 'Invalid credentials'$")
-    public void iSeeAnErrorMessageWithInvalidCredentials()
+    @Then("^I see an error message saying 'Invalid credentials'$")
+    public void iSeeAnErrorMessageSayingInvalidCredentials()
     {
         isDisplayedWithText(R.string.login_credentials_error);
     }

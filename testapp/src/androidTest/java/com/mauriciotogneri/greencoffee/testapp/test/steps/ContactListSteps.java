@@ -5,7 +5,7 @@ import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 
 @SuppressWarnings("unused")
-public class ContactSteps extends GreenCoffeeSteps
+public class ContactListSteps extends GreenCoffeeSteps
 {
     @When("^I select a contact from the list$")
     public void iSelectAContactFromTheList()

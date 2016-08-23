@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity
         {
             if (validCredentials(username, password))
             {
-                Intent intent = new Intent(this, ContactsActivity.class);
+                Intent intent = new Intent(this, ContactListActivity.class);
                 startActivity(intent);
 
                 finish();

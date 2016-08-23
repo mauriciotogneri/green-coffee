@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ContactsActivity extends AppCompatActivity
+public class ContactListActivity extends AppCompatActivity
 {
     @Override
     protected void onCreate(Bundle savedInstanceState)

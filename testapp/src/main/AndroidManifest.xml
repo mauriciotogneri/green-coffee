@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".ContactsActivity"
+            android:name=".ContactListActivity"
             android:label="@string/contacts.title"
             android:screenOrientation="portrait"/>
 
