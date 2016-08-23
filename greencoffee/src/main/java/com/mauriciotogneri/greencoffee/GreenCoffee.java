@@ -19,6 +19,7 @@ import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -162,6 +163,16 @@ public class GreenCoffee
     protected void typeTextWithText(@StringRes int resourceId, String text)
     {
         onView(withText(resourceId)).perform(typeText(text));
+    }
+
+    protected void closeKeyboardWithId(@IdRes int resourceId)
+    {
+        onView(withId(resourceId)).perform(closeSoftKeyboard());
+    }
+
+    protected void closeKeyboardWithText(@StringRes int resourceId)
+    {
+        onView(withText(resourceId)).perform(closeSoftKeyboard());
     }
 
     protected void containsTextWithId(@IdRes int resourceId, String text)

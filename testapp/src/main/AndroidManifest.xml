@@ -24,8 +24,13 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
-            android:label="@string/main.title"
+            android:name=".ContactsActivity"
+            android:label="@string/contacts.title"
+            android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".DetailsActivity"
+            android:label="@string/details.title"
             android:screenOrientation="portrait"/>
 
     </application>

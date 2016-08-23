@@ -13,6 +13,10 @@
     <string name="login.password.error">Password invalid</string>
     <string name="login.credentials.error">Invalid credentials</string>
 
-    <string name="main.title">Main screen</string>
+    <string name="contacts.title">Contacts screen</string>
+    <string name="contacts.married.yes">Married</string>
+    <string name="contacts.married.no">Not Married</string>
+
+    <string name="details.title">Details</string>
 
 </resources>

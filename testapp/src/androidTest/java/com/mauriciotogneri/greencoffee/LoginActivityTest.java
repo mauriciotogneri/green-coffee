@@ -106,9 +106,9 @@ public class LoginActivityTest extends GreenCoffee
         isDisplayedWithText(R.string.login_credentials_error);
     }
 
-    @Then("^I see the main screen$")
-    public void iSeeTheMainScreen()
+    @Then("^I see the contacts screen$")
+    public void iSeeTheContactsScreen()
     {
-        isDisplayedWithText(R.string.main_title);
+        isDisplayedWithText(R.string.contacts_title);
     }
 }

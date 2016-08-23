@@ -29,6 +29,12 @@ public class LoginActivity extends AppCompatActivity
                 login(username.getText().toString(), password.getText().toString());
             }
         });
+
+        EditText username = (EditText) findViewById(R.id.login_input_username);
+        username.setText("admin");
+
+        EditText password = (EditText) findViewById(R.id.login_input_password);
+        password.setText("1234");
     }
 
     private void login(String username, String password)
@@ -37,8 +43,10 @@ public class LoginActivity extends AppCompatActivity
         {
             if (validCredentials(username, password))
             {
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, ContactsActivity.class);
                 startActivity(intent);
+
+                finish();
             }
             else
             {
