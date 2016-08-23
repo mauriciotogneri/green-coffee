@@ -6,6 +6,7 @@ import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 
+@SuppressWarnings("unused")
 public class LoginSteps extends GreenCoffeeSteps
 {
     private static final String VALID_USERNAME = "admin";

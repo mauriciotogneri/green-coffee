@@ -68,11 +68,8 @@ public class GreenCoffeeConfig
         GherkinDocument gherkinDocument = parser.parse(featureSource);
         Feature feature = gherkinDocument.getFeature();
 
-        List<ScenarioDefinition> backgrounds = filterScenariosBy(feature, gherkin.ast.Background.class);
-        List<ScenarioDefinition> scenarios = filterScenariosBy(feature, gherkin.ast.Scenario.class);
-
-        List<ScenarioOutline> scenarioOutlines = filterScenariosBy(feature, gherkin.ast.ScenarioOutline.class);
-        scenarios.addAll(scenarioOutlines(scenarioOutlines));
+        List<ScenarioDefinition> backgrounds = backgrounds(feature);
+        List<ScenarioDefinition> scenarios = scenarios(feature);
 
         List<Scenario> result = new ArrayList<>();
 
@@ -95,33 +92,41 @@ public class GreenCoffeeConfig
         return result;
     }
 
-    @SuppressWarnings("unchecked")
-    private <T extends ScenarioDefinition> List<T> filterScenariosBy(Feature feature, Class<?> clazz)
-    {
-        List<T> backgrounds = new ArrayList<>();
-
-        for (ScenarioDefinition scenario : feature.getChildren())
-        {
-            if (clazz.isInstance(scenario))
-            {
-                backgrounds.add((T) scenario);
-            }
-        }
-
-        return backgrounds;
-    }
-
-    private List<ScenarioDefinition> scenarioOutlines(List<ScenarioOutline> scenarioOutlines)
+    private List<ScenarioDefinition> backgrounds(Feature feature)
     {
         List<ScenarioDefinition> result = new ArrayList<>();
 
-        for (ScenarioOutline scenarioOutline : scenarioOutlines)
+        for (ScenarioDefinition scenario : feature.getChildren())
         {
-            for (Examples examples : scenarioOutline.getExamples())
+            if (gherkin.ast.Background.class.isInstance(scenario))
             {
-                for (TableRow row : examples.getTableBody())
+                result.add(scenario);
+            }
+        }
+
+        return result;
+    }
+
+    private List<ScenarioDefinition> scenarios(Feature feature)
+    {
+        List<ScenarioDefinition> result = new ArrayList<>();
+
+        for (ScenarioDefinition scenario : feature.getChildren())
+        {
+            if (gherkin.ast.Scenario.class.isInstance(scenario))
+            {
+                result.add(scenario);
+            }
+            else if (gherkin.ast.ScenarioOutline.class.isInstance(scenario))
+            {
+                ScenarioOutline scenarioOutline = (ScenarioOutline) scenario;
+
+                for (Examples examples : scenarioOutline.getExamples())
                 {
-                    result.add(concreteScenario(scenarioOutline, parametersMap(examples.getTableHeader(), row)));
+                    for (TableRow row : examples.getTableBody())
+                    {
+                        result.add(concreteScenario(scenarioOutline, parametersMap(examples.getTableHeader(), row)));
+                    }
                 }
             }
         }
