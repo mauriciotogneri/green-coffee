@@ -2,10 +2,6 @@ package com.mauriciotogneri.greencoffee;
 
 import android.support.test.rule.ActivityTestRule;
 
-import com.mauriciotogneri.greencoffee.annotations.Given;
-import com.mauriciotogneri.greencoffee.annotations.Then;
-import com.mauriciotogneri.greencoffee.annotations.When;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runners.Parameterized.Parameters;
@@ -39,7 +35,7 @@ public class LoginActivityTest extends GreenCoffee
         start(this);
     }
 
-    @Given("^I see an empty login form$")
+    /*@Given("^I see an empty login form$")
     public void iSeeAnEmptyLoginForm()
     {
         containsTextWithId(R.id.login_input_username, "");
@@ -110,5 +106,5 @@ public class LoginActivityTest extends GreenCoffee
     public void iSeeTheContactsScreen()
     {
         isDisplayedWithText(R.string.contacts_title);
-    }
+    }*/
 }

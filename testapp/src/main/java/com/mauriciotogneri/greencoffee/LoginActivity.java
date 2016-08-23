@@ -30,11 +30,11 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
-        EditText username = (EditText) findViewById(R.id.login_input_username);
+        /*EditText username = (EditText) findViewById(R.id.login_input_username);
         username.setText("admin");
 
         EditText password = (EditText) findViewById(R.id.login_input_password);
-        password.setText("1234");
+        password.setText("1234");*/
     }
 
     private void login(String username, String password)
