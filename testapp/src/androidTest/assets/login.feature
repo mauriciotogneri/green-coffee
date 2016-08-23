@@ -34,6 +34,19 @@ Feature: Login screen to authenticate users
 		And  I press the login button
 		Then I see an error message with 'Invalid credentials'
 
+	Scenario Outline: Set of wrong credentials
+		When I introduce as username <user>
+		When I introduce as password <pass>
+		And  I press the login button
+		Then I see an error message with 'Invalid credentials'
+
+		Examples:
+			| user  | pass  |
+			| admin | 12345 |
+			| admin | admin |
+			| guest | 1234  |
+			| guest | guest |
+
 	Scenario: Valid username and password
 		When I introduce a valid username
 		And  I introduce a valid password
