@@ -4,7 +4,7 @@ Feature: Login screen to authenticate users
 	I want to authenticate using my credentials
 
 	Background:
-		Given an empty login form
+		Given I see an empty login form
 
 	Scenario: Username not introduced
 		When I introduce a valid password

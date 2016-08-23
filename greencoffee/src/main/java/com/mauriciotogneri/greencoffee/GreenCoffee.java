@@ -164,6 +164,16 @@ public class GreenCoffee
         onView(withText(resourceId)).perform(typeText(text));
     }
 
+    protected void containsTextWithId(@IdRes int resourceId, String text)
+    {
+        onView(withId(resourceId)).check(matches(withText(text)));
+    }
+
+    protected void containsTextWithTest(@StringRes int resourceId, String text)
+    {
+        onView(withText(resourceId)).check(matches(withText(text)));
+    }
+
     protected void isDisplayedWithId(@IdRes int resourceId)
     {
         onView(withId(resourceId)).check(matches(isDisplayed()));

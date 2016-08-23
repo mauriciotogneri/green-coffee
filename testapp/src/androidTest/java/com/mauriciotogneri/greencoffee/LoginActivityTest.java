@@ -39,11 +39,11 @@ public class LoginActivityTest extends GreenCoffee
         start(this);
     }
 
-    @Given("^an empty login form$")
+    @Given("^I see an empty login form$")
     public void anEmptyLoginForm()
     {
-        typeTextWithId(R.id.login_input_username, "");
-        typeTextWithId(R.id.login_input_password, "");
+        containsTextWithId(R.id.login_input_username, "");
+        containsTextWithId(R.id.login_input_password, "");
     }
 
     @When("^I press the login button$")
