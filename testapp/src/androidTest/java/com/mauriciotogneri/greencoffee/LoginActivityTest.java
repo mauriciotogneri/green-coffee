@@ -76,6 +76,18 @@ public class LoginActivityTest extends GreenCoffee
         typeTextWithId(R.id.login_input_password, INVALID_PASSWORD);
     }
 
+    @When("^I introduce as username (.+)$")
+    public void iIntroduceAsUsername(String username)
+    {
+        typeTextWithId(R.id.login_input_username, username);
+    }
+
+    @When("^I introduce as password (.+)$")
+    public void iIntroduceAsPassword(String password)
+    {
+        typeTextWithId(R.id.login_input_password, password);
+    }
+
     @Then("^I see an error message with 'Invalid username'$")
     public void iSeeAnErrorMessageWithInvalidUsername()
     {
