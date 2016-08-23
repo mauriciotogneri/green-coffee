@@ -40,7 +40,7 @@ public class LoginActivityTest extends GreenCoffee
     }
 
     @Given("^I see an empty login form$")
-    public void anEmptyLoginForm()
+    public void iSeeAnEmptyLoginForm()
     {
         containsTextWithId(R.id.login_input_username, "");
         containsTextWithId(R.id.login_input_password, "");

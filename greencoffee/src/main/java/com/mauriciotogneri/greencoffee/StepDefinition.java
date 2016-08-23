@@ -43,7 +43,8 @@ class StepDefinition
             }
             catch (Exception e)
             {
-                throw new RuntimeException(e);
+                String message = String.format("Error processing step: \"%s\" with text: \"%s\"", pattern.toString(), text);
+                throw new RuntimeException(message, e.getCause());
             }
         }
         else
