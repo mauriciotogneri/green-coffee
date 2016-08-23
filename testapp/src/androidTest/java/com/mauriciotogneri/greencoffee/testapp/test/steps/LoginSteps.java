@@ -1,10 +1,10 @@
-package com.mauriciotogneri.greencoffee.steps;
+package com.mauriciotogneri.greencoffee.testapp.test.steps;
 
 import com.mauriciotogneri.greencoffee.GreenCoffeeSteps;
-import com.mauriciotogneri.greencoffee.R;
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
+import com.mauriciotogneri.greencoffee.testapp.R;
 
 @SuppressWarnings("unused")
 public class LoginSteps extends GreenCoffeeSteps

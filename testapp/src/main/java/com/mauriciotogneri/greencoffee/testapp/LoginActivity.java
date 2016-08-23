@@ -1,4 +1,4 @@
-package com.mauriciotogneri.greencoffee;
+package com.mauriciotogneri.greencoffee.testapp;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,5 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
+import com.mauriciotogneri.greencoffee.exceptions.StepFailureException;
+
 import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,7 +45,7 @@ class StepDefinition
             }
             catch (Exception e)
             {
-                throw new StepException(method, pattern.toString(), text, e.getCause());
+                throw new StepFailureException(method, pattern.toString(), text, e.getCause());
             }
         }
         else

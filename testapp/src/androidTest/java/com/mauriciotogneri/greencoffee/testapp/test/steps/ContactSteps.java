@@ -1,4 +1,4 @@
-package com.mauriciotogneri.greencoffee.steps;
+package com.mauriciotogneri.greencoffee.testapp.test.steps;
 
 import com.mauriciotogneri.greencoffee.GreenCoffeeSteps;
 import com.mauriciotogneri.greencoffee.annotations.Then;

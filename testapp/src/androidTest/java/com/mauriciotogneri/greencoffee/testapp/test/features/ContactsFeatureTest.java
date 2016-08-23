@@ -1,13 +1,13 @@
-package com.mauriciotogneri.greencoffee.tets;
+package com.mauriciotogneri.greencoffee.testapp.test.features;
 
 import android.support.test.rule.ActivityTestRule;
 
 import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
-import com.mauriciotogneri.greencoffee.LoginActivity;
+import com.mauriciotogneri.greencoffee.testapp.LoginActivity;
 import com.mauriciotogneri.greencoffee.Scenario;
-import com.mauriciotogneri.greencoffee.steps.ContactSteps;
-import com.mauriciotogneri.greencoffee.steps.LoginSteps;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactSteps;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
 
 import org.junit.Rule;
 import org.junit.Test;

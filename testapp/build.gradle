@@ -12,7 +12,7 @@ android
 
     defaultConfig
     {
-        applicationId "com.mauriciotogneri.greencoffee"
+        applicationId "com.mauriciotogneri.greencoffee.testapp"
         minSdkVersion 14
         targetSdkVersion 24
         versionCode 1

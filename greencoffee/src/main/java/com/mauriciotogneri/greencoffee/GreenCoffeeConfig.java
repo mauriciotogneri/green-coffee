@@ -1,5 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
+import com.mauriciotogneri.greencoffee.exceptions.InvalidExampleException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -54,7 +56,7 @@ public class GreenCoffeeConfig
 
         while ((line = reader.readLine()) != null)
         {
-            builder.append(line).append("\n");
+            builder.append(String.format("%s%n", line));
         }
 
         reader.close();
@@ -155,7 +157,7 @@ public class GreenCoffeeConfig
         }
         else
         {
-            throw new RuntimeException(String.format("Invalid example format at: [%s, %s]", header.getLocation().getLine(), header.getLocation().getColumn()));
+            throw new InvalidExampleException(header.getLocation().getLine(), header.getLocation().getColumn());
         }
     }
 

@@ -2,6 +2,8 @@ package com.mauriciotogneri.greencoffee;
 
 import android.text.TextUtils;
 
+import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -57,7 +59,7 @@ public class GreenCoffeeTest
             }
         }
 
-        throw new RuntimeException(String.format("Step definition not found for: '%s: %s'", keyword, text));
+        throw new StepDefinitionNotFoundException(keyword, text);
     }
 
     private void logDescription(String tab, String description)

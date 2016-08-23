@@ -1,4 +1,4 @@
-package com.mauriciotogneri.greencoffee;
+package com.mauriciotogneri.greencoffee.testapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
