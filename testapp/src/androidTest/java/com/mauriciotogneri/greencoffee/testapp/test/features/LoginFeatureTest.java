@@ -2,10 +2,10 @@ package com.mauriciotogneri.greencoffee.testapp.test.features;
 
 import android.support.test.rule.ActivityTestRule;
 
-import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
-import com.mauriciotogneri.greencoffee.testapp.LoginActivity;
+import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.Scenario;
+import com.mauriciotogneri.greencoffee.testapp.LoginActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
 
 import org.junit.Rule;

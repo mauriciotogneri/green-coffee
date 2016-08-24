@@ -8,7 +8,6 @@ import java.util.List;
 
 import gherkin.ast.Step;
 
-// TODO: capture exception in start method
 // TODO: run with tag filter
 // TODO: generate reports
 public class GreenCoffeeTest
@@ -22,11 +21,11 @@ public class GreenCoffeeTest
 
     protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
     {
-        log(String.format("\tScenario: %s", scenario.name()));
+        log(String.format("Scenario: %s", scenario.name()));
 
         if (!TextUtils.isEmpty(scenario.description()))
         {
-            logDescription("\t\t", scenario.description());
+            logDescription("\t", scenario.description());
         }
 
         List<StepDefinition> stepDefinitions = firstTarget.stepDefinitions();
@@ -47,7 +46,7 @@ public class GreenCoffeeTest
         String keyword = step.getKeyword().trim();
         String text = step.getText().trim();
 
-        log(String.format("\t\t%s %s", keyword, text));
+        log(String.format("\t%s %s", keyword, text));
 
         for (StepDefinition stepDefinition : stepDefinitions)
         {
