@@ -8,6 +8,7 @@ import com.mauriciotogneri.greencoffee.annotations.But;
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
+import com.mauriciotogneri.greencoffee.interactions.ActionableView;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -77,12 +78,12 @@ public class GreenCoffeeSteps
         return null;
     }
 
-    protected ActionableView viewWithId(@IdRes int resourceId)
+    protected ActionableView onViewWithId(@IdRes int resourceId)
     {
         return new ActionableView(onView(withId(resourceId)));
     }
 
-    protected ActionableView viewWithText(@StringRes int resourceId)
+    protected ActionableView onViewWithText(@StringRes int resourceId)
     {
         return new ActionableView(onView(withText(resourceId)));
     }

@@ -1,4 +1,4 @@
-package com.mauriciotogneri.greencoffee;
+package com.mauriciotogneri.greencoffee.interactions;
 
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
