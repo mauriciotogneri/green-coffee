@@ -23,6 +23,7 @@ Feature: Login screen to authenticate users
 First, create a test that extends from `GreenCoffeeTest` and declare the entry point Activity and the feature that will be used:
 
 ```java
+@RunWith(Parameterized.class)
 public class LoginFeatureTest extends GreenCoffeeTest
 {
     @Rule

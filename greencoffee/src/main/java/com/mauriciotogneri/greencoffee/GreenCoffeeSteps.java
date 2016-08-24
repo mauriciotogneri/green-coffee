@@ -14,11 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.typeText;
-import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -82,53 +77,13 @@ public class GreenCoffeeSteps
         return null;
     }
 
-    protected void clickWithId(@IdRes int resourceId)
+    protected ActionableView viewWithId(@IdRes int resourceId)
     {
-        onView(withId(resourceId)).perform(click());
+        return new ActionableView(onView(withId(resourceId)));
     }
 
-    protected void clickWithText(@StringRes int resourceId)
+    protected ActionableView viewWithText(@StringRes int resourceId)
     {
-        onView(withText(resourceId)).perform(click());
-    }
-
-    protected void typeTextWithId(@IdRes int resourceId, String text)
-    {
-        onView(withId(resourceId)).perform(typeText(text));
-    }
-
-    protected void typeTextWithText(@StringRes int resourceId, String text)
-    {
-        onView(withText(resourceId)).perform(typeText(text));
-    }
-
-    protected void closeKeyboardWithId(@IdRes int resourceId)
-    {
-        onView(withId(resourceId)).perform(closeSoftKeyboard());
-    }
-
-    protected void closeKeyboardWithText(@StringRes int resourceId)
-    {
-        onView(withText(resourceId)).perform(closeSoftKeyboard());
-    }
-
-    protected void containsTextWithId(@IdRes int resourceId, String text)
-    {
-        onView(withId(resourceId)).check(matches(withText(text)));
-    }
-
-    protected void containsTextWithTest(@StringRes int resourceId, String text)
-    {
-        onView(withText(resourceId)).check(matches(withText(text)));
-    }
-
-    protected void isDisplayedWithId(@IdRes int resourceId)
-    {
-        onView(withId(resourceId)).check(matches(isDisplayed()));
-    }
-
-    protected void isDisplayedWithText(@StringRes int resourceId)
-    {
-        onView(withText(resourceId)).check(matches(isDisplayed()));
+        return new ActionableView(onView(withText(resourceId)));
     }
 }

@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:hint="@string/login.username"
-        android:inputType="text" />
+        android:inputType="text"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/login.input.password"
@@ -22,12 +23,19 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:hint="@string/login.password"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:textSize="20sp" />
 
     <Button
         android:id="@+id/login.button.doLogin"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/login.doLogin" />
+        android:paddingBottom="15dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="15dp"
+        android:text="@string/login.doLogin"
+        android:textSize="18sp" />
 
 </LinearLayout>
