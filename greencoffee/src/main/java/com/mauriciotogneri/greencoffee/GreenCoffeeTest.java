@@ -8,6 +8,11 @@ import java.util.List;
 
 import gherkin.ast.Step;
 
+// TODO: capture exception in start method
+// TODO: run tests from console
+// TODO: try assert to show message
+// TODO: run with tag filter
+// TODO: generate reports
 public class GreenCoffeeTest
 {
     private final Scenario scenario;
