@@ -7,13 +7,13 @@ import com.mauriciotogneri.greencoffee.testapp.R;
 @SuppressWarnings("unused")
 public class DetailsSteps extends GreenCoffeeSteps
 {
-    @Then("^I see the detail screen for \"([\\w| ]+)\"$")
+    @Then("^I see the detail screen for '([\\w| ]+)'$")
     public void iSeeTheDetailScreenFor$(String username)
     {
         onViewWithText(username).isDisplayed();
     }
 
-    @Then("^I see his name is \"([\\w| ]+)\"$")
+    @Then("^I see his name is '([\\w| ]+)'$")
     public void iSeeHisHerNameIs(String name)
     {
         onViewWithId(R.id.contact_detail_name).contains(name);

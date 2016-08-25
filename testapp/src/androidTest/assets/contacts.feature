@@ -5,13 +5,13 @@ Feature: List of contacts screen
 
 	Scenario: Selecting a contact from the list
 		Given I login as USER_1
-		When  I select the contact called "James Houghton"
-		Then  I see the detail screen for "James Houghton"
+		When  I select the contact called 'James Houghton'
+		Then  I see the detail screen for 'James Houghton'
 
 	Scenario: Selecting a contact from the list
 		Given I login as USER_2
-		When  I select the contact called "Maddison Wallace"
-		Then  I see the detail screen for "Maddison Wallace"
+		When  I select the contact called 'Maddison Wallace'
+		Then  I see the detail screen for 'Maddison Wallace'
 
 	Scenario: User has no contacts
 		Given I login as USER_3

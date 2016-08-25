@@ -18,7 +18,7 @@ public class ContactListSteps extends GreenCoffeeSteps
         this.dataMatcher = new ContactMatcher(R.id.contacts_list);
     }
 
-    @When("^I select the contact called \"([\\w| ]+)\"$")
+    @When("^I select the contact called '([\\w| ]+)'$")
     public void iSelectTheContactCalled$(String username)
     {
         dataMatcher.withContent(username).click();
