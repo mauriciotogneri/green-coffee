@@ -19,6 +19,16 @@ class StepDefinition
         this.target = target;
     }
 
+    public String pattern()
+    {
+        return pattern.pattern();
+    }
+
+    public Method method()
+    {
+        return method;
+    }
+
     public boolean matches(String text)
     {
         Matcher matcher = pattern.matcher(text);
@@ -45,7 +55,7 @@ class StepDefinition
             }
             catch (Exception e)
             {
-                throw new StepFailureException(method, pattern.toString(), text, e.getCause());
+                throw new StepFailureException(method, pattern.pattern(), text, e.getCause());
             }
         }
         else

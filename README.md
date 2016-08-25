@@ -27,7 +27,7 @@ First, create a test that extends from `GreenCoffeeTest` and declare the entry p
 public class LoginFeatureTest extends GreenCoffeeTest
 {
     @Rule
-    public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
     public LoginFeatureTest(Scenario scenario)
     {

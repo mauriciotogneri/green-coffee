@@ -2,9 +2,12 @@ package com.mauriciotogneri.greencoffee;
 
 import android.text.TextUtils;
 
+import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import gherkin.ast.Step;
 
@@ -35,9 +38,30 @@ public class GreenCoffeeTest
             stepDefinitions.addAll(greenCoffeeSteps.stepDefinitions());
         }
 
+        validateStepDefinitions(stepDefinitions);
+
         for (Step step : scenario.steps())
         {
             processStep(step, stepDefinitions);
+        }
+    }
+
+    private void validateStepDefinitions(List<StepDefinition> stepDefinitions)
+    {
+        Set<String> patterns = new HashSet<>();
+
+        for (StepDefinition stepDefinition : stepDefinitions)
+        {
+            String pattern = stepDefinition.pattern();
+
+            if (!patterns.contains(pattern))
+            {
+                patterns.add(pattern);
+            }
+            else
+            {
+                throw new DuplicatedStepDefinitionException(stepDefinition.method(), pattern);
+            }
         }
     }
 

@@ -26,11 +26,11 @@ public class GreenCoffeeSteps
 
         for (Method method : getClass().getDeclaredMethods())
         {
-            String expression = expression(method);
+            String pattern = pattern(method);
 
-            if (expression != null)
+            if (pattern != null)
             {
-                StepDefinition stepDefinition = new StepDefinition(expression, method, this);
+                StepDefinition stepDefinition = new StepDefinition(pattern, method, this);
                 stepDefinitions.add(stepDefinition);
             }
         }
@@ -38,7 +38,7 @@ public class GreenCoffeeSteps
         return stepDefinitions;
     }
 
-    private String expression(Method method)
+    private String pattern(Method method)
     {
         Given given = method.getAnnotation(Given.class);
 
