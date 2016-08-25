@@ -61,32 +61,32 @@ public class LoginSteps extends GreenCoffeeSteps
     @Given("^I see an empty login form$")
     public void iSeeAnEmptyLoginForm()
     {
-        containsTextWithId(R.id.login_input_username, "");
-        containsTextWithId(R.id.login_input_password, "");
+        onViewWithId(R.id.login_input_username).contains("");
+        onViewWithId(R.id.login_input_password).contains("");
     }
 
     @When("^I introduce an invalid username$")
     public void iIntroduceAnInvalidUsername()
     {
-        typeTextWithId(R.id.login_input_username, "guest");
+        onViewWithId(R.id.login_input_username).type(INVALID_USERNAME);
     }
 
     @When("^I introduce an invalid password$")
     public void iIntroduceAInvalidPassword()
     {
-        typeTextWithId(R.id.login_input_password, "1234");
+        onViewWithId(R.id.login_input_password).type(INVALID_PASSWORD);
     }
 
     @When("^I press the login button$")
     public void iPressTheLoginButton()
     {
-        clickWithId(R.id.login_button_doLogin);
+        onViewWithId(R.id.login_button_doLogin).click();
     }
 
     @Then("^I see an error message saying 'Invalid credentials'$")
     public void iSeeAnErrorMessageSayingInvalidCredentials()
     {
-        isDisplayedWithText(R.string.login_credentials_error);
+        onViewWithText(R.string.login_credentials_error).isDisplayed();
     }
 }
 ```
