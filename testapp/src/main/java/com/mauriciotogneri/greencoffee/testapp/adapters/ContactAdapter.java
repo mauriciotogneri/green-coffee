@@ -1,4 +1,4 @@
-package com.mauriciotogneri.greencoffee.testapp;
+package com.mauriciotogneri.greencoffee.testapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.mauriciotogneri.greencoffee.testapp.R;
+import com.mauriciotogneri.greencoffee.testapp.model.Contact;
 
 import java.util.List;
 

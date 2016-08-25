@@ -1,6 +1,5 @@
-package com.mauriciotogneri.greencoffee.testapp;
+package com.mauriciotogneri.greencoffee.testapp.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+
+import com.mauriciotogneri.greencoffee.testapp.R;
+import com.mauriciotogneri.greencoffee.testapp.database.UserDatabase;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -43,9 +45,7 @@ public class LoginActivity extends AppCompatActivity
         {
             if (validCredentials(username, password))
             {
-                Intent intent = new Intent(this, ContactListActivity.class);
-                startActivity(intent);
-
+                startActivity(ContactListActivity.create(this, username));
                 finish();
             }
             else
@@ -75,7 +75,9 @@ public class LoginActivity extends AppCompatActivity
 
     private boolean validCredentials(String username, String password)
     {
-        return TextUtils.equals(username, "admin") && TextUtils.equals(password, "1234");
+        UserDatabase userDatabase = new UserDatabase();
+
+        return userDatabase.isValid(username, password);
     }
 
     private void errorDialog(int message)

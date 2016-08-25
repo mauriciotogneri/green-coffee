@@ -1,6 +1,8 @@
-package com.mauriciotogneri.greencoffee.testapp;
+package com.mauriciotogneri.greencoffee.testapp.model;
 
 import android.content.Context;
+
+import com.mauriciotogneri.greencoffee.testapp.R;
 
 public class Contact
 {

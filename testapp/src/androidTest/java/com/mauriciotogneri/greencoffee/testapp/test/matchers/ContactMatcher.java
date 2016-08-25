@@ -1,7 +1,7 @@
 package com.mauriciotogneri.greencoffee.testapp.test.matchers;
 
 import com.mauriciotogneri.greencoffee.interactions.DataMatcher;
-import com.mauriciotogneri.greencoffee.testapp.Contact;
+import com.mauriciotogneri.greencoffee.testapp.model.Contact;
 
 public class ContactMatcher extends DataMatcher<Contact, String>
 {

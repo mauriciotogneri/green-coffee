@@ -4,7 +4,7 @@ import com.mauriciotogneri.greencoffee.GreenCoffeeSteps;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.interactions.DataMatcher;
-import com.mauriciotogneri.greencoffee.testapp.Contact;
+import com.mauriciotogneri.greencoffee.testapp.model.Contact;
 import com.mauriciotogneri.greencoffee.testapp.R;
 import com.mauriciotogneri.greencoffee.testapp.test.matchers.ContactMatcher;
 

@@ -1,5 +1,6 @@
-package com.mauriciotogneri.greencoffee.testapp;
+package com.mauriciotogneri.greencoffee.testapp.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,19 +9,35 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.mauriciotogneri.greencoffee.testapp.R;
+import com.mauriciotogneri.greencoffee.testapp.adapters.ContactAdapter;
+import com.mauriciotogneri.greencoffee.testapp.database.ContactDatabase;
+import com.mauriciotogneri.greencoffee.testapp.model.Contact;
 
 public class ContactListActivity extends AppCompatActivity
 {
+    private static final String PARAMETER_USERNAME = "parameter.username";
+
+    public static Intent create(Context context, String username)
+    {
+        Intent intent = new Intent(context, ContactListActivity.class);
+        intent.putExtra(PARAMETER_USERNAME, username);
+
+        return intent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contacts);
 
+        String username = getIntent().getStringExtra(PARAMETER_USERNAME);
+
+        ContactDatabase contactDatabase = new ContactDatabase();
+
         ListView listView = (ListView) findViewById(R.id.contacts_list);
-        listView.setAdapter(new ContactAdapter(this, contacts()));
+        listView.setAdapter(new ContactAdapter(this, contactDatabase.contacts(username)));
         listView.setOnItemClickListener(new OnItemClickListener()
         {
             @Override
@@ -36,22 +53,5 @@ public class ContactListActivity extends AppCompatActivity
     {
         Intent intent = new Intent(this, DetailsActivity.class);
         startActivity(intent);
-    }
-
-    private List<Contact> contacts()
-    {
-        List<Contact> contacts = new ArrayList<>();
-        contacts.add(new Contact("John", "Smith", 42, 81.2, true));
-        contacts.add(new Contact("Martha", "Phillips", 30, 65.7, false));
-        contacts.add(new Contact("Freddie", "James", 55, 78.8, true));
-        contacts.add(new Contact("Megan", "Woodard", 49, 73.0, true));
-        contacts.add(new Contact("Jack", "Baxter", 28, 71.4, false));
-        contacts.add(new Contact("Amelia", "Harrison", 22, 62.7, false));
-        contacts.add(new Contact("Thomas", "Wolfe", 40, 77.2, true));
-        contacts.add(new Contact("Rebecca", "Rees", 60, 74.5, true));
-        contacts.add(new Contact("James", "Houghton", 31, 76.9, true));
-        contacts.add(new Contact("Maddison", "Wallace", 25, 71.6, false));
-
-        return contacts;
     }
 }

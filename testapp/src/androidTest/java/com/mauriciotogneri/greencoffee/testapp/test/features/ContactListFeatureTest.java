@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.Scenario;
-import com.mauriciotogneri.greencoffee.testapp.ContactListActivity;
+import com.mauriciotogneri.greencoffee.testapp.activities.ContactListActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 
 import org.junit.Rule;
