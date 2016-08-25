@@ -1,10 +1,23 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.os.Environment;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.runner.lifecycle.Stage;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.view.View;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +32,38 @@ public class GreenCoffeeTest
     public GreenCoffeeTest(Scenario scenario)
     {
         this.scenario = scenario;
+    }
+
+    private void getActivity()
+    {
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Collection resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+            }
+        });
+    }
+
+    private void takeScreenshot(Activity activity) throws Exception
+    {
+        View view = activity.getWindow().getDecorView().getRootView();
+        view.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
+        view.setDrawingCacheEnabled(false);
+
+        Date now = new Date();
+        DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
+
+        String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
+        File imageFile = new File(mPath);
+
+        FileOutputStream outputStream = new FileOutputStream(imageFile);
+        int quality = 100;
+        bitmap.compress(CompressFormat.PNG, quality, outputStream);
+        outputStream.flush();
+        outputStream.close();
     }
 
     protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
