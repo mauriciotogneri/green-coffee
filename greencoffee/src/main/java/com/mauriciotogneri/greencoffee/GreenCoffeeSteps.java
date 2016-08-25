@@ -2,6 +2,7 @@ package com.mauriciotogneri.greencoffee;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
+import android.support.test.espresso.matcher.ViewMatchers;
 
 import com.mauriciotogneri.greencoffee.annotations.And;
 import com.mauriciotogneri.greencoffee.annotations.But;
@@ -15,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 public class GreenCoffeeSteps
 {
@@ -80,16 +79,16 @@ public class GreenCoffeeSteps
 
     protected ActionableView onViewWithId(@IdRes int resourceId)
     {
-        return new ActionableView(onView(withId(resourceId)));
+        return new ActionableView(onView(ViewMatchers.withId(resourceId)));
     }
 
     protected ActionableView onViewWithText(@StringRes int resourceId)
     {
-        return new ActionableView(onView(withText(resourceId)));
+        return new ActionableView(onView(ViewMatchers.withText(resourceId)));
     }
 
     protected ActionableView onViewWithText(String text)
     {
-        return new ActionableView(onView(withText(text)));
+        return new ActionableView(onView(ViewMatchers.withText(text)));
     }
 }

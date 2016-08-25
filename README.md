@@ -91,7 +91,7 @@ public class LoginSteps extends GreenCoffeeSteps
 }
 ```
 
-## Configure
+## Installation
 Add the following dependency to your `build.gradle` file:
 
 ```groovy

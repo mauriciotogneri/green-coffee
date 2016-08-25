@@ -12,8 +12,18 @@ public class ActionableData
         this.dataInteraction = dataInteraction;
     }
 
-    public void click()
+    public ActionableView click()
     {
-        dataInteraction.perform(ViewActions.click());
+        return new ActionableView(dataInteraction.perform(ViewActions.click()));
+    }
+
+    public ActionableView doubleClick()
+    {
+        return new ActionableView(dataInteraction.perform(ViewActions.doubleClick()));
+    }
+
+    public ActionableView longClick()
+    {
+        return new ActionableView(dataInteraction.perform(ViewActions.longClick()));
     }
 }
