@@ -1,6 +1,7 @@
 package com.mauriciotogneri.greencoffee.interactions;
 
 import android.support.test.espresso.DataInteraction;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.action.ViewActions;
 
 public class ActionableData
@@ -14,16 +15,26 @@ public class ActionableData
 
     public ActionableView click()
     {
-        return new ActionableView(dataInteraction.perform(ViewActions.click()));
+        return perform(ViewActions.click());
     }
 
     public ActionableView doubleClick()
     {
-        return new ActionableView(dataInteraction.perform(ViewActions.doubleClick()));
+        return perform(ViewActions.doubleClick());
     }
 
     public ActionableView longClick()
     {
-        return new ActionableView(dataInteraction.perform(ViewActions.longClick()));
+        return perform(ViewActions.longClick());
+    }
+
+    public ActionableView scrollTo()
+    {
+        return perform(ViewActions.scrollTo());
+    }
+
+    private ActionableView perform(ViewAction viewAction)
+    {
+        return new ActionableView(dataInteraction.perform(viewAction));
     }
 }

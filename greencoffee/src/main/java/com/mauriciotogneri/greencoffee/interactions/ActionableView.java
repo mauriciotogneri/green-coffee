@@ -1,9 +1,13 @@
 package com.mauriciotogneri.greencoffee.interactions;
 
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.matcher.ViewMatchers;
+
+import org.hamcrest.Matchers;
 
 public class ActionableView
 {
@@ -16,111 +20,156 @@ public class ActionableView
 
     public ActionableView click()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.click()));
+        return perform(ViewActions.click());
     }
 
     public ActionableView doubleClick()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.doubleClick()));
+        return perform(ViewActions.doubleClick());
     }
 
     public ActionableView longClick()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.longClick()));
+        return perform(ViewActions.longClick());
     }
 
     public ActionableView type(String text)
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.typeText(text)));
+        return perform(ViewActions.typeText(text));
     }
 
     public ActionableView clearText()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.clearText()));
+        return perform(ViewActions.clearText());
     }
 
     public ActionableView scrollTo()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.scrollTo()));
+        return perform(ViewActions.scrollTo());
     }
 
     public ActionableView swipeUp()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.swipeUp()));
+        return perform(ViewActions.swipeUp());
     }
 
     public ActionableView swipeDown()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.swipeDown()));
+        return perform(ViewActions.swipeDown());
     }
 
     public ActionableView swipeLeft()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.swipeLeft()));
+        return perform(ViewActions.swipeLeft());
     }
 
     public ActionableView swipeRight()
     {
-        return new ActionableView(viewInteraction.perform(ViewActions.swipeRight()));
+        return perform(ViewActions.swipeRight());
     }
 
     public ActionableView doesNotExist()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.doesNotExist()));
+        return check(ViewAssertions.doesNotExist());
     }
 
     public ActionableView contains(Object text)
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.withText(text.toString()))));
+        return check(ViewAssertions.matches(ViewMatchers.withText(text.toString())));
     }
 
     public ActionableView isEmpty()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.withText(""))));
+        return check(ViewAssertions.matches(ViewMatchers.withText("")));
+    }
+
+    public ActionableView isNotEmpty()
+    {
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.withText(""))));
     }
 
     public ActionableView hasFocus()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.hasFocus())));
+        return check(ViewAssertions.matches(ViewMatchers.hasFocus()));
     }
 
-    public ActionableView hasErrorText(String text)
+    public ActionableView doesNotHaveFocus()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.hasErrorText(text))));
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.hasFocus())));
+    }
+
+    public ActionableView hasErrorText(Object text)
+    {
+        return check(ViewAssertions.matches(ViewMatchers.hasErrorText(text.toString())));
     }
 
     public ActionableView isChecked()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isChecked())));
+        return check(ViewAssertions.matches(ViewMatchers.isChecked()));
     }
 
     public ActionableView isNotChecked()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isNotChecked())));
+        return check(ViewAssertions.matches(ViewMatchers.isNotChecked()));
     }
 
     public ActionableView isClickable()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isClickable())));
+        return check(ViewAssertions.matches(ViewMatchers.isClickable()));
+    }
+
+    public ActionableView isFocusable()
+    {
+        return check(ViewAssertions.matches(ViewMatchers.isFocusable()));
+    }
+
+    public ActionableView isNotFocusable()
+    {
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isFocusable())));
     }
 
     public ActionableView isEnabled()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isEnabled())));
+        return check(ViewAssertions.matches(ViewMatchers.isEnabled()));
+    }
+
+    public ActionableView isDisabled()
+    {
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isEnabled())));
     }
 
     public ActionableView isSelected()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isSelected())));
+        return check(ViewAssertions.matches(ViewMatchers.isSelected()));
     }
 
-    public ActionableView isCompletelyDisplayed()
+    public ActionableView isNotSelected()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed())));
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isSelected())));
     }
 
     public ActionableView isDisplayed()
     {
-        return new ActionableView(viewInteraction.check(ViewAssertions.matches(ViewMatchers.isDisplayed())));
+        return check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
+    }
+
+    public ActionableView isCompletelyDisplayed()
+    {
+        return check(ViewAssertions.matches(ViewMatchers.isCompletelyDisplayed()));
+    }
+
+    public ActionableView isNotDisplayed()
+    {
+        return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
+    }
+
+    private ActionableView check(ViewAssertion viewAssertion)
+    {
+        return new ActionableView(viewInteraction.check(viewAssertion));
+    }
+
+    private ActionableView perform(ViewAction viewAction)
+    {
+        return new ActionableView(viewInteraction.perform(viewAction));
     }
 }
