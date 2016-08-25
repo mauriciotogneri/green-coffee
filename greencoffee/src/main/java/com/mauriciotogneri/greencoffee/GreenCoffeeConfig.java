@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,31 +25,68 @@ import gherkin.ast.ScenarioOutline;
 import gherkin.ast.Step;
 import gherkin.ast.TableCell;
 import gherkin.ast.TableRow;
+import gherkin.ast.Tag;
 
 public class GreenCoffeeConfig
 {
-    public List<Scenario> fromString(String featureSource)
+    private final List<Scenario> scenarios;
+
+    private GreenCoffeeConfig(List<Scenario> scenarios)
     {
-        return scenarios(featureSource);
+        this.scenarios = scenarios;
     }
 
-    public List<Scenario> fromAssets(String featurePath) throws IOException
+    public GreenCoffeeConfig()
+    {
+        this(new ArrayList<Scenario>());
+    }
+
+    public List<Scenario> scenarios()
+    {
+        return scenarios;
+    }
+
+    public GreenCoffeeConfig withTags(String firstTag, String... restTags)
+    {
+        List<String> tagList = new ArrayList<>();
+        tagList.add(firstTag);
+        tagList.addAll(Arrays.asList(restTags));
+
+        List<Scenario> filtered = new ArrayList<>();
+
+        for (Scenario scenario : scenarios)
+        {
+            if (scenario.hasTags(tagList))
+            {
+                filtered.add(scenario);
+            }
+        }
+
+        return new GreenCoffeeConfig(filtered);
+    }
+
+    public GreenCoffeeConfig withFeatureFromString(String featureSource)
+    {
+        return new GreenCoffeeConfig(scenarios(featureSource));
+    }
+
+    public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
     {
         InputStream stream = getClass().getClassLoader().getResourceAsStream(featurePath);
 
-        return fromInputStream(stream);
+        return withFeatureFromInputStream(stream);
     }
 
-    public List<Scenario> fromUrl(String featureUrl) throws IOException
+    public GreenCoffeeConfig withFeatureFromUrl(String featureUrl) throws IOException
     {
         URL url = new URL(featureUrl);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.setRequestMethod("GET");
 
-        return fromInputStream(urlConnection.getInputStream());
+        return withFeatureFromInputStream(urlConnection.getInputStream());
     }
 
-    public List<Scenario> fromInputStream(InputStream featureInput) throws IOException
+    public GreenCoffeeConfig withFeatureFromInputStream(InputStream featureInput) throws IOException
     {
         BufferedReader reader = new BufferedReader(new InputStreamReader(featureInput));
         StringBuilder builder = new StringBuilder();
@@ -61,7 +99,7 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return scenarios(builder.toString());
+        return new GreenCoffeeConfig(scenarios(builder.toString()));
     }
 
     private List<Scenario> scenarios(String featureSource)
@@ -80,15 +118,39 @@ public class GreenCoffeeConfig
             String name = scenarioDefinition.getName();
             String description = scenarioDefinition.getDescription();
             List<Step> steps = new ArrayList<>();
+            List<String> tags = new ArrayList<>();
 
             for (ScenarioDefinition background : backgrounds)
             {
                 steps.addAll(background.getSteps());
             }
 
+            if (isScenarioNormal(scenarioDefinition))
+            {
+                gherkin.ast.Scenario scenarioNormal = (gherkin.ast.Scenario) scenarioDefinition;
+                tags.addAll(tags(scenarioNormal.getTags()));
+            }
+            else if (isScenarioOutline(scenarioDefinition))
+            {
+                ScenarioOutline scenarioOutline = (ScenarioOutline) scenarioDefinition;
+                tags.addAll(tags(scenarioOutline.getTags()));
+            }
+
             steps.addAll(scenarioDefinition.getSteps());
 
-            result.add(new Scenario(name, description, steps));
+            result.add(new Scenario(name, description, steps, tags));
+        }
+
+        return result;
+    }
+
+    private List<String> tags(List<Tag> tags)
+    {
+        List<String> result = new ArrayList<>();
+
+        for (Tag tag : tags)
+        {
+            result.add(tag.getName());
         }
 
         return result;
@@ -115,11 +177,11 @@ public class GreenCoffeeConfig
 
         for (ScenarioDefinition scenario : feature.getChildren())
         {
-            if (gherkin.ast.Scenario.class.isInstance(scenario))
+            if (isScenarioNormal(scenario))
             {
                 result.add(scenario);
             }
-            else if (gherkin.ast.ScenarioOutline.class.isInstance(scenario))
+            else if (isScenarioOutline(scenario))
             {
                 ScenarioOutline scenarioOutline = (ScenarioOutline) scenario;
 
@@ -134,6 +196,16 @@ public class GreenCoffeeConfig
         }
 
         return result;
+    }
+
+    private boolean isScenarioNormal(ScenarioDefinition scenario)
+    {
+        return gherkin.ast.Scenario.class.isInstance(scenario);
+    }
+
+    private boolean isScenarioOutline(ScenarioDefinition scenario)
+    {
+        return gherkin.ast.ScenarioOutline.class.isInstance(scenario);
     }
 
     private Map<String, String> parametersMap(TableRow header, TableRow row)

@@ -11,7 +11,6 @@ import java.util.Set;
 
 import gherkin.ast.Step;
 
-// TODO: run with tag filter
 // TODO: generate reports
 public class GreenCoffeeTest
 {

@@ -32,7 +32,9 @@ public class DetailsFeatureTest extends GreenCoffeeTest
     @Parameters
     public static Iterable<Scenario> data() throws IOException
     {
-        return new GreenCoffeeConfig().fromAssets("assets/details.feature");
+        return new GreenCoffeeConfig()
+                .withFeatureFromAssets("assets/details.feature")
+                .scenarios();
     }
 
     @Test

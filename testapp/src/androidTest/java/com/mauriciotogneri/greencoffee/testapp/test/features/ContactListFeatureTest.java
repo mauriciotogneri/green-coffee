@@ -32,7 +32,9 @@ public class ContactListFeatureTest extends GreenCoffeeTest
     @Parameters
     public static Iterable<Scenario> data() throws IOException
     {
-        return new GreenCoffeeConfig().fromAssets("assets/contacts.feature");
+        return new GreenCoffeeConfig()
+                .withFeatureFromAssets("assets/contacts.feature")
+                .scenarios();
     }
 
     @Test
