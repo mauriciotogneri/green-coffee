@@ -19,12 +19,12 @@ import org.junit.runners.Parameterized.Parameters;
 import java.io.IOException;
 
 @RunWith(Parameterized.class)
-public class ContactListFeatureTest extends GreenCoffeeTest
+public class DetailsFeatureTest extends GreenCoffeeTest
 {
     @Rule
     public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
-    public ContactListFeatureTest(Scenario scenario)
+    public DetailsFeatureTest(Scenario scenario)
     {
         super(scenario);
     }
@@ -32,7 +32,7 @@ public class ContactListFeatureTest extends GreenCoffeeTest
     @Parameters
     public static Iterable<Scenario> data() throws IOException
     {
-        return new GreenCoffeeConfig().fromAssets("assets/contacts.feature");
+        return new GreenCoffeeConfig().fromAssets("assets/details.feature");
     }
 
     @Test

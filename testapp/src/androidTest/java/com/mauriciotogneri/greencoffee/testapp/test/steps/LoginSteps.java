@@ -20,6 +20,32 @@ public class LoginSteps extends GreenCoffeeSteps
         onViewWithId(R.id.login_input_password).contains("");
     }
 
+    @Given("^I login as (\\w+)$")
+    public void iLoginAs$(String user)
+    {
+        if (user.equals("USER_1"))
+        {
+            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_1.username());
+            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_1.password());
+        }
+        else if (user.equals("USER_2"))
+        {
+            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_2.username());
+            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_2.password());
+        }
+        else if (user.equals("USER_3"))
+        {
+            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_3.username());
+            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_3.password());
+        }
+        else
+        {
+            throw new RuntimeException();
+        }
+
+        onViewWithId(R.id.login_button_doLogin).click();
+    }
+
     @When("^I press the login button$")
     public void iPressTheLoginButton()
     {
@@ -78,11 +104,5 @@ public class LoginSteps extends GreenCoffeeSteps
     public void iSeeAnErrorMessageSayingInvalidCredentials()
     {
         onViewWithText(R.string.login_credentials_error).isDisplayed();
-    }
-
-    @Then("^I see the contacts screen$")
-    public void iSeeTheContactsScreen()
-    {
-        onViewWithText(R.string.contacts_title).isDisplayed();
     }
 }

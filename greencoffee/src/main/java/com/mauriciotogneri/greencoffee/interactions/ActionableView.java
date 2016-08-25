@@ -26,9 +26,9 @@ public class ActionableView
         viewInteraction.perform(ViewActions.typeText(text));
     }
 
-    public void contains(String text)
+    public void contains(Object text)
     {
-        viewInteraction.check(matches(withText(text)));
+        viewInteraction.check(matches(withText(text.toString())));
     }
 
     public void isDisplayed()

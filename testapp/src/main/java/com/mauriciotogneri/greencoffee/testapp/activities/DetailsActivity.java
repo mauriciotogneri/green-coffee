@@ -38,5 +38,11 @@ public class DetailsActivity extends AppCompatActivity
 
         TextView contactAge = (TextView) findViewById(R.id.contact_detail_age);
         contactAge.setText(contact.age());
+
+        TextView contactWeight = (TextView) findViewById(R.id.contact_detail_weight);
+        contactWeight.setText(contact.weight());
+
+        TextView contactMarried = (TextView) findViewById(R.id.contact_detail_married);
+        contactMarried.setText(contact.married(this));
     }
 }

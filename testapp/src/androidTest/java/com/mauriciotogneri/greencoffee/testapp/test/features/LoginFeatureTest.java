@@ -6,6 +6,7 @@ import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.Scenario;
 import com.mauriciotogneri.greencoffee.testapp.activities.LoginActivity;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
 
 import org.junit.Rule;
@@ -36,6 +37,6 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(new LoginSteps());
+        start(new LoginSteps(), new ContactListSteps());
     }
 }

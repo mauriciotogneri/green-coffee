@@ -50,4 +50,48 @@
 
     </TableRow>
 
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dip">
+
+        <TextView
+            style="@style/widget_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/details.contact.weight"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contact.detail.weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="71.2 kg." />
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dip">
+
+        <TextView
+            style="@style/widget_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
+            android:text="@string/details.contact.married"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/contact.detail.married"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Married" />
+
+    </TableRow>
+
 </TableLayout>
