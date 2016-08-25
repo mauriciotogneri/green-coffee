@@ -20,7 +20,7 @@ import java.io.IOException;
 public class LoginFeatureTest extends GreenCoffeeTest
 {
     @Rule
-    public ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(LoginActivity.class);
+    public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
     public LoginFeatureTest(Scenario scenario)
     {

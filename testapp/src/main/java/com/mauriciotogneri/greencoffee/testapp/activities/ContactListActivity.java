@@ -51,7 +51,6 @@ public class ContactListActivity extends AppCompatActivity
 
     private void onContactSelected(Contact contact)
     {
-        Intent intent = new Intent(this, DetailsActivity.class);
-        startActivity(intent);
+        startActivity(DetailsActivity.create(this, contact.id()));
     }
 }

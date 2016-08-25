@@ -42,10 +42,12 @@ Feature: Login screen to authenticate users
 
 		Examples:
 			| user  | pass  |
-			| admin | 12345 |
 			| admin | admin |
-			| guest | 1234  |
+			| admin | 12345 |
 			| guest | guest |
+			| guest | 12345 |
+			| root  | root  |
+			| root  | 12345 |
 
 	Scenario: Valid username and password
 		When I introduce a valid username

@@ -5,12 +5,11 @@ import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.testapp.R;
+import com.mauriciotogneri.greencoffee.testapp.database.UserDatabase;
 
 @SuppressWarnings("unused")
 public class LoginSteps extends GreenCoffeeSteps
 {
-    private static final String VALID_USERNAME = "admin";
-    private static final String VALID_PASSWORD = "1234";
     private static final String INVALID_USERNAME = "guest";
     private static final String INVALID_PASSWORD = "5678";
 
@@ -30,13 +29,13 @@ public class LoginSteps extends GreenCoffeeSteps
     @When("^I introduce a valid username$")
     public void iIntroduceAValidUsername()
     {
-        onViewWithId(R.id.login_input_username).type(VALID_USERNAME);
+        onViewWithId(R.id.login_input_username).type(UserDatabase.USER_1.username());
     }
 
     @When("^I introduce a valid password$")
     public void iIntroduceAValidPassword()
     {
-        onViewWithId(R.id.login_input_password).type(VALID_PASSWORD);
+        onViewWithId(R.id.login_input_password).type(UserDatabase.USER_1.password());
     }
 
     @When("^I introduce an invalid username$")

@@ -7,4 +7,8 @@
         <item name="colorAccent">#17A589</item>
     </style>
 
+    <style name="widget_textview">
+        <item name="android:textSize">15sp</item>
+    </style>
+
 </resources>

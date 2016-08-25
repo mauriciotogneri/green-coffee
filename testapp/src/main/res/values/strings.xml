@@ -18,5 +18,7 @@
     <string name="contacts.married.no">Not Married</string>
 
     <string name="details.title">Details</string>
+    <string name="details.contact.name">Name:</string>
+    <string name="details.contact.age">Age:</string>
 
 </resources>

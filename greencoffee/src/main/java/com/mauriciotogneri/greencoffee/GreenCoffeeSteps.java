@@ -87,4 +87,9 @@ public class GreenCoffeeSteps
     {
         return new ActionableView(onView(withText(resourceId)));
     }
+
+    protected ActionableView onViewWithText(String text)
+    {
+        return new ActionableView(onView(withText(text)));
+    }
 }

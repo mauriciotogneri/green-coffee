@@ -16,6 +16,16 @@ public class User
         return username;
     }
 
+    public String password()
+    {
+        return password;
+    }
+
+    public boolean hasUsername(String username)
+    {
+        return this.username.equals(username);
+    }
+
     public boolean matches(String username, String password)
     {
         return this.username.equals(username) && this.password.equals(password);

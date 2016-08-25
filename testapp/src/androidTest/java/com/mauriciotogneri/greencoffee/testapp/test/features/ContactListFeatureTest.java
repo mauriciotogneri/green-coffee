@@ -5,7 +5,7 @@ import android.support.test.rule.ActivityTestRule;
 import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
 import com.mauriciotogneri.greencoffee.Scenario;
-import com.mauriciotogneri.greencoffee.testapp.activities.ContactListActivity;
+import com.mauriciotogneri.greencoffee.testapp.activities.LoginActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 
 import org.junit.Rule;
@@ -20,7 +20,7 @@ import java.io.IOException;
 public class ContactListFeatureTest extends GreenCoffeeTest
 {
     @Rule
-    public ActivityTestRule<ContactListActivity> activityTestRule = new ActivityTestRule<>(ContactListActivity.class);
+    public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
     public ContactListFeatureTest(Scenario scenario)
     {
