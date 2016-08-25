@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def releaseVersion = '0.0.2'
+def releaseVersion = '0.0.3'
 def bintrayUser = hasProperty('bintray_user') ? bintray_user : ''
 def bintrayApiKey = hasProperty('bintray_apikey') ? bintray_apikey : ''
 
 android
 {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     dexOptions
     {

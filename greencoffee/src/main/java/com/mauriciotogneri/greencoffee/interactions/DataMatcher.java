@@ -9,25 +9,23 @@ import org.hamcrest.Matcher;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-public class DataAdapterMatcher<T, C>
+public abstract class DataMatcher<T, C>
 {
     private final int resourceId;
-    private final DataMatcher<T, C> dataMatcher;
 
-    public DataAdapterMatcher(int resourceId, DataMatcher<T, C> dataMatcher)
+    public DataMatcher(int resourceId)
     {
         this.resourceId = resourceId;
-        this.dataMatcher = dataMatcher;
     }
 
-    public DataAdapterMatcher(DataMatcher<T, C> dataMatcher)
+    public DataMatcher()
     {
-        this(0, dataMatcher);
+        this(0);
     }
 
     public ActionableData withContent(C content)
     {
-        DataInteraction dataInteraction = onData(dataMatcher(dataMatcher, content));
+        DataInteraction dataInteraction = onData(dataMatcher(content));
 
         if (resourceId != 0)
         {
@@ -39,8 +37,10 @@ public class DataAdapterMatcher<T, C>
         }
     }
 
-    private Matcher<Object> dataMatcher(final DataMatcher<T, C> dataMatcher, final C content)
+    private Matcher<Object> dataMatcher(final C content)
     {
+        final DataMatcher<T, C> dataMatcher = this;
+
         return new BoundedMatcher<Object, T>(dataMatcher.dataClass())
         {
             @Override
@@ -57,10 +57,7 @@ public class DataAdapterMatcher<T, C>
         };
     }
 
-    public interface DataMatcher<T, C>
-    {
-        Class<T> dataClass();
+    public abstract Class<T> dataClass();
 
-        boolean matches(T data, C content);
-    }
+    public abstract boolean matches(T data, C content);
 }
