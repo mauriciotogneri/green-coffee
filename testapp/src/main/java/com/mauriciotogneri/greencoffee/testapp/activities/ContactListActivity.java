@@ -8,11 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mauriciotogneri.greencoffee.testapp.R;
 import com.mauriciotogneri.greencoffee.testapp.adapters.ContactAdapter;
 import com.mauriciotogneri.greencoffee.testapp.database.ContactDatabase;
 import com.mauriciotogneri.greencoffee.testapp.model.Contact;
+
+import java.util.List;
 
 public class ContactListActivity extends AppCompatActivity
 {
@@ -35,18 +38,30 @@ public class ContactListActivity extends AppCompatActivity
         String username = getIntent().getStringExtra(PARAMETER_USERNAME);
 
         ContactDatabase contactDatabase = new ContactDatabase();
+        List<Contact> contacts = contactDatabase.contacts(username);
 
         ListView listView = (ListView) findViewById(R.id.contacts_list);
-        listView.setAdapter(new ContactAdapter(this, contactDatabase.contacts(username)));
-        listView.setOnItemClickListener(new OnItemClickListener()
+
+        if (!contacts.isEmpty())
         {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            listView.setAdapter(new ContactAdapter(this, contacts));
+            listView.setOnItemClickListener(new OnItemClickListener()
             {
-                Contact contact = (Contact) parent.getItemAtPosition(position);
-                onContactSelected(contact);
-            }
-        });
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+                {
+                    Contact contact = (Contact) parent.getItemAtPosition(position);
+                    onContactSelected(contact);
+                }
+            });
+        }
+        else
+        {
+            listView.setVisibility(View.GONE);
+
+            TextView labelEmptyList = (TextView) findViewById(R.id.contacts_label_emptyList);
+            labelEmptyList.setVisibility(View.VISIBLE);
+        }
     }
 
     private void onContactSelected(Contact contact)

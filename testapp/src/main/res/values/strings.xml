@@ -16,6 +16,7 @@
     <string name="contacts.title">Contacts screen</string>
     <string name="contacts.married.yes">Married</string>
     <string name="contacts.married.no">Not Married</string>
+    <string name="contacts.emptyList">No contacts</string>
 
     <string name="details.title">Details</string>
     <string name="details.contact.name">Name:</string>

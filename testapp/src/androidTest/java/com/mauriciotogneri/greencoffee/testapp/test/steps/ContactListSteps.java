@@ -61,6 +61,6 @@ public class ContactListSteps extends GreenCoffeeSteps
     @Then("^I see an empty contact list$")
     public void iSeeAnEmptyContactList()
     {
-        // TODO
+        onViewWithText(R.string.contacts_emptyList).isDisplayed();
     }
 }
