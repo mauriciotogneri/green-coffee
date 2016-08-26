@@ -7,6 +7,10 @@ import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import gherkin.ast.DataTable;
+import gherkin.ast.DocString;
+import gherkin.ast.Node;
+
 class StepDefinition
 {
     private final Pattern pattern;
@@ -37,7 +41,7 @@ class StepDefinition
         return matcher.find();
     }
 
-    public void invoke(String text)
+    public void invoke(String text, Node argument)
     {
         Matcher matcher = pattern.matcher(text);
 
@@ -47,7 +51,7 @@ class StepDefinition
 
             try
             {
-                parameters = parameters(matcher);
+                parameters = parameters(matcher, argument);
             }
             catch (Exception e)
             {
@@ -71,14 +75,32 @@ class StepDefinition
         }
     }
 
-    private Object[] parameters(Matcher matcher)
+    private Object[] parameters(Matcher matcher, Node argument)
     {
-        Object[] parameters = new Object[matcher.groupCount()];
+        Object[] parameters = new Object[matcher.groupCount() + ((argument != null) ? 1 : 0)];
         Class<?>[] types = method.getParameterTypes();
 
-        for (int i = 0; i < parameters.length; i++)
+        int limit = (argument != null) ? (parameters.length - 1) : parameters.length;
+
+        for (int i = 0; i < limit; i++)
         {
             parameters[i] = castParameter(matcher.group(i + 1), types[i]);
+        }
+
+        if (argument != null)
+        {
+            if (argument.getClass().equals(DocString.class))
+            {
+                DocString docString = (DocString) argument;
+
+                parameters[parameters.length - 1] = docString.getContent();
+            }
+            else if (argument.getClass().equals(DataTable.class))
+            {
+                DataTable dataTable = (DataTable) argument;
+
+                parameters[parameters.length - 1] = dataTable.getRows();
+            }
         }
 
         return parameters;

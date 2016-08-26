@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import gherkin.ast.Node;
 import gherkin.ast.Step;
 
 public class GreenCoffeeTest
@@ -83,6 +84,7 @@ public class GreenCoffeeTest
     {
         String keyword = step.getKeyword().trim();
         String text = step.getText().trim();
+        Node argument = step.getArgument();
 
         testLog.logStep(keyword, text);
 
@@ -90,7 +92,7 @@ public class GreenCoffeeTest
         {
             if (stepDefinition.matches(text))
             {
-                stepDefinition.invoke(text);
+                stepDefinition.invoke(text, argument);
                 return;
             }
         }

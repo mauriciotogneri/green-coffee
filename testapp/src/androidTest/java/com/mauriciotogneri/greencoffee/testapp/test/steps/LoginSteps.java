@@ -23,24 +23,25 @@ public class LoginSteps extends GreenCoffeeSteps
     @Given("^I login as (\\w+)$")
     public void iLoginAs$(String user)
     {
-        if (user.equals("USER_1"))
+        switch (user)
         {
-            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_1.username());
-            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_1.password());
-        }
-        else if (user.equals("USER_2"))
-        {
-            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_2.username());
-            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_2.password());
-        }
-        else if (user.equals("USER_3"))
-        {
-            onViewWithId(R.id.login_input_username).type(UserDatabase.USER_3.username());
-            onViewWithId(R.id.login_input_password).type(UserDatabase.USER_3.password());
-        }
-        else
-        {
-            throw new RuntimeException();
+            case "USER_1":
+                onViewWithId(R.id.login_input_username).type(UserDatabase.USER_1.username());
+                onViewWithId(R.id.login_input_password).type(UserDatabase.USER_1.password());
+                break;
+
+            case "USER_2":
+                onViewWithId(R.id.login_input_username).type(UserDatabase.USER_2.username());
+                onViewWithId(R.id.login_input_password).type(UserDatabase.USER_2.password());
+                break;
+
+            case "USER_3":
+                onViewWithId(R.id.login_input_username).type(UserDatabase.USER_3.username());
+                onViewWithId(R.id.login_input_password).type(UserDatabase.USER_3.password());
+                break;
+
+            default:
+                throw new RuntimeException();
         }
 
         onViewWithId(R.id.login_button_doLogin).click();
