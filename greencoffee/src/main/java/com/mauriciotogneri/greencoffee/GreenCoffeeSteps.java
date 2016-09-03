@@ -9,6 +9,7 @@ import com.mauriciotogneri.greencoffee.annotations.But;
 import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
+import com.mauriciotogneri.greencoffee.exceptions.InvalidStepDefinitionException;
 import com.mauriciotogneri.greencoffee.interactions.ActionableView;
 
 import java.lang.reflect.Method;
@@ -39,42 +40,56 @@ public class GreenCoffeeSteps
 
     private String pattern(Method method)
     {
+        String result = null;
+
         Given given = method.getAnnotation(Given.class);
 
         if (given != null)
         {
-            return given.value();
+            result = given.value();
         }
 
         When when = method.getAnnotation(When.class);
 
         if (when != null)
         {
-            return when.value();
+            checkInvalidStepDefinition(result, method);
+            result = when.value();
         }
 
         Then then = method.getAnnotation(Then.class);
 
         if (then != null)
         {
-            return then.value();
+            checkInvalidStepDefinition(result, method);
+            result = then.value();
         }
 
         And and = method.getAnnotation(And.class);
 
         if (and != null)
         {
-            return and.value();
+            checkInvalidStepDefinition(result, method);
+            result = and.value();
         }
 
         But but = method.getAnnotation(But.class);
 
         if (but != null)
         {
-            return but.value();
+            checkInvalidStepDefinition(result, method);
+            result = but.value();
         }
 
-        return null;
+        return result;
+    }
+
+    private void checkInvalidStepDefinition(String pattern, Method method)
+    {
+        if (pattern != null)
+        {
+            throw new InvalidStepDefinitionException(method);
+        }
     }
 
     protected ActionableView onViewWithId(@IdRes int resourceId)

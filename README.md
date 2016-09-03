@@ -19,7 +19,7 @@ Feature: Login screen to authenticate users
 		 Then I see an error message saying 'Invalid credentials'
 ```
 
-First, create a test that extends from `GreenCoffeeTest` and declare the Activity and the feature that will be used:
+First, create a class that extends from `GreenCoffeeTest` and declare the Activity, the feature and the step definitions that will be used:
 
 ```java
 @RunWith(Parameterized.class)
@@ -92,7 +92,8 @@ public class LoginSteps extends GreenCoffeeSteps
 }
 ```
 
-This is how it looks when you run your instrumentation tests:
+This is how it looks when you run a more complex instrumentation test:
+
 ![Example](http://i.imgur.com/4rMK1KK.gif)
 
 ## Step definitions
