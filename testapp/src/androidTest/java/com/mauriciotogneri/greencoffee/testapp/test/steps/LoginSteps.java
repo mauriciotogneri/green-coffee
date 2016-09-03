@@ -72,7 +72,7 @@ public class LoginSteps extends GreenCoffeeSteps
     }
 
     @When("^I introduce an invalid password$")
-    public void iIntroduceAInvalidPassword()
+    public void iIntroduceAnInvalidPassword()
     {
         onViewWithId(R.id.login_input_password).type(INVALID_PASSWORD);
     }

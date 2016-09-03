@@ -1,9 +1,8 @@
-[![Build Status](https://travis-ci.org/mauriciotogneri/green-coffee.svg?branch=master)](https://travis-ci.org/mauriciotogneri/green-coffee)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mauriciotogneri/green-coffee/blob/master/LICENSE.txt)
 [![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 
 # Green Coffee
-**Green Coffee** is an Android library that allows you to declare Cucumber step definitions in your instrumentation tests.
+**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests.
 
 ## Example
 
@@ -20,7 +19,7 @@ Feature: Login screen to authenticate users
 		 Then I see an error message saying 'Invalid credentials'
 ```
 
-First, create a test that extends from `GreenCoffeeTest` and declare the entry point Activity and the feature that will be used:
+First, create a test that extends from `GreenCoffeeTest` and declare the Activity and the feature that will be used:
 
 ```java
 @RunWith(Parameterized.class)
@@ -37,7 +36,9 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Parameters
     public static Iterable<Scenario> data() throws IOException
     {
-        return new GreenCoffeeConfig().fromAssets("assets/login.feature");
+        return new GreenCoffeeConfig()
+                        .withFeatureFromAssets("assets/login.feature")
+                        .scenarios();
     }
 
     @Test
@@ -49,7 +50,7 @@ public class LoginFeatureTest extends GreenCoffeeTest
 ```
 
 This configuration makes the test work in the following way:
-* The feature will be parsed and its the scenarios will be loaded
+* The feature will be parsed and all its scenarios will be loaded
 * For each scenario, an instance of the declared activity will be launched
 * The steps definitions passed as parameters in the method `start` will be used to match the steps in the scenarios
 
@@ -61,20 +62,20 @@ public class LoginSteps extends GreenCoffeeSteps
     @Given("^I see an empty login form$")
     public void iSeeAnEmptyLoginForm()
     {
-        onViewWithId(R.id.login_input_username).contains("");
-        onViewWithId(R.id.login_input_password).contains("");
+        onViewWithId(R.id.login_input_username).isEmpty();
+        onViewWithId(R.id.login_input_password).isEmpty();
     }
 
     @When("^I introduce an invalid username$")
     public void iIntroduceAnInvalidUsername()
     {
-        onViewWithId(R.id.login_input_username).type(INVALID_USERNAME);
+        onViewWithId(R.id.login_input_username).type("guest");
     }
 
     @When("^I introduce an invalid password$")
-    public void iIntroduceAInvalidPassword()
+    public void iIntroduceAnInvalidPassword()
     {
-        onViewWithId(R.id.login_input_password).type(INVALID_PASSWORD);
+        onViewWithId(R.id.login_input_password).type("1234");
     }
 
     @When("^I press the login button$")
@@ -90,6 +91,17 @@ public class LoginSteps extends GreenCoffeeSteps
     }
 }
 ```
+
+## Step definitions
+Methods used as step definitions can be declared using the following annotations:
+* `Given`
+* `When`
+* `Then`
+* `And`
+* `But`
+
+## Espresso helper methods
+Green Coffee includes a set of methods that makes more readable the interaction with the UI components. More information in the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki).
 
 ## Installation
 Add the following dependency to your `build.gradle` file:
