@@ -93,7 +93,7 @@ public class LoginSteps extends GreenCoffeeSteps
 ```
 
 This is how it looks when you run your instrumentation tests:
-[http://i.imgur.com/4rMK1KK.gif|alt=example]
+![Example](http://i.imgur.com/4rMK1KK.gif)
 
 ## Step definitions
 Methods used as step definitions can be declared using the following annotations:
