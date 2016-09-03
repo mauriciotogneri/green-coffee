@@ -2,7 +2,7 @@
 [![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 
 # Green Coffee
-**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests. Visit the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki) for more information.
+**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests. Visit the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki) for more detailed information.
 
 ## Example
 
@@ -49,12 +49,7 @@ public class LoginFeatureTest extends GreenCoffeeTest
 }
 ```
 
-This configuration makes the test work in the following way:
-* The feature will be parsed and all its scenarios will be loaded
-* For each scenario, an instance of the declared activity will be launched
-* The steps definitions passed as parameters in the method `start` will be used to match the steps in the scenarios
-
-The second step is to create a class containing the steps definitions:
+Next, create a class containing the steps definitions:
 
 ```java
 public class LoginSteps extends GreenCoffeeSteps
@@ -92,23 +87,14 @@ public class LoginSteps extends GreenCoffeeSteps
 }
 ```
 
-This is how it looks when you run a more complex instrumentation test:
+And that's it, now you can create your own tests using Green Coffee. This is how it looks when you run a more complex test:
 
 ![Example](http://i.imgur.com/4rMK1KK.gif)
 
-## Step definitions
-Methods used as step definitions can be declared using the following annotations:
-* `Given`
-* `When`
-* `Then`
-* `And`
-* `But`
-
-## Espresso helper methods
-Green Coffee includes a set of methods that makes more readable the interaction with the UI components. More information in the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki/Espresso-support).
+You can see an example applied to a full app [here](https://github.com/mauriciotogneri/green-coffee/tree/master/testapp/src/androidTest/java/com/mauriciotogneri/greencoffee/testapp/test).
 
 ## Installation
-Add the following dependency to your `build.gradle` file:
+In order to use Green Coffee, add the following dependency to your `build.gradle` file:
 
 ```groovy
 compile 'com.mauriciotogneri:greencoffee:1.0.0'
