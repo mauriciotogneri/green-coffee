@@ -2,7 +2,7 @@
 [![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 
 # Green Coffee
-**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests.
+**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests. Visit the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki) for more information.
 
 ## Example
 
@@ -104,7 +104,7 @@ Methods used as step definitions can be declared using the following annotations
 * `But`
 
 ## Espresso helper methods
-Green Coffee includes a set of methods that makes more readable the interaction with the UI components. More information in the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki).
+Green Coffee includes a set of methods that makes more readable the interaction with the UI components. More information in the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki/Espresso-support).
 
 ## Installation
 Add the following dependency to your `build.gradle` file:
@@ -112,3 +112,27 @@ Add the following dependency to your `build.gradle` file:
 ```groovy
 compile 'com.mauriciotogneri:greencoffee:1.0.0'
 ```
+
+## License
+
+        MIT License
+
+        Copyright (c) 2016 Mauricio Togneri
+
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
