@@ -3,7 +3,7 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-green--coffee-green.svg?style=true)](https://android-arsenal.com/details/1/4313)
 
 # Green Coffee
-**Green Coffee** is an Android library that allows you to run Cucumber scenarios in your instrumentation tests. Visit the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki) for more detailed information.
+**Green Coffee** is a library that allows you to run your acceptance tests written in Gherkin in your Android instrumentation tests using the step definitions that you declare. Visit the [wiki](https://github.com/mauriciotogneri/green-coffee/wiki) for more detailed information.
 
 ## Example
 
