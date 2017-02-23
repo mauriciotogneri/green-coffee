@@ -1,10 +1,15 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.os.Environment;
+
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import gherkin.ast.Node;
@@ -14,20 +19,20 @@ public class GreenCoffeeTest
 {
     private final Scenario scenario;
     private final TestLog testLog;
-    private final ScreenCapture screenCapture;
+    private final String screenshotsPath;
 
     public GreenCoffeeTest(Scenario scenario, String screenshotsPath)
     {
         this.scenario = scenario;
         this.testLog = new TestLog();
-        this.screenCapture = new ScreenCapture(screenshotsPath);
+        this.screenshotsPath = screenshotsPath;
     }
 
     public GreenCoffeeTest(Scenario scenario)
     {
         this.scenario = scenario;
         this.testLog = new TestLog();
-        this.screenCapture = null;
+        this.screenshotsPath = null;
     }
 
     protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
@@ -52,9 +57,13 @@ public class GreenCoffeeTest
         }
         catch (Exception e)
         {
-            if (screenCapture != null)
+            if (screenshotsPath != null)
             {
-                screenCapture.takeScreenshot();
+                String fileName = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
+                String path = String.format("%s/%s/%s.jpg", Environment.getExternalStorageDirectory().toString(), screenshotsPath, fileName);
+
+                ScreenCapture screenCapture = new ScreenCapture();
+                screenCapture.takeScreenshot(path);
             }
 
             throw e;

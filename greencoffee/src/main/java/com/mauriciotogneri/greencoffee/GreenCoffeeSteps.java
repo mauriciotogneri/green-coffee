@@ -106,4 +106,10 @@ public class GreenCoffeeSteps
     {
         return new ActionableView(onView(ViewMatchers.withText(text)));
     }
+
+    protected void takeScreenshot(String path)
+    {
+        ScreenCapture screenCapture = new ScreenCapture();
+        screenCapture.takeScreenshot(path);
+    }
 }
