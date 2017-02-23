@@ -98,7 +98,7 @@ You can see an example applied to a full app [here](https://github.com/mauriciot
 In order to use Green Coffee, add the following dependency to your `build.gradle` file:
 
 ```groovy
-compile 'com.mauriciotogneri:greencoffee:1.0.0'
+compile 'com.mauriciotogneri:greencoffee:1.1.0'
 ```
 
 ## License
