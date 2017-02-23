@@ -25,7 +25,7 @@ public class LoginFeatureTest extends GreenCoffeeTest
 
     public LoginFeatureTest(Scenario scenario)
     {
-        super(scenario);
+        super(scenario, "test");
     }
 
     @Parameters

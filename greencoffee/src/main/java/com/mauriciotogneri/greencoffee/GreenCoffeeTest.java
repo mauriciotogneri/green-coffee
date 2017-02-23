@@ -59,7 +59,7 @@ public class GreenCoffeeTest
         {
             if (screenshotsPath != null)
             {
-                String fileName = new SimpleDateFormat("yyyy-MM-dd_hh:mm:ss", Locale.getDefault()).format(new Date());
+                String fileName = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss", Locale.getDefault()).format(new Date());
                 String path = String.format("%s/%s/%s.jpg", Environment.getExternalStorageDirectory().toString(), screenshotsPath, fileName);
 
                 ScreenCapture screenCapture = new ScreenCapture();

@@ -1,6 +1,12 @@
 package com.mauriciotogneri.greencoffee.testapp.activities;
 
+import android.Manifest;
+import android.Manifest.permission;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -32,11 +38,13 @@ public class LoginActivity extends AppCompatActivity
             }
         });
 
-        /*EditText username = (EditText) findViewById(R.id.login_input_username);
-        username.setText("admin");
-
-        EditText password = (EditText) findViewById(R.id.login_input_password);
-        password.setText("1234");*/
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            if (ContextCompat.checkSelfPermission(this, permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            {
+                ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1000);
+            }
+        }
     }
 
     private void login(String username, String password)

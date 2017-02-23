@@ -36,6 +36,7 @@ class ScreenCapture
                     catch (Exception e)
                     {
                         // ignore
+                        System.out.println();
                     }
                 }
             }
@@ -50,9 +51,14 @@ class ScreenCapture
         view.setDrawingCacheEnabled(false);
 
         File imageFile = new File(path);
-        FileOutputStream outputStream = new FileOutputStream(imageFile);
-        bitmap.compress(CompressFormat.PNG, 100, outputStream);
-        outputStream.flush();
-        outputStream.close();
+        File parentFolder = imageFile.getParentFile();
+
+        if (parentFolder.exists() || parentFolder.mkdirs())
+        {
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            bitmap.compress(CompressFormat.JPEG, 100, outputStream);
+            outputStream.flush();
+            outputStream.close();
+        }
     }
 }
