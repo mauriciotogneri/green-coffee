@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mauriciotogneri/green-coffee/blob/master/LICENSE.txt)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mauriciotogneri/green-coffee/blob/master/LICENSE.md)
 [![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-green--coffee-green.svg?style=true)](https://android-arsenal.com/details/1/4313)
 
