@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 class TestLog
 {
-    public void logScenario(Scenario scenario)
+    void logScenario(Scenario scenario)
     {
         log(String.format("Scenario: %s", scenario.name()));
 
@@ -17,7 +17,7 @@ class TestLog
         }
     }
 
-    public void logStep(String keyword, String text)
+    void logStep(String keyword, String text)
     {
         log(String.format("\t%s %s", keyword, text));
     }

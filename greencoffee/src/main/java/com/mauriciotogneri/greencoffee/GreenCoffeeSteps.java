@@ -24,7 +24,7 @@ import static android.support.test.espresso.Espresso.onView;
 
 public class GreenCoffeeSteps
 {
-    public List<StepDefinition> stepDefinitions()
+    List<StepDefinition> stepDefinitions()
     {
         List<StepDefinition> stepDefinitions = new ArrayList<>();
 

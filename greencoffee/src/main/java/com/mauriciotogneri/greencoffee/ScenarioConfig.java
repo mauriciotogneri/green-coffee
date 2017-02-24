@@ -8,29 +8,29 @@ public class ScenarioConfig
     private final Locale locale;
     private final String screenshotPath;
 
-    public ScenarioConfig(Scenario scenario, Locale locale, String screenshotPath)
+    ScenarioConfig(Scenario scenario, Locale locale, String screenshotPath)
     {
         this.scenario = scenario;
         this.locale = locale;
         this.screenshotPath = screenshotPath;
     }
 
-    public Scenario scenario()
+    Scenario scenario()
     {
         return scenario;
     }
 
-    public Locale locale()
+    Locale locale()
     {
         return locale;
     }
 
-    public boolean hasScreenshotPath()
+    boolean hasScreenshotPath()
     {
         return (screenshotPath != null);
     }
 
-    public String screenshotPath()
+    String screenshotPath()
     {
         return screenshotPath;
     }

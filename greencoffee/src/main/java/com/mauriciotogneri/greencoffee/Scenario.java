@@ -5,14 +5,14 @@ import java.util.List;
 
 import gherkin.ast.Step;
 
-public class Scenario
+class Scenario
 {
     private final String name;
     private final String description;
     private final List<String> tags;
     private final List<Step> steps;
 
-    public Scenario(String name, String description, List<Step> steps, List<String> tags)
+    Scenario(String name, String description, List<Step> steps, List<String> tags)
     {
         this.name = name;
         this.description = description;

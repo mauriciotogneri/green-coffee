@@ -15,7 +15,7 @@ import java.util.Iterator;
 
 class ScreenCapture
 {
-    public void takeScreenshot(final String path)
+    void takeScreenshot(final String path)
     {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable()
         {

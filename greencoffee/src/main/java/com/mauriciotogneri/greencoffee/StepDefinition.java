@@ -17,31 +17,31 @@ class StepDefinition
     private final Method method;
     private final Object target;
 
-    public StepDefinition(String expression, Method method, Object target)
+    StepDefinition(String expression, Method method, Object target)
     {
         this.pattern = Pattern.compile(expression);
         this.method = method;
         this.target = target;
     }
 
-    public String pattern()
+    String pattern()
     {
         return pattern.pattern();
     }
 
-    public Method method()
+    Method method()
     {
         return method;
     }
 
-    public boolean matches(String text)
+    boolean matches(String text)
     {
         Matcher matcher = pattern.matcher(text);
 
         return matcher.find();
     }
 
-    public void invoke(String text, Node argument)
+    void invoke(String text, Node argument)
     {
         Matcher matcher = pattern.matcher(text);
 
