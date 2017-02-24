@@ -1728,6 +1728,45 @@ public class GherkinDialectProvider implements IGherkinDialectProvider {
                     "      \"Menawa \"\n" +
                     "    ]\n" +
                     "  },\n" +
+                    "  \"ka\": {\n" +
+                    "    \"and\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"და\"\n" +
+                    "    ],\n" +
+                    "    \"background\": [\n" +
+                    "      \"კონტექსტი\"\n" +
+                    "    ],\n" +
+                    "    \"but\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"მაგ\u00ADრამ\"\n" +
+                    "    ],\n" +
+                    "    \"examples\": [\n" +
+                    "      \"მაგალითები\"\n" +
+                    "    ],\n" +
+                    "    \"feature\": [\n" +
+                    "      \"თვისება\"\n" +
+                    "    ],\n" +
+                    "    \"given\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"მოცემული\"\n" +
+                    "    ],\n" +
+                    "    \"name\": \"Georgian\",\n" +
+                    "    \"native\": \"ქართველი\",\n" +
+                    "    \"scenario\": [\n" +
+                    "      \"სცენარის\"\n" +
+                    "    ],\n" +
+                    "    \"scenarioOutline\": [\n" +
+                    "      \"სცენარის ნიმუში\"\n" +
+                    "    ],\n" +
+                    "    \"then\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"მაშინ\"\n" +
+                    "    ],\n" +
+                    "    \"when\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"როდესაც\"\n" +
+                    "    ]\n" +
+                    "  },\n" +
                     "  \"kn\": {\n" +
                     "    \"and\": [\n" +
                     "      \"* \",\n" +
@@ -1933,6 +1972,100 @@ public class GherkinDialectProvider implements IGherkinDialectProvider {
                     "      \"Ja \"\n" +
                     "    ]\n" +
                     "  },\n" +
+                    "  \"mk-Cyrl\": {\n" +
+                    "    \"and\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"И \"\n" +
+                    "    ],\n" +
+                    "    \"background\": [\n" +
+                    "      \"Контекст\",\n" +
+                    "      \"Содржина\"\n" +
+                    "    ],\n" +
+                    "    \"but\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Но \"\n" +
+                    "    ],\n" +
+                    "    \"examples\": [\n" +
+                    "      \"Примери\",\n" +
+                    "      \"Сценарија\"\n" +
+                    "    ],\n" +
+                    "    \"feature\": [\n" +
+                    "      \"Функционалност\",\n" +
+                    "      \"Бизнис потреба\",\n" +
+                    "      \"Можност\"\n" +
+                    "    ],\n" +
+                    "    \"given\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Дадено \",\n" +
+                    "      \"Дадена \"\n" +
+                    "    ],\n" +
+                    "    \"name\": \"Macedonian\",\n" +
+                    "    \"native\": \"Македонски\",\n" +
+                    "    \"scenario\": [\n" +
+                    "      \"Сценарио\",\n" +
+                    "      \"На пример\"\n" +
+                    "    ],\n" +
+                    "    \"scenarioOutline\": [\n" +
+                    "      \"Преглед на сценарија\",\n" +
+                    "      \"Скица\",\n" +
+                    "      \"Концепт\"\n" +
+                    "    ],\n" +
+                    "    \"then\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Тогаш \"\n" +
+                    "    ],\n" +
+                    "    \"when\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Кога \"\n" +
+                    "    ]\n" +
+                    "  },\n" +
+                    "  \"mk-Latn\": {\n" +
+                    "    \"and\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"I \"\n" +
+                    "    ],\n" +
+                    "    \"background\": [\n" +
+                    "      \"Kontekst\",\n" +
+                    "      \"Sodrzhina\"\n" +
+                    "    ],\n" +
+                    "    \"but\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"No \"\n" +
+                    "    ],\n" +
+                    "    \"examples\": [\n" +
+                    "      \"Primeri\",\n" +
+                    "      \"Scenaria\"\n" +
+                    "    ],\n" +
+                    "    \"feature\": [\n" +
+                    "      \"Funkcionalnost\",\n" +
+                    "      \"Biznis potreba\",\n" +
+                    "      \"Mozhnost\"\n" +
+                    "    ],\n" +
+                    "    \"given\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Dadeno \",\n" +
+                    "      \"Dadena \"\n" +
+                    "    ],\n" +
+                    "    \"name\": \"Macedonian (Latin)\",\n" +
+                    "    \"native\": \"Makedonski (Latinica)\",\n" +
+                    "    \"scenario\": [\n" +
+                    "      \"Scenario\",\n" +
+                    "      \"Na primer\"\n" +
+                    "    ],\n" +
+                    "    \"scenarioOutline\": [\n" +
+                    "      \"Pregled na scenarija\",\n" +
+                    "      \"Skica\",\n" +
+                    "      \"Koncept\"\n" +
+                    "    ],\n" +
+                    "    \"then\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Togash \"\n" +
+                    "    ],\n" +
+                    "    \"when\": [\n" +
+                    "      \"* \",\n" +
+                    "      \"Koga \"\n" +
+                    "    ]\n" +
+                    "  },\n" +
                     "  \"mn\": {\n" +
                     "    \"and\": [\n" +
                     "      \"* \",\n" +
@@ -2014,7 +2147,8 @@ public class GherkinDialectProvider implements IGherkinDialectProvider {
                     "    ],\n" +
                     "    \"when\": [\n" +
                     "      \"* \",\n" +
-                    "      \"Als \"\n" +
+                    "      \"Als \",\n" +
+                    "      \"Wanneer \"\n" +
                     "    ]\n" +
                     "  },\n" +
                     "  \"no\": {\n" +
@@ -2293,6 +2427,7 @@ public class GherkinDialectProvider implements IGherkinDialectProvider {
                     "    \"then\": [\n" +
                     "      \"* \",\n" +
                     "      \"То \",\n" +
+                    "      \"Затем \",\n" +
                     "      \"Тогда \"\n" +
                     "    ],\n" +
                     "    \"when\": [\n" +
@@ -3069,7 +3204,7 @@ public class GherkinDialectProvider implements IGherkinDialectProvider {
                     "      \"當\"\n" +
                     "    ]\n" +
                     "  }\n" +
-                    "}";
+                    "}\n";
             DIALECTS = gson.fromJson(dialects, Map.class);
         } catch (Exception e) {
             throw new RuntimeException(e);

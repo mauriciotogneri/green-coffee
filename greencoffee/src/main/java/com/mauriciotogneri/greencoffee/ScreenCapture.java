@@ -36,7 +36,6 @@ class ScreenCapture
                     catch (Exception e)
                     {
                         // ignore
-                        System.out.println();
                     }
                 }
             }

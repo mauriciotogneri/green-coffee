@@ -1,14 +1,12 @@
 package com.mauriciotogneri.greencoffee;
 
 import android.app.Activity;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Environment;
 import android.support.test.rule.ActivityTestRule;
-import android.util.DisplayMetrics;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
+import com.mauriciotogneri.ogma.Ogma;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,7 +31,8 @@ public class GreenCoffeeTest
 
     protected void start(ActivityTestRule<? extends Activity> activity, GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
     {
-        locale(activity);
+        Ogma ogma = new Ogma(activity.getActivity());
+        ogma.locale(scenarioConfig.locale());
 
         Scenario scenario = scenarioConfig.scenario();
 
@@ -67,21 +66,6 @@ public class GreenCoffeeTest
             }
 
             throw e;
-        }
-    }
-
-    private void locale(ActivityTestRule<? extends Activity> activity)
-    {
-        Locale locale = scenarioConfig.locale();
-
-        Resources resources = activity.getActivity().getResources();
-        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        Configuration config = resources.getConfiguration();
-
-        if (!config.locale.equals(locale))
-        {
-            config.locale = locale;
-            resources.updateConfiguration(config, displayMetrics);
         }
     }
 

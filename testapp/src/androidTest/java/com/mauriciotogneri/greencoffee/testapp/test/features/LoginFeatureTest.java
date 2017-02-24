@@ -8,6 +8,7 @@ import com.mauriciotogneri.greencoffee.ScenarioConfig;
 import com.mauriciotogneri.greencoffee.testapp.activities.LoginActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.ScreenshotSteps;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,6 +43,6 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(activity, new LoginSteps(), new ContactListSteps());
+        start(activity, new LoginSteps(), new ContactListSteps(), new ScreenshotSteps());
     }
 }

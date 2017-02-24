@@ -5,6 +5,7 @@ Feature: List of contacts screen
 
 	Scenario: Selecting a contact from the list
 		Given I login as USER_1
+		And   I take a screenshot named 'contacts'
 		When  I select the contact called 'James Houghton'
 		Then  I see the detail screen for 'James Houghton'
 

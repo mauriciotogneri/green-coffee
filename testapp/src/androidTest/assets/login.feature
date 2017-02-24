@@ -7,6 +7,7 @@ Feature: Login screen to authenticate users
 		Given I see an empty login form
 
 	Scenario: Username not introduced
+		When I take a screenshot named 'login'
 		When I introduce a valid password
 		And  I press the login button
 		Then I see an error message saying 'Invalid username'

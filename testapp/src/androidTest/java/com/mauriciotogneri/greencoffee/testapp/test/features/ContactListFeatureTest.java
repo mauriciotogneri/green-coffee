@@ -9,6 +9,7 @@ import com.mauriciotogneri.greencoffee.testapp.activities.LoginActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.DetailsSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
+import com.mauriciotogneri.greencoffee.testapp.test.steps.ScreenshotSteps;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -43,6 +44,6 @@ public class ContactListFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(activity, new LoginSteps(), new ContactListSteps(), new DetailsSteps());
+        start(activity, new LoginSteps(), new ContactListSteps(), new DetailsSteps(), new ScreenshotSteps());
     }
 }

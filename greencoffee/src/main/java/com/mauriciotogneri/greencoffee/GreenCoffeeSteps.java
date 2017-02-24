@@ -13,6 +13,7 @@ import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidStepDefinitionException;
 import com.mauriciotogneri.greencoffee.interactions.ActionableView;
+import com.mauriciotogneri.ogma.Ogma;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -117,7 +118,7 @@ public class GreenCoffeeSteps
 
     protected Locale locale()
     {
-        return InstrumentationRegistry.getTargetContext().getResources().getConfiguration().locale;
+        return new Ogma(InstrumentationRegistry.getTargetContext()).locale();
     }
 
     protected void takeScreenshot(String fileName)

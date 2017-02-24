@@ -7,6 +7,7 @@ Feature: Contact detail screen
 		Given I login as USER_1
 		When  I select the contact called 'James Houghton'
 		Then  I see the detail screen for 'James Houghton'
+		And   I take a screenshot named 'details'
 		And   I see his name is 'James Houghton'
 		And   I see his age is 31
 		And   I see his weight is 76.9 kg.
