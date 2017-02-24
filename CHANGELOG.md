@@ -6,9 +6,11 @@ All notable changes to this project will be documented in this file.
 - Support to launch the scenarios with different locales
 - Support to take screenshots during the tests
 - This CHANGELOG
+
 ### Changed
 - The constructor of `GreenCoffeeTest`
 - Updated to latest version of [Gherkin java](https://github.com/cucumber/gherkin-java)
+
 ### Removed
 - Example app. Moved [here](https://github.com/vndly/green-coffee-example)
 
