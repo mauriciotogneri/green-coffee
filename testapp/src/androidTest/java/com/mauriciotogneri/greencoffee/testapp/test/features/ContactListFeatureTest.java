@@ -44,6 +44,6 @@ public class ContactListFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(activity, new LoginSteps(), new ContactListSteps(), new DetailsSteps(), new ScreenshotSteps());
+        start(new LoginSteps(), new ContactListSteps(), new DetailsSteps(), new ScreenshotSteps());
     }
 }

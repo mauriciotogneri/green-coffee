@@ -1,8 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
-import android.app.Activity;
 import android.os.Environment;
-import android.support.test.rule.ActivityTestRule;
+import android.support.test.InstrumentationRegistry;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
@@ -27,13 +26,13 @@ public class GreenCoffeeTest
     {
         this.scenarioConfig = scenario;
         this.testLog = new TestLog();
+
+        Ogma ogma = new Ogma(InstrumentationRegistry.getTargetContext());
+        ogma.locale(scenarioConfig.locale());
     }
 
-    protected void start(ActivityTestRule<? extends Activity> activity, GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
+    protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
     {
-        Ogma ogma = new Ogma(activity.getActivity());
-        ogma.locale(scenarioConfig.locale());
-
         Scenario scenario = scenarioConfig.scenario();
 
         testLog.logScenario(scenario);

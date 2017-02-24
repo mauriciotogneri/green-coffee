@@ -43,6 +43,6 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Test
     public void test()
     {
-        start(activity, new LoginSteps(), new ContactListSteps(), new ScreenshotSteps());
+        start(new LoginSteps(), new ContactListSteps(), new ScreenshotSteps());
     }
 }
