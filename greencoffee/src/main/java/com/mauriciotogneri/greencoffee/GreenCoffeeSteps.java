@@ -1,5 +1,6 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.espresso.matcher.ViewMatchers;
@@ -107,8 +108,10 @@ public class GreenCoffeeSteps
         return new ActionableView(onView(ViewMatchers.withText(text)));
     }
 
-    protected void takeScreenshot(String path)
+    protected void takeScreenshot(String fileName)
     {
+        String path = String.format("%s/%s.jpg", Environment.getExternalStorageDirectory().toString(), fileName);
+
         ScreenCapture screenCapture = new ScreenCapture();
         screenCapture.takeScreenshot(path);
     }

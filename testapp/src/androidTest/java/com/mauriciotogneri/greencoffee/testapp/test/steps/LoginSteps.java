@@ -17,9 +17,9 @@ public class LoginSteps extends GreenCoffeeSteps
     public void iSeeAnEmptyLoginForm()
     {
         onViewWithId(R.id.login_input_username).isEmpty();
-        onViewWithId(R.id.login_input_password).isNotEmpty();
+        onViewWithId(R.id.login_input_password).isEmpty();
 
-        takeScreenshot("login_1.jpg");
+        takeScreenshot("login_" + Math.random());
     }
 
     @Given("^I login as (\\w+)$")
