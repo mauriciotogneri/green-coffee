@@ -29,17 +29,20 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Rule
     public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
-    public LoginFeatureTest(Scenario scenario)
+    public LoginFeatureTest(ScenarioConfig scenarioConfig)
     {
-        super(scenario);
+        super(scenarioConfig);
     }
 
     @Parameters
-    public static Iterable<Scenario> scenarios() throws IOException
+    public static Iterable<ScenarioConfig> scenarios() throws IOException
     {
-        return new GreenCoffeeConfig()
+        return new GreenCoffeeConfig("testapp") // folder to place the screenshot if a test fails
                         .withFeatureFromAssets("assets/login.feature")
-                        .scenarios();
+                        .scenarios(
+                            new Locale("en", "GB"),
+                            new Locale("es", "ES")
+                        ); // the locales used to run the scenarios (optional)
     }
 
     @Test
@@ -92,20 +95,34 @@ And that's it, now you can create your own tests using Green Coffee. This is how
 
 ![Example](http://i.imgur.com/4rMK1KK.gif)
 
-You can see an example applied to a full app [here](https://github.com/mauriciotogneri/green-coffee/tree/master/testapp/src/androidTest/java/com/mauriciotogneri/greencoffee/testapp/test).
+You can see an example applied to a full app [here](https://github.com/vndly/green-coffee-example).
 
 ## Installation
 In order to use Green Coffee, add the following dependency to your `build.gradle` file:
 
 ```groovy
-androidTestCompile 'com.mauriciotogneri:greencoffee:2.0.0'
+dependencies
+{
+    androidTestCompile 'com.mauriciotogneri:greencoffee:2.0.1'
+}
 ```
+
+And the following test instrumentation runner:
+```groovy
+defaultConfig
+{
+    ...
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+}
+```
+
+## Changelog
 
 ## License
 
     MIT License
 
-    Copyright (c) 2016 Mauricio Togneri
+    Copyright (c) 2017 Mauricio Togneri
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
