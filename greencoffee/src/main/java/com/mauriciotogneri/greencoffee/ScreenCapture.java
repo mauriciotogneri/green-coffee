@@ -45,7 +45,7 @@ class ScreenCapture
 
     private void takeScreenshot(Activity activity, String path) throws Exception
     {
-        View view = activity.getWindow().getDecorView().getRootView();
+        View view = activity.getWindow().getDecorView();
         view.setDrawingCacheEnabled(true);
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
         view.setDrawingCacheEnabled(false);

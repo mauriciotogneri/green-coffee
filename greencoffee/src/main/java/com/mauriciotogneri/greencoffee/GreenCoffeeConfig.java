@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -30,20 +31,45 @@ import gherkin.ast.Tag;
 public class GreenCoffeeConfig
 {
     private final List<Scenario> scenarios;
+    private final String screenshotPath;
 
-    private GreenCoffeeConfig(List<Scenario> scenarios)
+    private GreenCoffeeConfig(List<Scenario> scenarios, String screenshotPath)
     {
         this.scenarios = scenarios;
+        this.screenshotPath = screenshotPath;
+    }
+
+    public GreenCoffeeConfig(String screenshotPath)
+    {
+        this(new ArrayList<Scenario>(), screenshotPath);
     }
 
     public GreenCoffeeConfig()
     {
-        this(new ArrayList<Scenario>());
+        this(null);
     }
 
-    public List<Scenario> scenarios()
+    public List<ScenarioConfig> scenarios(Locale... locales)
     {
-        return scenarios;
+        List<ScenarioConfig> scenarioConfigs = new ArrayList<>();
+
+        Locale[] finalLocales = locales;
+
+        if (finalLocales.length == 0)
+        {
+            finalLocales = new Locale[1];
+            finalLocales[0] = Locale.getDefault();
+        }
+
+        for (Locale locale : finalLocales)
+        {
+            for (Scenario scenario : scenarios)
+            {
+                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotPath));
+            }
+        }
+
+        return scenarioConfigs;
     }
 
     public GreenCoffeeConfig withTags(String firstTag, String... restTags)
@@ -62,12 +88,12 @@ public class GreenCoffeeConfig
             }
         }
 
-        return new GreenCoffeeConfig(filtered);
+        return new GreenCoffeeConfig(filtered, screenshotPath);
     }
 
     public GreenCoffeeConfig withFeatureFromString(String featureSource)
     {
-        return new GreenCoffeeConfig(scenarios(featureSource));
+        return new GreenCoffeeConfig(scenarios(featureSource), screenshotPath);
     }
 
     public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
@@ -99,7 +125,7 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return new GreenCoffeeConfig(scenarios(builder.toString()));
+        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotPath);
     }
 
     private List<Scenario> scenarios(String featureSource)

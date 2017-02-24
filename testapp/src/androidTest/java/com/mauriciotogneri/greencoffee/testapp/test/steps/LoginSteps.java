@@ -19,7 +19,7 @@ public class LoginSteps extends GreenCoffeeSteps
         onViewWithId(R.id.login_input_username).isEmpty();
         onViewWithId(R.id.login_input_password).isEmpty();
 
-        takeScreenshot("login_" + Math.random());
+        takeScreenshot("login_" + locale());
     }
 
     @Given("^I login as (\\w+)$")

@@ -33,7 +33,9 @@ public class ContactListActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_contacts);
+        setTitle(R.string.contacts_title);
 
         String username = getIntent().getStringExtra(PARAMETER_USERNAME);
 

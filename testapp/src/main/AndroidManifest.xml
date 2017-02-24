@@ -27,12 +27,10 @@
 
         <activity
             android:name=".activities.ContactListActivity"
-            android:label="@string/contacts.title"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".activities.DetailsActivity"
-            android:label="@string/details.title"
             android:screenOrientation="portrait" />
 
     </application>

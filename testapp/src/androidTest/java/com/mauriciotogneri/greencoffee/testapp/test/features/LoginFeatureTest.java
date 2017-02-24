@@ -4,7 +4,7 @@ import android.support.test.rule.ActivityTestRule;
 
 import com.mauriciotogneri.greencoffee.GreenCoffeeConfig;
 import com.mauriciotogneri.greencoffee.GreenCoffeeTest;
-import com.mauriciotogneri.greencoffee.Scenario;
+import com.mauriciotogneri.greencoffee.ScenarioConfig;
 import com.mauriciotogneri.greencoffee.testapp.activities.LoginActivity;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.ContactListSteps;
 import com.mauriciotogneri.greencoffee.testapp.test.steps.LoginSteps;
@@ -17,28 +17,31 @@ import org.junit.runners.Parameterized.Parameters;
 
 import java.io.IOException;
 
+import static com.mauriciotogneri.greencoffee.testapp.test.TestSuite.ENGLISH;
+import static com.mauriciotogneri.greencoffee.testapp.test.TestSuite.SPANISH;
+
 @RunWith(Parameterized.class)
 public class LoginFeatureTest extends GreenCoffeeTest
 {
     @Rule
     public ActivityTestRule<LoginActivity> activity = new ActivityTestRule<>(LoginActivity.class);
 
-    public LoginFeatureTest(Scenario scenario)
+    public LoginFeatureTest(ScenarioConfig scenarioConfig)
     {
-        super(scenario);
+        super(scenarioConfig);
     }
 
     @Parameters
-    public static Iterable<Scenario> scenarios() throws IOException
+    public static Iterable<ScenarioConfig> scenarios() throws IOException
     {
-        return new GreenCoffeeConfig()
+        return new GreenCoffeeConfig("testapp")
                 .withFeatureFromAssets("assets/login.feature")
-                .scenarios();
+                .scenarios(ENGLISH, SPANISH);
     }
 
     @Test
     public void test()
     {
-        start(new LoginSteps(), new ContactListSteps());
+        start(activity, new LoginSteps(), new ContactListSteps());
     }
 }

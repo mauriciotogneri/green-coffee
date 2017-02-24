@@ -1,6 +1,11 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.app.Activity;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Environment;
+import android.support.test.rule.ActivityTestRule;
+import android.util.DisplayMetrics;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
@@ -17,26 +22,21 @@ import gherkin.ast.Step;
 
 public class GreenCoffeeTest
 {
-    private final Scenario scenario;
+    private final ScenarioConfig scenarioConfig;
     private final TestLog testLog;
-    private final String screenshotsPath;
 
-    public GreenCoffeeTest(Scenario scenario, String screenshotsPath)
+    public GreenCoffeeTest(ScenarioConfig scenario)
     {
-        this.scenario = scenario;
+        this.scenarioConfig = scenario;
         this.testLog = new TestLog();
-        this.screenshotsPath = screenshotsPath;
     }
 
-    public GreenCoffeeTest(Scenario scenario)
+    protected void start(ActivityTestRule<? extends Activity> activity, GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
     {
-        this.scenario = scenario;
-        this.testLog = new TestLog();
-        this.screenshotsPath = null;
-    }
+        locale(activity);
 
-    protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
-    {
+        Scenario scenario = scenarioConfig.scenario();
+
         testLog.logScenario(scenario);
 
         List<StepDefinition> stepDefinitions = firstTarget.stepDefinitions();
@@ -57,16 +57,31 @@ public class GreenCoffeeTest
         }
         catch (Exception e)
         {
-            if (screenshotsPath != null)
+            if (scenarioConfig.hasScreenshotPath())
             {
-                String fileName = new SimpleDateFormat("yyyy-MM-dd_hh-mm-ss", Locale.getDefault()).format(new Date());
-                String path = String.format("%s/%s/%s.jpg", Environment.getExternalStorageDirectory().toString(), screenshotsPath, fileName);
+                String date = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
+                String path = String.format("%s/%s/%s_%s.jpg", Environment.getExternalStorageDirectory().toString(), scenarioConfig.screenshotPath(), date, scenario.name().replace(" ", "_"));
 
                 ScreenCapture screenCapture = new ScreenCapture();
                 screenCapture.takeScreenshot(path);
             }
 
             throw e;
+        }
+    }
+
+    private void locale(ActivityTestRule<? extends Activity> activity)
+    {
+        Locale locale = scenarioConfig.locale();
+
+        Resources resources = activity.getActivity().getResources();
+        DisplayMetrics displayMetrics = resources.getDisplayMetrics();
+        Configuration config = resources.getConfiguration();
+
+        if (!config.locale.equals(locale))
+        {
+            config.locale = locale;
+            resources.updateConfiguration(config, displayMetrics);
         }
     }
 

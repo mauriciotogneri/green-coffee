@@ -3,6 +3,7 @@ package com.mauriciotogneri.greencoffee;
 import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.matcher.ViewMatchers;
 
 import com.mauriciotogneri.greencoffee.annotations.And;
@@ -16,6 +17,7 @@ import com.mauriciotogneri.greencoffee.interactions.ActionableView;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import static android.support.test.espresso.Espresso.onView;
 
@@ -106,6 +108,16 @@ public class GreenCoffeeSteps
     protected ActionableView onViewWithText(String text)
     {
         return new ActionableView(onView(ViewMatchers.withText(text)));
+    }
+
+    protected String string(@StringRes int stringId)
+    {
+        return InstrumentationRegistry.getTargetContext().getString(stringId);
+    }
+
+    protected Locale locale()
+    {
+        return InstrumentationRegistry.getTargetContext().getResources().getConfiguration().locale;
     }
 
     protected void takeScreenshot(String fileName)

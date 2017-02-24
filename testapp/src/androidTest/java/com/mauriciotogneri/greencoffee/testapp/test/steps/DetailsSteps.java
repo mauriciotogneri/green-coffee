@@ -34,6 +34,18 @@ public class DetailsSteps extends GreenCoffeeSteps
     @Then("^I see he is (single|married)$")
     public void iSeeHeIsSingleMarried(String status)
     {
-        onViewWithId(R.id.contact_detail_married).contains(status);
+        switch (status)
+        {
+            case "single":
+                onViewWithId(R.id.contact_detail_married).contains(string(R.string.contacts_married_no));
+                break;
+
+            case "married":
+                onViewWithId(R.id.contact_detail_married).contains(string(R.string.contacts_married_yes));
+                break;
+
+            default:
+                throw new RuntimeException();
+        }
     }
 }

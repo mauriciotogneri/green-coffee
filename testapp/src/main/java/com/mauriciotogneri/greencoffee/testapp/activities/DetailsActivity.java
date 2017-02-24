@@ -26,7 +26,9 @@ public class DetailsActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_details);
+        setTitle(R.string.details_title);
 
         String contactId = getIntent().getStringExtra(PARAMETER_CONTACT_ID);
 
