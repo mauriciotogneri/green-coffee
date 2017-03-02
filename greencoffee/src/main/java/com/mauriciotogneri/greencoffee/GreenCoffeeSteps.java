@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
 import android.support.test.espresso.matcher.ViewMatchers;
 
 import com.mauriciotogneri.greencoffee.annotations.And;
@@ -109,6 +110,16 @@ public class GreenCoffeeSteps
     protected ActionableView onViewWithText(String text)
     {
         return new ActionableView(onView(ViewMatchers.withText(text)));
+    }
+
+    protected void pressBack()
+    {
+        Espresso.pressBack();
+    }
+
+    protected void closeKeyboard()
+    {
+        Espresso.closeSoftKeyboard();
     }
 
     protected String string(@StringRes int stringId)

@@ -4,10 +4,12 @@ import android.os.Environment;
 import android.support.test.InstrumentationRegistry;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
+import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 import com.mauriciotogneri.ogma.Ogma;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -31,15 +33,20 @@ public class GreenCoffeeTest
         ogma.locale(scenarioConfig.locale());
     }
 
-    protected void start(GreenCoffeeSteps firstTarget, GreenCoffeeSteps... restTargets)
+    protected void start(GreenCoffeeSteps... targets)
     {
+        if (targets.length == 0)
+        {
+            throw new NoStepsDefinedException();
+        }
+
         Scenario scenario = scenarioConfig.scenario();
 
         testLog.logScenario(scenario);
 
-        List<StepDefinition> stepDefinitions = firstTarget.stepDefinitions();
+        List<StepDefinition> stepDefinitions = new ArrayList<>();
 
-        for (GreenCoffeeSteps greenCoffeeSteps : restTargets)
+        for (GreenCoffeeSteps greenCoffeeSteps : targets)
         {
             stepDefinitions.addAll(greenCoffeeSteps.stepDefinitions());
         }
