@@ -5,7 +5,7 @@ import java.util.List;
 
 import gherkin.ast.Step;
 
-class Scenario
+public class Scenario
 {
     private final String name;
     private final String description;
@@ -31,6 +31,19 @@ class Scenario
     }
 
     public boolean hasTags(List<String> tagList)
+    {
+        for (String tag : tagList)
+        {
+            if (tags.contains(tag))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean hasTags(String... tagList)
     {
         for (String tag : tagList)
         {
