@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [2.1.0] - 2017-03-02
+## [2.1.1] - 2017-03-02
 ### Added
 - Added the helper methods `closeKeyboard()` and `pressBack()`
 - Added method `beforeScenarioStarts(Scenario scenario, Locale locale)`
