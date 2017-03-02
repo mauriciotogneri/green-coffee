@@ -29,8 +29,14 @@ public class GreenCoffeeTest
         this.scenarioConfig = scenario;
         this.testLog = new TestLog();
 
+        beforeScenarioStarts(scenario.scenario(), scenario.locale());
+
         Ogma ogma = new Ogma(InstrumentationRegistry.getTargetContext());
         ogma.locale(scenarioConfig.locale());
+    }
+
+    protected void beforeScenarioStarts(Scenario scenario, Locale locale)
+    {
     }
 
     protected void start(GreenCoffeeSteps... targets)
