@@ -103,7 +103,7 @@ In order to use Green Coffee, add the following dependency to your `build.gradle
 ```groovy
 dependencies
 {
-    androidTestCompile 'com.mauriciotogneri:greencoffee:2.1.1'
+    androidTestCompile 'com.mauriciotogneri:greencoffee:2.2.0'
 }
 ```
 

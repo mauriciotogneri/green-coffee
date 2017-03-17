@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.2.0] - 2017-03-17
+### Removed
+- Unused third party libraries
+
 ## [2.1.1] - 2017-03-02
 ### Added
 - Added the helper methods `closeKeyboard()` and `pressBack()`
