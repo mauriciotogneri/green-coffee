@@ -34,7 +34,7 @@ public class LoginFeatureTest extends GreenCoffeeTest
         super(scenarioConfig);
     }
 
-    @Parameters
+    @Parameters(name = "{0}")
     public static Iterable<ScenarioConfig> scenarios() throws IOException
     {
         return new GreenCoffeeConfig("testapp") // folder to place the screenshot if a test fails
@@ -103,7 +103,7 @@ In order to use Green Coffee, add the following dependency to your `build.gradle
 ```groovy
 dependencies
 {
-    androidTestCompile 'com.mauriciotogneri:greencoffee:2.3.0'
+    androidTestCompile 'com.mauriciotogneri:greencoffee:2.4.0'
 }
 ```
 

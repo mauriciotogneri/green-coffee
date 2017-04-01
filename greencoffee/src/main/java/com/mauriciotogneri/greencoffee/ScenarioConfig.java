@@ -38,6 +38,6 @@ public class ScenarioConfig
     @Override
     public String toString()
     {
-        return scenario.name();
+        return String.format("%s - %s", scenario.name(), locale.toString());
     }
 }
