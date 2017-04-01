@@ -34,4 +34,10 @@ public class ScenarioConfig
     {
         return screenshotPath;
     }
+
+    @Override
+    public String toString()
+    {
+        return scenario.name();
+    }
 }

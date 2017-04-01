@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.3.0] - 2017-04-02
+### Changed
+- Using Gradle plugin version 2.3.0
+- Overridden method `toString()` for class `ScenarioConfig` 
+
 ## [2.2.0] - 2017-03-17
 ### Removed
 - Unused third party libraries
