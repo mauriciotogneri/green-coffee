@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.5.0] - 2017-04-26
+### Added
+-  
+
 ## [2.4.0] - 2017-04-02
 ### Changed
 - Using Gradle plugin version 2.3.0
