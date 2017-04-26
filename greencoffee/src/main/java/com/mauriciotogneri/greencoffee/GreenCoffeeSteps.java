@@ -103,83 +103,37 @@ public class GreenCoffeeSteps
         }
     }
 
-    /**
-     * Find view with id, default return first found view
-     *
-     * @param resourceId
-     * @return first found view
-     */
     protected ActionableView onViewWithId(@IdRes int resourceId)
     {
         return onViewWithId(resourceId, 0);
     }
 
-    /**
-     * Find view with id and index for matches multiple views
-     *
-     * @param resourceId
-     * @param index
-     * @return found view
-     */
     protected ActionableView onViewWithId(@IdRes int resourceId, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withId(resourceId), index)));
     }
 
-    /**
-     * Find view with text, default return first found view
-     *
-     * @param resourceId
-     * @return first found view
-     */
     protected ActionableView onViewWithText(@StringRes int resourceId)
     {
         return onViewWithText(resourceId, 0);
     }
 
-    /**
-     * Find view with text and index for matches multiple views
-     *
-     * @param resourceId
-     * @param index
-     * @return found view
-     */
     protected ActionableView onViewWithText(@StringRes int resourceId, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(resourceId), index)));
     }
 
-    /**
-     * Find view with text, default return first found view
-     *
-     * @param text
-     * @return first found view
-     */
     protected ActionableView onViewWithText(String text)
     {
         return onViewWithText(text, 0);
     }
 
-    /**
-     * Find view with text and index for matches multiple views
-     *
-     * @param text
-     * @param index
-     * @return
-     */
     protected ActionableView onViewWithText(String text, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(text), index)));
     }
 
-    /**
-     * Find child view on parent view with index
-     *
-     * @param parentViewId parent view id
-     * @param index
-     * @return found child view
-     */
-    public ActionableView onViewChildOf(@IdRes int parentViewId, int index)
+    protected ActionableView onViewChildOf(@IdRes int parentViewId, int index)
     {
         return new ActionableView(onView(nthChildOf(ViewMatchers.withId(parentViewId), index)));
     }
@@ -212,39 +166,40 @@ public class GreenCoffeeSteps
         screenCapture.takeScreenshot(path);
     }
 
-    public static Matcher<View> withIndex(final Matcher<View> matcher, final int index)
+    protected Matcher<View> withIndex(final Matcher<View> matcher, final int index)
     {
         return new TypeSafeMatcher<View>()
         {
-            int currentIndex;
-            int viewObjHash;
+            private int currentIndex;
+            private int viewObjHash;
 
             @Override
             public void describeTo(Description description)
             {
-                description.appendText(String.format("with index: %d ", index));
+                description.appendText(String.format("with index: %d", index));
             }
 
             @Override
             public boolean matchesSafely(View view)
             {
-                if (matcher.matches(view) && currentIndex++ == index)
+                if (matcher.matches(view) && (currentIndex++ == index))
                 {
                     viewObjHash = view.hashCode();
                 }
-                return view.hashCode() == viewObjHash;
+
+                return (view.hashCode() == viewObjHash);
             }
         };
     }
 
-    private static Matcher<View> nthChildOf(final Matcher<View> parentMatcher, final int childPosition)
+    protected Matcher<View> nthChildOf(final Matcher<View> parentMatcher, final int childPosition)
     {
         return new TypeSafeMatcher<View>()
         {
             @Override
             public void describeTo(Description description)
             {
-                description.appendText("with " + childPosition + " child view of type parentMatcher");
+                description.appendText(String.format("with %d child view of type parentMatcher", childPosition));
             }
 
             @Override
@@ -256,6 +211,7 @@ public class GreenCoffeeSteps
                 }
 
                 ViewGroup group = (ViewGroup) view.getParent();
+
                 return parentMatcher.matches(view.getParent()) && group.getChildAt(childPosition).equals(view);
             }
         };
