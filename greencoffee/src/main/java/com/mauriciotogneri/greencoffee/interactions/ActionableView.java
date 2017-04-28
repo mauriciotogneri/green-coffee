@@ -79,7 +79,12 @@ public class ActionableView
 
     public ActionableView contains(Object text)
     {
-        return check(ViewAssertions.matches(ViewMatchers.withText(text.toString())));
+        return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.containsString(text.toString()))));
+    }
+
+    public ActionableView notContains(Object text)
+    {
+        return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.not(Matchers.containsString(text.toString())))));
     }
 
     public ActionableView isEmpty()
@@ -177,17 +182,16 @@ public class ActionableView
         return check(ViewAssertions.matches(Matchers.not(hasDrawable())));
     }
 
-    private ActionableView check(ViewAssertion viewAssertion)
+    public ActionableView check(ViewAssertion viewAssertion)
     {
         return new ActionableView(viewInteraction.check(viewAssertion));
     }
 
-    private ActionableView perform(ViewAction viewAction)
+    public ActionableView perform(ViewAction viewAction)
     {
         return new ActionableView(viewInteraction.perform(viewAction));
     }
 
-    //from here:https://github.com/googlesamples/android-testing/blob/master/ui/espresso/IntentsAdvancedSample/app/src/androidTest/java/com/example/android/testing/espresso/intents/AdvancedSample/ImageViewHasDrawableMatcher.java
     public static BoundedMatcher<View, ImageView> hasDrawable()
     {
         return new BoundedMatcher<View, ImageView>(ImageView.class)

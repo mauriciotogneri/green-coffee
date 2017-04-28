@@ -52,7 +52,7 @@ public abstract class DataMatcher<T, C>
             @Override
             public void describeTo(Description description)
             {
-                description.appendText("with content '" + content + "'");
+                description.appendText(String.format("with content: '%s'", content));
             }
         };
     }
