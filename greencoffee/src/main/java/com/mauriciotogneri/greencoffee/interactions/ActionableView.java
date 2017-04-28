@@ -82,7 +82,7 @@ public class ActionableView
         return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.containsString(text.toString()))));
     }
 
-    public ActionableView notContains(Object text)
+    public ActionableView doesNotContain(Object text)
     {
         return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.not(Matchers.containsString(text.toString())))));
     }
