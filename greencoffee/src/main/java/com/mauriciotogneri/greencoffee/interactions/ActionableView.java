@@ -172,14 +172,14 @@ public class ActionableView
         return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
     }
 
-    public ActionableView isHasDrawable()
+    public ActionableView hasDrawable()
     {
-        return check(ViewAssertions.matches(hasDrawable()));
+        return check(ViewAssertions.matches(hasDrawableImageView()));
     }
 
-    public ActionableView isHasNotDrawable()
+    public ActionableView doesNotHaveDrawable()
     {
-        return check(ViewAssertions.matches(Matchers.not(hasDrawable())));
+        return check(ViewAssertions.matches(Matchers.not(hasDrawableImageView())));
     }
 
     public ActionableView check(ViewAssertion viewAssertion)
@@ -192,7 +192,7 @@ public class ActionableView
         return new ActionableView(viewInteraction.perform(viewAction));
     }
 
-    public BoundedMatcher<View, ImageView> hasDrawable()
+    public BoundedMatcher<View, ImageView> hasDrawableImageView()
     {
         return new BoundedMatcher<View, ImageView>(ImageView.class)
         {

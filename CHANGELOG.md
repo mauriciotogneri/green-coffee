@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.6.0] - 2017-04-28
+### Added
+- Improvements in `ActionableView` (by @thanhlcm90)
+- Added callback `afterScenarioEnds(Scenario scenario, Locale locale)`
+- Added method `grantPermission(String permission)`
+
 ## [2.5.0] - 2017-04-26
 ### Added
 - Improvements in `ActionableView` (by @thanhlcm90)

@@ -97,8 +97,10 @@ public class GreenCoffeeTest
 
             throw e;
         }
-
-        afterScenarioEnds(scenarioConfig.scenario(), scenarioConfig.locale());
+        finally
+        {
+            afterScenarioEnds(scenarioConfig.scenario(), scenarioConfig.locale());
+        }
     }
 
     private void validateStepDefinitions(List<StepDefinition> stepDefinitions)
