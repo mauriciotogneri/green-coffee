@@ -1,13 +1,14 @@
 package com.mauriciotogneri.greencoffee;
 
+import android.os.Build;
 import android.os.Environment;
-import android.support.test.InstrumentationRegistry;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 import com.mauriciotogneri.ogma.Ogma;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
+import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import gherkin.ast.Node;
 import gherkin.ast.Step;
 
@@ -31,12 +34,27 @@ public class GreenCoffeeTest
 
         beforeScenarioStarts(scenario.scenario(), scenario.locale());
 
-        Ogma ogma = new Ogma(InstrumentationRegistry.getTargetContext());
+        Ogma ogma = new Ogma(getTargetContext());
         ogma.locale(scenarioConfig.locale());
     }
 
     protected void beforeScenarioStarts(Scenario scenario, Locale locale)
     {
+    }
+
+    protected void afterScenarioEnds(Scenario scenario, Locale locale)
+    {
+    }
+
+    protected void grantPermission(String permission) throws IOException
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            getInstrumentation()
+                    .getUiAutomation()
+                    .executeShellCommand(String.format("pm grant %s %s", getTargetContext().getPackageName(), permission))
+                    .close();
+        }
     }
 
     protected void start(GreenCoffeeSteps... targets)
@@ -79,6 +97,8 @@ public class GreenCoffeeTest
 
             throw e;
         }
+
+        afterScenarioEnds(scenarioConfig.scenario(), scenarioConfig.locale());
     }
 
     private void validateStepDefinitions(List<StepDefinition> stepDefinitions)

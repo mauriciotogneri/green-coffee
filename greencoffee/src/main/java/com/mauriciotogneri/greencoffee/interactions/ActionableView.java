@@ -192,7 +192,7 @@ public class ActionableView
         return new ActionableView(viewInteraction.perform(viewAction));
     }
 
-    public static BoundedMatcher<View, ImageView> hasDrawable()
+    public BoundedMatcher<View, ImageView> hasDrawable()
     {
         return new BoundedMatcher<View, ImageView>(ImageView.class)
         {
@@ -205,7 +205,7 @@ public class ActionableView
             @Override
             public boolean matchesSafely(ImageView imageView)
             {
-                return imageView.getDrawable() != null;
+                return (imageView.getDrawable() != null);
             }
         };
     }

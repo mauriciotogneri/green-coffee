@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2.5.0] - 2017-04-26
 ### Added
-- Improvements made by @thanhlcm90
+- Improvements in `ActionableView` (by @thanhlcm90)
 
 ## [2.4.0] - 2017-04-02
 ### Changed
