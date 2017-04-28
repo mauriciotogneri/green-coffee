@@ -5,8 +5,12 @@ import android.support.test.espresso.ViewAssertion;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.espresso.matcher.ViewMatchers;
+import android.view.View;
+import android.widget.ImageView;
 
+import org.hamcrest.Description;
 import org.hamcrest.Matchers;
 
 public class ActionableView
@@ -168,6 +172,16 @@ public class ActionableView
         return check(ViewAssertions.matches(Matchers.not(ViewMatchers.isDisplayed())));
     }
 
+    public ActionableView isHasDrawable()
+    {
+        return check(ViewAssertions.matches(hasDrawable()));
+    }
+
+    public ActionableView isHasNotDrawable()
+    {
+        return check(ViewAssertions.matches(Matchers.not(hasDrawable())));
+    }
+
     public ActionableView check(ViewAssertion viewAssertion)
     {
         return new ActionableView(viewInteraction.check(viewAssertion));
@@ -176,5 +190,23 @@ public class ActionableView
     public ActionableView perform(ViewAction viewAction)
     {
         return new ActionableView(viewInteraction.perform(viewAction));
+    }
+
+    public static BoundedMatcher<View, ImageView> hasDrawable()
+    {
+        return new BoundedMatcher<View, ImageView>(ImageView.class)
+        {
+            @Override
+            public void describeTo(Description description)
+            {
+                description.appendText("has drawable");
+            }
+
+            @Override
+            public boolean matchesSafely(ImageView imageView)
+            {
+                return imageView.getDrawable() != null;
+            }
+        };
     }
 }
