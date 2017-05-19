@@ -13,11 +13,11 @@ Given the following feature:
 Feature: Login screen to authenticate users
 
 	Scenario: Invalid username and password
-	    Given I see an empty login form
-		 When I introduce an invalid username
-		  And I introduce an invalid password
-		  And I press the login button
-		 Then I see an error message saying 'Invalid credentials'
+        Given I see an empty login form
+         When I introduce an invalid username
+          And I introduce an invalid password
+          And I press the login button
+         Then I see an error message saying 'Invalid credentials'
 ```
 
 First, create a class that extends from `GreenCoffeeTest` and declare the Activity, the feature and the step definitions that will be used:
@@ -115,8 +115,6 @@ defaultConfig
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 }
 ```
-
-## Changelog
 
 ## License
 
