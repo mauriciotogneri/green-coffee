@@ -1,6 +1,11 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.7.0] - 2017-07-04
+### Added
+- Added methods `waitFor(long millis)` and `waitFor(long millis, TimeUnit timeUnit)`
+- Added class `SpinnerMatcher`
+
 ## [2.6.0] - 2017-04-28
 ### Added
 - Improvements in `ActionableView` (by @thanhlcm90)

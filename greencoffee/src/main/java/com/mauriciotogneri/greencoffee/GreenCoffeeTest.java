@@ -6,7 +6,6 @@ import android.os.Environment;
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
-import com.mauriciotogneri.ogma.Ogma;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -34,8 +33,8 @@ public class GreenCoffeeTest
 
         beforeScenarioStarts(scenario.scenario(), scenario.locale());
 
-        Ogma ogma = new Ogma(getTargetContext());
-        ogma.locale(scenarioConfig.locale());
+        Localization localization = new Localization(getTargetContext());
+        localization.locale(scenarioConfig.locale());
     }
 
     protected void beforeScenarioStarts(Scenario scenario, Locale locale)

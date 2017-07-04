@@ -5,6 +5,8 @@ import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +18,6 @@ import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidStepDefinitionException;
 import com.mauriciotogneri.greencoffee.interactions.ActionableView;
-import com.mauriciotogneri.ogma.Ogma;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -26,8 +27,10 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 
 public class GreenCoffeeSteps
 {
@@ -155,7 +158,7 @@ public class GreenCoffeeSteps
 
     protected Locale locale()
     {
-        return new Ogma(InstrumentationRegistry.getTargetContext()).locale();
+        return new Localization(InstrumentationRegistry.getTargetContext()).locale();
     }
 
     protected void takeScreenshot(String fileName)
@@ -213,6 +216,42 @@ public class GreenCoffeeSteps
                 ViewGroup group = (ViewGroup) view.getParent();
 
                 return parentMatcher.matches(view.getParent()) && group.getChildAt(childPosition).equals(view);
+            }
+        };
+    }
+
+    protected void waitFor(long value, TimeUnit timeUnit)
+    {
+        onView(isRoot()).perform(actionWaitFor(value, timeUnit));
+    }
+
+    protected void waitFor(long millis)
+    {
+        waitFor(millis, TimeUnit.MILLISECONDS);
+    }
+
+    private ViewAction actionWaitFor(long value, TimeUnit timeUnit)
+    {
+        final long millis = timeUnit.toMillis(value);
+
+        return new ViewAction()
+        {
+            @Override
+            public Matcher<View> getConstraints()
+            {
+                return isRoot();
+            }
+
+            @Override
+            public String getDescription()
+            {
+                return "Wait for " + millis + " milliseconds.";
+            }
+
+            @Override
+            public void perform(UiController uiController, View view)
+            {
+                uiController.loopMainThreadForAtLeast(millis);
             }
         };
     }
