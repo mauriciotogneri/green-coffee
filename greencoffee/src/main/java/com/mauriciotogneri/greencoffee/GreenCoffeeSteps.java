@@ -17,7 +17,10 @@ import com.mauriciotogneri.greencoffee.annotations.Given;
 import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidStepDefinitionException;
+import com.mauriciotogneri.greencoffee.interactions.ActionableData;
 import com.mauriciotogneri.greencoffee.interactions.ActionableView;
+import com.mauriciotogneri.greencoffee.interactions.DataMatcher;
+import com.mauriciotogneri.greencoffee.interactions.ObjectMatcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -29,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -135,6 +139,16 @@ public class GreenCoffeeSteps
     protected ActionableView onViewWithText(Object text, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(text.toString()), index)));
+    }
+
+    protected <T> ActionableData onViewWithObject(T object)
+    {
+        return new ActionableData(onData(new ObjectMatcher<>(object)));
+    }
+
+    protected <T> ActionableData onViewWithObject(@IdRes int resourceId, Class<T> clazz, T object)
+    {
+        return new DataMatcher<>(resourceId, clazz).with(object);
     }
 
     protected ActionableView onViewChildOf(@IdRes int parentViewId, int index)

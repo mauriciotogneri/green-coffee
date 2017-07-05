@@ -1,5 +1,6 @@
 package com.mauriciotogneri.greencoffee.interactions;
 
+import android.support.annotation.IdRes;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.matcher.BoundedMatcher;
 
@@ -9,21 +10,23 @@ import org.hamcrest.Matcher;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
-public abstract class DataMatcher<T, C>
+public class DataMatcher<T, C>
 {
     private final int resourceId;
+    private final Class<T> clazz;
 
-    public DataMatcher(int resourceId)
+    public DataMatcher(@IdRes int resourceId, Class<T> clazz)
     {
         this.resourceId = resourceId;
+        this.clazz = clazz;
     }
 
-    public DataMatcher()
+    public DataMatcher(Class<T> clazz)
     {
-        this(0);
+        this(0, clazz);
     }
 
-    public ActionableData withContent(C content)
+    public ActionableData with(C content)
     {
         DataInteraction dataInteraction = onData(dataMatcher(content));
 
@@ -41,7 +44,7 @@ public abstract class DataMatcher<T, C>
     {
         final DataMatcher<T, C> dataMatcher = this;
 
-        return new BoundedMatcher<Object, T>(dataMatcher.dataClass())
+        return new BoundedMatcher<Object, T>(clazz)
         {
             @Override
             public boolean matchesSafely(T data)
@@ -57,7 +60,8 @@ public abstract class DataMatcher<T, C>
         };
     }
 
-    public abstract Class<T> dataClass();
-
-    public abstract boolean matches(T data, C content);
+    public boolean matches(T element, C content)
+    {
+        return element.equals(content);
+    }
 }

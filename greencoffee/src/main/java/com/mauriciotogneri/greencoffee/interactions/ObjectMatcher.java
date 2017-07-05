@@ -3,11 +3,11 @@ package com.mauriciotogneri.greencoffee.interactions;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
-public class SpinnerMatcher<T> extends BaseMatcher<T>
+public class ObjectMatcher<T> extends BaseMatcher<T>
 {
     private final T element;
 
-    public SpinnerMatcher(T element)
+    public ObjectMatcher(T element)
     {
         this.element = element;
     }
@@ -15,7 +15,7 @@ public class SpinnerMatcher<T> extends BaseMatcher<T>
     @Override
     public boolean matches(Object object)
     {
-        return element.getClass().equals(object.getClass()) && element.equals(object);
+        return element.equals(object);
     }
 
     @Override
