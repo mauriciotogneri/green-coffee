@@ -18,6 +18,7 @@ import com.mauriciotogneri.greencoffee.annotations.Then;
 import com.mauriciotogneri.greencoffee.annotations.When;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidStepDefinitionException;
 import com.mauriciotogneri.greencoffee.interactions.ActionableData;
+import com.mauriciotogneri.greencoffee.interactions.ActionableObject;
 import com.mauriciotogneri.greencoffee.interactions.ActionableView;
 import com.mauriciotogneri.greencoffee.interactions.DataMatcher;
 import com.mauriciotogneri.greencoffee.interactions.ObjectMatcher;
@@ -111,47 +112,47 @@ public class GreenCoffeeSteps
         }
     }
 
-    protected ActionableView onViewWithId(@IdRes int resourceId)
+    protected ActionableObject onViewWithId(@IdRes int resourceId)
     {
         return new ActionableView(onView(withId(resourceId)));
     }
 
-    protected ActionableView onViewWithId(@IdRes int resourceId, int index)
+    protected ActionableObject onViewWithId(@IdRes int resourceId, int index)
     {
         return new ActionableView(onView(withIndex(withId(resourceId), index)));
     }
 
-    protected ActionableView onViewWithText(@StringRes int resourceId)
+    protected ActionableObject onViewWithText(@StringRes int resourceId)
     {
         return new ActionableView(onView(ViewMatchers.withText(resourceId)));
     }
 
-    protected ActionableView onViewWithText(@StringRes int resourceId, int index)
+    protected ActionableObject onViewWithText(@StringRes int resourceId, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(resourceId), index)));
     }
 
-    protected ActionableView onViewWithText(Object text)
+    protected ActionableObject onViewWithText(Object text)
     {
         return new ActionableView(onView(ViewMatchers.withText(text.toString())));
     }
 
-    protected ActionableView onViewWithText(Object text, int index)
+    protected ActionableObject onViewWithText(Object text, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(text.toString()), index)));
     }
 
-    protected <T> ActionableData onViewWithObject(T object)
+    protected <T> ActionableObject onViewWithObject(T object)
     {
         return new ActionableData(onData(new ObjectMatcher<>(object)));
     }
 
-    protected <T> ActionableData onViewWithObject(@IdRes int resourceId, Class<T> clazz, T object)
+    protected <T> ActionableObject onViewWithObject(@IdRes int resourceId, Class<T> clazz, T object)
     {
         return new DataMatcher<>(resourceId, clazz).with(object);
     }
 
-    protected ActionableView onViewChildOf(@IdRes int parentViewId, int index)
+    protected ActionableObject onViewChildOf(@IdRes int parentViewId, int index)
     {
         return new ActionableView(onView(nthChildOf(withId(parentViewId), index)));
     }

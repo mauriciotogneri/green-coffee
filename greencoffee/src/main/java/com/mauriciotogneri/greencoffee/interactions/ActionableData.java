@@ -2,9 +2,9 @@ package com.mauriciotogneri.greencoffee.interactions;
 
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewAction;
-import android.support.test.espresso.action.ViewActions;
+import android.support.test.espresso.ViewAssertion;
 
-public class ActionableData
+public class ActionableData extends ActionableObject
 {
     private final DataInteraction dataInteraction;
 
@@ -13,27 +13,14 @@ public class ActionableData
         this.dataInteraction = dataInteraction;
     }
 
-    public ActionableView click()
+    @Override
+    public ActionableObject check(ViewAssertion viewAssertion)
     {
-        return perform(ViewActions.click());
+        return new ActionableView(dataInteraction.check(viewAssertion));
     }
 
-    public ActionableView doubleClick()
-    {
-        return perform(ViewActions.doubleClick());
-    }
-
-    public ActionableView longClick()
-    {
-        return perform(ViewActions.longClick());
-    }
-
-    public ActionableView scrollTo()
-    {
-        return perform(ViewActions.scrollTo());
-    }
-
-    private ActionableView perform(ViewAction viewAction)
+    @Override
+    public ActionableObject perform(ViewAction viewAction)
     {
         return new ActionableView(dataInteraction.perform(viewAction));
     }
