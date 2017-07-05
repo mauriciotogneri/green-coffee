@@ -31,6 +31,7 @@ import java.util.concurrent.TimeUnit;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 public class GreenCoffeeSteps
 {
@@ -108,17 +109,17 @@ public class GreenCoffeeSteps
 
     protected ActionableView onViewWithId(@IdRes int resourceId)
     {
-        return onViewWithId(resourceId, 0);
+        return new ActionableView(onView(withId(resourceId)));
     }
 
     protected ActionableView onViewWithId(@IdRes int resourceId, int index)
     {
-        return new ActionableView(onView(withIndex(ViewMatchers.withId(resourceId), index)));
+        return new ActionableView(onView(withIndex(withId(resourceId), index)));
     }
 
     protected ActionableView onViewWithText(@StringRes int resourceId)
     {
-        return onViewWithText(resourceId, 0);
+        return new ActionableView(onView(ViewMatchers.withText(resourceId)));
     }
 
     protected ActionableView onViewWithText(@StringRes int resourceId, int index)
@@ -126,19 +127,19 @@ public class GreenCoffeeSteps
         return new ActionableView(onView(withIndex(ViewMatchers.withText(resourceId), index)));
     }
 
-    protected ActionableView onViewWithText(String text)
+    protected ActionableView onViewWithText(Object text)
     {
-        return onViewWithText(text, 0);
+        return new ActionableView(onView(ViewMatchers.withText(text.toString())));
     }
 
-    protected ActionableView onViewWithText(String text, int index)
+    protected ActionableView onViewWithText(Object text, int index)
     {
-        return new ActionableView(onView(withIndex(ViewMatchers.withText(text), index)));
+        return new ActionableView(onView(withIndex(ViewMatchers.withText(text.toString()), index)));
     }
 
     protected ActionableView onViewChildOf(@IdRes int parentViewId, int index)
     {
-        return new ActionableView(onView(nthChildOf(ViewMatchers.withId(parentViewId), index)));
+        return new ActionableView(onView(nthChildOf(withId(parentViewId), index)));
     }
 
     protected void pressBack()
