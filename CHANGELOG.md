@@ -1,9 +1,14 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.8.0] - 2017-07-05
+### Added
+- Added boolean methods for actionable elements
+- Improved data matchers
+
 ## [2.7.0] - 2017-07-04
 ### Added
-- Added methods `waitFor(long millis)` and `waitFor(long millis, TimeUnit timeUnit)`
+- Added methods `waitFor(long millis)` and `waitFor(long value, TimeUnit timeUnit)`
 - Added class `SpinnerMatcher`
 
 ## [2.6.0] - 2017-04-28
