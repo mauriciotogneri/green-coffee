@@ -442,6 +442,8 @@ public abstract class ActionableObject
 
     public abstract ActionableObject perform(ViewAction viewAction);
 
+    public abstract String text();
+
     private boolean checkIf(Runnable runnable)
     {
         try
