@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 ## [2.8.1] - 2017-07-06
 ### Added
 - Added method `text()` to `ActionableObject`
+- Added class `TimedIdlingResource`
 
 ## [2.8.0] - 2017-07-05
 ### Added
