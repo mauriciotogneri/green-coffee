@@ -37,6 +37,7 @@ import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.Matchers.allOf;
 
 public class GreenCoffeeSteps
 {
@@ -140,6 +141,11 @@ public class GreenCoffeeSteps
     protected ActionableObject onViewWithText(Object text, int index)
     {
         return new ActionableView(onView(withIndex(ViewMatchers.withText(text.toString()), index)));
+    }
+
+    protected ActionableObject onViewWithAll(Matcher<? super View>... matchers)
+    {
+        return new ActionableView(onView(allOf(matchers)));
     }
 
     protected <T> ActionableObject onViewWithObject(T object)
