@@ -103,7 +103,8 @@ In order to use Green Coffee, add the following dependency to your `build.gradle
 ```groovy
 dependencies
 {
-    androidTestCompile 'com.mauriciotogneri:greencoffee:2.8.1'
+    androidTestCompile 'com.android.support.test:runner:1.0.1'
+    androidTestCompile 'com.mauriciotogneri:greencoffee:2.9.0'
 }
 ```
 
@@ -111,7 +112,6 @@ And the following test instrumentation runner:
 ```groovy
 defaultConfig
 {
-    ...
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 }
 ```

@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [2.9.0] - 2017-09-18
+### Changed
+- Using Espresso `3.0.1`
+
 ## [2.8.1] - 2017-07-06
 ### Added
 - Added method `text()` to `ActionableObject`
