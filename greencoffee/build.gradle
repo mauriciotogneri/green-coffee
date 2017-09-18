@@ -24,24 +24,6 @@ android
         versionName releaseVersion
     }
 
-    buildTypes
-    {
-        debug
-        {
-            debuggable true
-        }
-
-        release
-        {
-            minifyEnabled false
-        }
-    }
-
-    lintOptions
-    {
-        abortOnError false
-    }
-
     compileOptions
     {
         sourceCompatibility JavaVersion.VERSION_1_7
