@@ -12,7 +12,7 @@ public class Scenario
     private final List<String> tags;
     private final List<Step> steps;
 
-    Scenario(String name, String description, List<Step> steps, List<String> tags)
+    public Scenario(String name, String description, List<Step> steps, List<String> tags)
     {
         this.name = name;
         this.description = description;
