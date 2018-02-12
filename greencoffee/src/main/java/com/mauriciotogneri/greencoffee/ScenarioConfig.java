@@ -15,6 +15,21 @@ public class ScenarioConfig
         this.screenshotPath = screenshotPath;
     }
 
+    public ScenarioConfig(Scenario scenario, Locale locale)
+    {
+        this(scenario, locale, null);
+    }
+
+    public ScenarioConfig(Scenario scenario, String screenshotPath)
+    {
+        this(scenario, null, screenshotPath);
+    }
+
+    public ScenarioConfig(Scenario scenario)
+    {
+        this(scenario, null, null);
+    }
+
     public Scenario scenario()
     {
         return scenario;
@@ -22,7 +37,7 @@ public class ScenarioConfig
 
     public Locale locale()
     {
-        return locale;
+        return (locale != null) ? locale : Locale.getDefault();
     }
 
     public boolean hasScreenshotPath()
@@ -38,6 +53,13 @@ public class ScenarioConfig
     @Override
     public String toString()
     {
-        return String.format("%s - %s", scenario.name(), locale.toString());
+        if (locale != null)
+        {
+            return String.format("%s - %s", scenario.name(), locale.toString());
+        }
+        else
+        {
+            return scenario.name();
+        }
     }
 }
