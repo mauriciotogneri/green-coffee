@@ -2,14 +2,14 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 
-def releaseVersion = '2.9.0'
+def releaseVersion = '2.9.1'
 def bintrayUser = hasProperty('bintray_user') ? bintray_user : ''
 def bintrayApiKey = hasProperty('bintray_apikey') ? bintray_apikey : ''
 
 android
 {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.1'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     dexOptions
     {
@@ -19,15 +19,15 @@ android
     defaultConfig
     {
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName releaseVersion
     }
 
     compileOptions
     {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -75,6 +75,6 @@ artifacts {
 
 dependencies
 {
-    compile 'io.cucumber:gherkin-jvm-deps:1.0.4'
-    compile 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'io.cucumber:gherkin-jvm-deps:1.0.4'
+    implementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 }

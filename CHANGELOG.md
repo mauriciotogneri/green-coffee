@@ -1,5 +1,10 @@
 # Change Log
-All notable changes to this project will be documented in this file.
+All notable changes to this project are documented in this file.
+
+## [3.0.0] - 2018-02-12
+### Changed
+- Updated to Java 8
+- Updated Android build tools, compile version and Gradle version
 
 ## [2.9.0] - 2017-09-18
 ### Changed
