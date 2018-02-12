@@ -5,6 +5,8 @@ All notable changes to this project are documented in this file.
 ### Changed
 - Updated to Java 8
 - Updated Android build tools, compile version and Gradle version
+- Updated visibility of some classes and methods
+- Some constructor parameters of the class `ScenarioConfig` are optional
 
 ## [2.9.0] - 2017-09-18
 ### Changed
