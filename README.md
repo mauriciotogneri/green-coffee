@@ -37,7 +37,7 @@ public class LoginFeatureTest extends GreenCoffeeTest
     @Parameters(name = "{0}")
     public static Iterable<ScenarioConfig> scenarios() throws IOException
     {
-        return new GreenCoffeeConfig("testapp") // folder to place the screenshot if a test fails
+        return new GreenCoffeeConfig(true) // automatically take a screenshot if a test fails
                         .withFeatureFromAssets("assets/login.feature")
                         .scenarios(
                             new Locale("en", "GB"),
