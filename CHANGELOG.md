@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to this project are documented in this file.
 
+## [3.1.0] - 2018-04-13
+### Changed
+- Updated screenshot parameter from path to file
+### Removed
+- Method `grantPermission`. Use `GrantPermissionRule` instead
+
 ## [3.0.0] - 2018-02-12
 ### Changed
 - Updated to Java 8

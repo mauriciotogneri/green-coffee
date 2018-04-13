@@ -1,19 +1,15 @@
 package com.mauriciotogneri.greencoffee;
 
-import android.os.Build;
-
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.InstrumentationRegistry.getTargetContext;
 import gherkin.ast.Node;
 import gherkin.ast.Step;
@@ -40,17 +36,6 @@ public class GreenCoffeeTest
 
     protected void afterScenarioEnds(Scenario scenario, Locale locale)
     {
-    }
-
-    protected void grantPermission(String permission) throws IOException
-    {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            getInstrumentation()
-                    .getUiAutomation()
-                    .executeShellCommand(String.format("pm grant %s %s", getTargetContext().getPackageName(), permission))
-                    .close();
-        }
     }
 
     protected void start(GreenCoffeeSteps... targets)
