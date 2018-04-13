@@ -4,7 +4,11 @@ import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionExcept
 import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
+import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -69,8 +73,12 @@ public class GreenCoffeeTest
         {
             if (scenarioConfig.hasScreenshotFolder())
             {
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                String fileName = String.format("%s.jpg", dateFormat.format(new Date()));
+                File screenshotFile = new File(scenarioConfig.screenshotFolder(), fileName);
+
                 ScreenCapture screenCapture = new ScreenCapture();
-                screenCapture.takeScreenshot(scenarioConfig.screenshotFolder());
+                screenCapture.takeScreenshot(screenshotFile);
             }
 
             throw e;
