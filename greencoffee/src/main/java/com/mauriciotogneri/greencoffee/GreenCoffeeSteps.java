@@ -1,6 +1,5 @@
 package com.mauriciotogneri.greencoffee;
 
-import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.test.InstrumentationRegistry;
@@ -27,6 +26,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import java.io.File;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -183,15 +183,13 @@ public class GreenCoffeeSteps
         return new Localization(InstrumentationRegistry.getTargetContext()).locale();
     }
 
-    protected void takeScreenshot(String fileName)
+    protected void takeScreenshot(File file)
     {
-        String path = String.format("%s/%s.jpg", Environment.getExternalStorageDirectory().toString(), fileName);
-
         ScreenCapture screenCapture = new ScreenCapture();
-        screenCapture.takeScreenshot(path);
+        screenCapture.takeScreenshot(file);
     }
 
-    protected Matcher<View> withIndex(final Matcher<View> matcher, final int index)
+    protected Matcher<View> withIndex(Matcher<View> matcher, int index)
     {
         return new TypeSafeMatcher<View>()
         {
@@ -217,7 +215,7 @@ public class GreenCoffeeSteps
         };
     }
 
-    protected Matcher<View> nthChildOf(final Matcher<View> parentMatcher, final int childPosition)
+    protected Matcher<View> nthChildOf(Matcher<View> parentMatcher, int childPosition)
     {
         return new TypeSafeMatcher<View>()
         {
@@ -254,7 +252,7 @@ public class GreenCoffeeSteps
 
     private ViewAction actionWaitFor(long value, TimeUnit timeUnit)
     {
-        final long millis = timeUnit.toMillis(value);
+        long millis = timeUnit.toMillis(value);
 
         return new ViewAction()
         {

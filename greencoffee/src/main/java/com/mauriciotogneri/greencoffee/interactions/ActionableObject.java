@@ -71,14 +71,7 @@ public abstract class ActionableObject
 
     public boolean checkIfDoesNotExist()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                doesNotExist();
-            }
-        });
+        return checkIf(this::doesNotExist);
     }
 
     public ActionableObject contains(Object text)
@@ -86,16 +79,9 @@ public abstract class ActionableObject
         return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.containsString(text.toString()))));
     }
 
-    public boolean checkIfContains(final Object text)
+    public boolean checkIfContains(Object text)
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                contains(text);
-            }
-        });
+        return checkIf(() -> contains(text));
     }
 
     public ActionableObject doesNotContain(Object text)
@@ -103,16 +89,9 @@ public abstract class ActionableObject
         return check(ViewAssertions.matches(ViewMatchers.withText(Matchers.not(Matchers.containsString(text.toString())))));
     }
 
-    public boolean checkIfDoesNotContain(final Object text)
+    public boolean checkIfDoesNotContain(Object text)
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                doesNotContain(text);
-            }
-        });
+        return checkIf(() -> doesNotContain(text));
     }
 
     public ActionableObject isEmpty()
@@ -122,14 +101,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsEmpty()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isEmpty();
-            }
-        });
+        return checkIf(this::isEmpty);
     }
 
     public ActionableObject isNotEmpty()
@@ -139,14 +111,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsNotEmpty()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isNotEmpty();
-            }
-        });
+        return checkIf(this::isNotEmpty);
     }
 
     public ActionableObject hasFocus()
@@ -156,14 +121,7 @@ public abstract class ActionableObject
 
     public boolean checkIfHasFocus()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                hasFocus();
-            }
-        });
+        return checkIf(this::hasFocus);
     }
 
     public ActionableObject doesNotHaveFocus()
@@ -173,14 +131,7 @@ public abstract class ActionableObject
 
     public boolean checkIfDoesNotHaveFocus()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                doesNotHaveFocus();
-            }
-        });
+        return checkIf(this::doesNotHaveFocus);
     }
 
     public ActionableObject hasErrorText(Object text)
@@ -188,16 +139,9 @@ public abstract class ActionableObject
         return check(ViewAssertions.matches(ViewMatchers.hasErrorText(text.toString())));
     }
 
-    public boolean checkIfHasErrorText(final Object text)
+    public boolean checkIfHasErrorText(Object text)
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                hasErrorText(text);
-            }
-        });
+        return checkIf(() -> hasErrorText(text));
     }
 
     public ActionableObject isChecked()
@@ -207,14 +151,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsChecked()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isChecked();
-            }
-        });
+        return checkIf(this::isChecked);
     }
 
     public ActionableObject isNotChecked()
@@ -224,14 +161,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsNotChecked()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isNotChecked();
-            }
-        });
+        return checkIf(this::isNotChecked);
     }
 
     public ActionableObject isClickable()
@@ -241,14 +171,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsClickable()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isClickable();
-            }
-        });
+        return checkIf(this::isClickable);
     }
 
     public ActionableObject isFocusable()
@@ -258,14 +181,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsFocusable()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isFocusable();
-            }
-        });
+        return checkIf(this::isFocusable);
     }
 
     public ActionableObject isNotFocusable()
@@ -275,14 +191,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsNotFocusable()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isNotFocusable();
-            }
-        });
+        return checkIf(this::isNotFocusable);
     }
 
     public ActionableObject isEnabled()
@@ -292,14 +201,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsEnabled()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isEnabled();
-            }
-        });
+        return checkIf(this::isEnabled);
     }
 
     public ActionableObject isDisabled()
@@ -309,14 +211,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsDisabled()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isDisabled();
-            }
-        });
+        return checkIf(this::isDisabled);
     }
 
     public ActionableObject isSelected()
@@ -326,14 +221,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsSelected()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isSelected();
-            }
-        });
+        return checkIf(this::isSelected);
     }
 
     public ActionableObject isNotSelected()
@@ -343,14 +231,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsNotSelected()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isNotSelected();
-            }
-        });
+        return checkIf(this::isNotSelected);
     }
 
     public ActionableObject isDisplayed()
@@ -360,14 +241,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsDisplayed()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isDisplayed();
-            }
-        });
+        return checkIf(this::isDisplayed);
     }
 
     public ActionableObject isCompletelyDisplayed()
@@ -377,14 +251,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsCompletelyDisplayed()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isCompletelyDisplayed();
-            }
-        });
+        return checkIf(this::isCompletelyDisplayed);
     }
 
     public ActionableObject isNotDisplayed()
@@ -394,14 +261,7 @@ public abstract class ActionableObject
 
     public boolean checkIfIsNotDisplayed()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                isNotDisplayed();
-            }
-        });
+        return checkIf(this::isNotDisplayed);
     }
 
     public ActionableObject hasDrawable()
@@ -411,14 +271,7 @@ public abstract class ActionableObject
 
     public boolean checkIfHasDrawable()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                hasDrawable();
-            }
-        });
+        return checkIf(this::hasDrawable);
     }
 
     public ActionableObject doesNotHaveDrawable()
@@ -428,14 +281,7 @@ public abstract class ActionableObject
 
     public boolean checkIfDoesNotHaveDrawable()
     {
-        return checkIf(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                doesNotHaveDrawable();
-            }
-        });
+        return checkIf(this::doesNotHaveDrawable);
     }
 
     public abstract ActionableObject check(ViewAssertion viewAssertion);

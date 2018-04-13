@@ -35,7 +35,7 @@ public class ActionableView extends ActionableObject
     @Override
     public String text()
     {
-        final String[] stringHolder = {null};
+        String[] stringHolder = {null};
 
         viewInteraction.perform(new ViewAction()
         {

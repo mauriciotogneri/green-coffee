@@ -1,16 +1,13 @@
 package com.mauriciotogneri.greencoffee;
 
 import android.os.Build;
-import android.os.Environment;
 
 import com.mauriciotogneri.greencoffee.exceptions.DuplicatedStepDefinitionException;
 import com.mauriciotogneri.greencoffee.exceptions.NoStepsDefinedException;
 import com.mauriciotogneri.greencoffee.exceptions.StepDefinitionNotFoundException;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -85,13 +82,10 @@ public class GreenCoffeeTest
         }
         catch (Exception e)
         {
-            if (scenarioConfig.hasScreenshotPath())
+            if (scenarioConfig.hasScreenshotFolder())
             {
-                String date = new SimpleDateFormat("yyyyMMddhhmmss", Locale.getDefault()).format(new Date());
-                String path = String.format("%s/%s/%s_%s.jpg", Environment.getExternalStorageDirectory().toString(), scenarioConfig.screenshotPath(), date, scenario.name().replace(" ", "_"));
-
                 ScreenCapture screenCapture = new ScreenCapture();
-                screenCapture.takeScreenshot(path);
+                screenCapture.takeScreenshot(scenarioConfig.screenshotFolder());
             }
 
             throw e;

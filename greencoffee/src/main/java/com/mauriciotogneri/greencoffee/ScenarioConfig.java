@@ -1,18 +1,19 @@
 package com.mauriciotogneri.greencoffee;
 
+import java.io.File;
 import java.util.Locale;
 
 public class ScenarioConfig
 {
     private final Scenario scenario;
     private final Locale locale;
-    private final String screenshotPath;
+    private final File screenshotFolder;
 
-    public ScenarioConfig(Scenario scenario, Locale locale, String screenshotPath)
+    public ScenarioConfig(Scenario scenario, Locale locale, File screenshotFolder)
     {
         this.scenario = scenario;
         this.locale = locale;
-        this.screenshotPath = screenshotPath;
+        this.screenshotFolder = screenshotFolder;
     }
 
     public ScenarioConfig(Scenario scenario, Locale locale)
@@ -20,9 +21,9 @@ public class ScenarioConfig
         this(scenario, locale, null);
     }
 
-    public ScenarioConfig(Scenario scenario, String screenshotPath)
+    public ScenarioConfig(Scenario scenario, File screenshotFolder)
     {
-        this(scenario, null, screenshotPath);
+        this(scenario, null, screenshotFolder);
     }
 
     public ScenarioConfig(Scenario scenario)
@@ -40,14 +41,14 @@ public class ScenarioConfig
         return (locale != null) ? locale : Locale.getDefault();
     }
 
-    public boolean hasScreenshotPath()
+    public boolean hasScreenshotFolder()
     {
-        return (screenshotPath != null);
+        return (screenshotFolder != null);
     }
 
-    public String screenshotPath()
+    public File screenshotFolder()
     {
-        return screenshotPath;
+        return screenshotFolder;
     }
 
     @Override

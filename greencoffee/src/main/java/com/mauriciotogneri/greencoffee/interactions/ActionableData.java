@@ -35,7 +35,7 @@ public class ActionableData extends ActionableObject
     @Override
     public String text()
     {
-        final String[] stringHolder = {null};
+        String[] stringHolder = {null};
 
         dataInteraction.perform(new ViewAction()
         {

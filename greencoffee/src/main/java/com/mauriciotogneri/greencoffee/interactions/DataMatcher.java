@@ -40,9 +40,9 @@ public class DataMatcher<T, C>
         }
     }
 
-    private Matcher<Object> dataMatcher(final C content)
+    private Matcher<Object> dataMatcher(C content)
     {
-        final DataMatcher<T, C> dataMatcher = this;
+        DataMatcher<T, C> dataMatcher = this;
 
         return new BoundedMatcher<Object, T>(clazz)
         {

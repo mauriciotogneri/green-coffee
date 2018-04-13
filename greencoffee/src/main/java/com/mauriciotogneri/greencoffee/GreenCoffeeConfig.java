@@ -3,6 +3,7 @@ package com.mauriciotogneri.greencoffee;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidExampleException;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -31,17 +32,17 @@ import gherkin.ast.Tag;
 public class GreenCoffeeConfig
 {
     private final List<Scenario> scenarios;
-    private final String screenshotPath;
+    private final File screenshotFolder;
 
-    private GreenCoffeeConfig(List<Scenario> scenarios, String screenshotPath)
+    private GreenCoffeeConfig(List<Scenario> scenarios, File screenshotFolder)
     {
         this.scenarios = scenarios;
-        this.screenshotPath = screenshotPath;
+        this.screenshotFolder = screenshotFolder;
     }
 
-    public GreenCoffeeConfig(String screenshotPath)
+    public GreenCoffeeConfig(File screenshotFolder)
     {
-        this(new ArrayList<Scenario>(), screenshotPath);
+        this(new ArrayList<>(), screenshotFolder);
     }
 
     public GreenCoffeeConfig()
@@ -65,7 +66,7 @@ public class GreenCoffeeConfig
         {
             for (Scenario scenario : scenarios)
             {
-                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotPath));
+                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotFolder));
             }
         }
 
@@ -88,12 +89,12 @@ public class GreenCoffeeConfig
             }
         }
 
-        return new GreenCoffeeConfig(filtered, screenshotPath);
+        return new GreenCoffeeConfig(filtered, screenshotFolder);
     }
 
     public GreenCoffeeConfig withFeatureFromString(String featureSource)
     {
-        return new GreenCoffeeConfig(scenarios(featureSource), screenshotPath);
+        return new GreenCoffeeConfig(scenarios(featureSource), screenshotFolder);
     }
 
     public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
@@ -125,7 +126,7 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotPath);
+        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotFolder);
     }
 
     private List<Scenario> scenarios(String featureSource)

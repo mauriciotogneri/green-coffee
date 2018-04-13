@@ -15,34 +15,30 @@ import java.util.Iterator;
 
 class ScreenCapture
 {
-    void takeScreenshot(final String path)
+    void takeScreenshot(File file)
     {
-        InstrumentationRegistry.getInstrumentation().runOnMainSync(new Runnable()
+        InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
         {
-            @Override
-            public void run()
+            Collection<Activity> resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+            Iterator<Activity> iterator = resumedActivities.iterator();
+
+            if (iterator.hasNext())
             {
-                Collection<Activity> resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
-                Iterator<Activity> iterator = resumedActivities.iterator();
+                Activity activity = iterator.next();
 
-                if (iterator.hasNext())
+                try
                 {
-                    Activity activity = iterator.next();
-
-                    try
-                    {
-                        takeScreenshot(activity, path);
-                    }
-                    catch (Exception e)
-                    {
-                        // ignore
-                    }
+                    takeScreenshot(activity, file);
+                }
+                catch (Exception e)
+                {
+                    // ignore
                 }
             }
         });
     }
 
-    private void takeScreenshot(Activity activity, String path) throws Exception
+    private void takeScreenshot(Activity activity, File file) throws Exception
     {
         View view = activity.getWindow().getDecorView().getRootView();
         view.setDrawingCacheEnabled(true);
@@ -50,12 +46,11 @@ class ScreenCapture
         Bitmap bitmap = Bitmap.createBitmap(view.getDrawingCache());
         view.setDrawingCacheEnabled(false);
 
-        File imageFile = new File(path);
-        File parentFolder = imageFile.getParentFile();
+        File parentFolder = file.getParentFile();
 
         if (parentFolder.exists() || parentFolder.mkdirs())
         {
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            FileOutputStream outputStream = new FileOutputStream(file);
             bitmap.compress(CompressFormat.JPEG, 100, outputStream);
             outputStream.flush();
             outputStream.close();
