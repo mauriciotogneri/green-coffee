@@ -74,7 +74,7 @@ public class GreenCoffeeTest
             if (scenarioConfig.screenshotOnFail())
             {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                String fileName = String.format("%s.jpg", dateFormat.format(new Date()));
+                String fileName = String.format("%s - %s.jpg", scenario.name(), dateFormat.format(new Date()));
                 File screenshotFile = new File(getTargetContext().getExternalFilesDir("screenshots"), fileName);
 
                 ScreenCapture screenCapture = new ScreenCapture();
