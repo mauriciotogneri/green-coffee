@@ -104,7 +104,7 @@ In order to use Green Coffee, add the following dependency to your `build.gradle
 dependencies
 {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.mauriciotogneri:greencoffee:3.1.1'
+    androidTestImplementation 'com.mauriciotogneri:greencoffee:3.2.0'
 }
 ```
 

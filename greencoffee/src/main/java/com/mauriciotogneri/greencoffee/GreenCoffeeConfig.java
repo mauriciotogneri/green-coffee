@@ -32,22 +32,22 @@ import gherkin.ast.Tag;
 public class GreenCoffeeConfig
 {
     private final List<Scenario> scenarios;
-    private final File screenshotFolder;
+    private final Boolean screenshotOnFail;
 
-    private GreenCoffeeConfig(List<Scenario> scenarios, File screenshotFolder)
+    private GreenCoffeeConfig(List<Scenario> scenarios, Boolean screenshotOnFail)
     {
         this.scenarios = scenarios;
-        this.screenshotFolder = screenshotFolder;
+        this.screenshotOnFail = screenshotOnFail;
     }
 
-    public GreenCoffeeConfig(File screenshotFolder)
+    public GreenCoffeeConfig(Boolean screenshotOnFail)
     {
-        this(new ArrayList<>(), screenshotFolder);
+        this(new ArrayList<>(), screenshotOnFail);
     }
 
     public GreenCoffeeConfig()
     {
-        this(null);
+        this(false);
     }
 
     public List<ScenarioConfig> scenarios(Locale... locales)
@@ -66,7 +66,7 @@ public class GreenCoffeeConfig
         {
             for (Scenario scenario : scenarios)
             {
-                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotFolder));
+                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotOnFail));
             }
         }
 
@@ -89,12 +89,12 @@ public class GreenCoffeeConfig
             }
         }
 
-        return new GreenCoffeeConfig(filtered, screenshotFolder);
+        return new GreenCoffeeConfig(filtered, screenshotOnFail);
     }
 
     public GreenCoffeeConfig withFeatureFromString(String featureSource)
     {
-        return new GreenCoffeeConfig(scenarios(featureSource), screenshotFolder);
+        return new GreenCoffeeConfig(scenarios(featureSource), screenshotOnFail);
     }
 
     public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
@@ -126,7 +126,7 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotFolder);
+        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotOnFail);
     }
 
     private List<Scenario> scenarios(String featureSource)

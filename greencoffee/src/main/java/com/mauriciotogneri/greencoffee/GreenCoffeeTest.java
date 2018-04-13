@@ -71,11 +71,11 @@ public class GreenCoffeeTest
         }
         catch (Exception e)
         {
-            if (scenarioConfig.hasScreenshotFolder())
+            if (scenarioConfig.screenshotOnFail())
             {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 String fileName = String.format("%s.jpg", dateFormat.format(new Date()));
-                File screenshotFile = new File(scenarioConfig.screenshotFolder(), fileName);
+                File screenshotFile = new File(getTargetContext().getExternalFilesDir("screenshots"), fileName);
 
                 ScreenCapture screenCapture = new ScreenCapture();
                 screenCapture.takeScreenshot(screenshotFile);
