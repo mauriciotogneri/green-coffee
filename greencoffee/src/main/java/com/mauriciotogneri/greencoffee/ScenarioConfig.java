@@ -7,27 +7,30 @@ public class ScenarioConfig
     private final Scenario scenario;
     private final Locale locale;
     private final Boolean screenshotOnFail;
+    private final ScreenshotProvider screenshotProvider;
 
-    public ScenarioConfig(Scenario scenario, Locale locale, Boolean screenshotOnFail)
+    public ScenarioConfig(Scenario scenario, Locale locale, Boolean screenshotOnFail,
+                          ScreenshotProvider screenshotProvider)
     {
         this.scenario = scenario;
         this.locale = locale;
         this.screenshotOnFail = screenshotOnFail;
+        this.screenshotProvider = screenshotProvider;
     }
 
     public ScenarioConfig(Scenario scenario, Locale locale)
     {
-        this(scenario, locale, false);
+        this(scenario, locale, false, ScreenshotProvider.getDefault());
     }
 
     public ScenarioConfig(Scenario scenario, Boolean screenshotOnFail)
     {
-        this(scenario, null, screenshotOnFail);
+        this(scenario, null, screenshotOnFail, ScreenshotProvider.getDefault());
     }
 
     public ScenarioConfig(Scenario scenario)
     {
-        this(scenario, null, false);
+        this(scenario, null, false, ScreenshotProvider.getDefault());
     }
 
     public Scenario scenario()
@@ -43,6 +46,11 @@ public class ScenarioConfig
     public Boolean screenshotOnFail()
     {
         return screenshotOnFail;
+    }
+
+    public ScreenshotProvider screenshotProvider()
+    {
+        return screenshotProvider;
     }
 
     @Override

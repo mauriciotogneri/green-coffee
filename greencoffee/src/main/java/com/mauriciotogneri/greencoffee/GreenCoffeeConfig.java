@@ -3,7 +3,6 @@ package com.mauriciotogneri.greencoffee;
 import com.mauriciotogneri.greencoffee.exceptions.InvalidExampleException;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -33,21 +32,28 @@ public class GreenCoffeeConfig
 {
     private final List<Scenario> scenarios;
     private final Boolean screenshotOnFail;
+    private final ScreenshotProvider screenshotProvider;
 
-    private GreenCoffeeConfig(List<Scenario> scenarios, Boolean screenshotOnFail)
+    private GreenCoffeeConfig(List<Scenario> scenarios, Boolean screenshotOnFail, ScreenshotProvider screenshotProvider)
     {
         this.scenarios = scenarios;
         this.screenshotOnFail = screenshotOnFail;
+        this.screenshotProvider = screenshotProvider;
+    }
+
+    public GreenCoffeeConfig(Boolean screenshotOnFail, ScreenshotProvider screenshotProvider)
+    {
+        this(new ArrayList<>(), screenshotOnFail, screenshotProvider);
     }
 
     public GreenCoffeeConfig(Boolean screenshotOnFail)
     {
-        this(new ArrayList<>(), screenshotOnFail);
+        this(new ArrayList<>(), screenshotOnFail, ScreenshotProvider.getDefault());
     }
 
     public GreenCoffeeConfig()
     {
-        this(false);
+        this(false, ScreenshotProvider.getDefault());
     }
 
     public List<ScenarioConfig> scenarios(Locale... locales)
@@ -66,7 +72,8 @@ public class GreenCoffeeConfig
         {
             for (Scenario scenario : scenarios)
             {
-                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotOnFail));
+                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotOnFail,
+                        screenshotProvider));
             }
         }
 
@@ -89,12 +96,12 @@ public class GreenCoffeeConfig
             }
         }
 
-        return new GreenCoffeeConfig(filtered, screenshotOnFail);
+        return new GreenCoffeeConfig(filtered, screenshotOnFail, screenshotProvider);
     }
 
     public GreenCoffeeConfig withFeatureFromString(String featureSource)
     {
-        return new GreenCoffeeConfig(scenarios(featureSource), screenshotOnFail);
+        return new GreenCoffeeConfig(scenarios(featureSource), screenshotOnFail, screenshotProvider);
     }
 
     public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
@@ -126,7 +133,8 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotOnFail);
+        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotOnFail,
+                screenshotProvider);
     }
 
     private List<Scenario> scenarios(String featureSource)

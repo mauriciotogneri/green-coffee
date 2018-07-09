@@ -77,8 +77,9 @@ public class GreenCoffeeTest
                 String fileName = String.format("%s - %s.jpg", scenario.name(), dateFormat.format(new Date()));
                 File screenshotFile = new File(getTargetContext().getExternalFilesDir("screenshots"), fileName);
 
-                ScreenCapture screenCapture = new ScreenCapture();
-                screenCapture.takeScreenshot(screenshotFile);
+
+                ScreenshotProvider screenshotProvider = scenarioConfig.screenshotProvider();
+                screenshotProvider.takeScreenshot(screenshotFile);
             }
 
             throw e;
