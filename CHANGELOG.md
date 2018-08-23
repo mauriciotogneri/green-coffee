@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project are documented in this file.
 
+## [3.3.0] - 2018-08-23
+### Changed
+- ???
+
 ## [3.2.1] - 2018-04-13
 ### Changed
 - Updated screenshot parameter from path to boolean. When set to `true`, screenshots will be placed in the folder `Android/data/your_package/files/screenshots`
