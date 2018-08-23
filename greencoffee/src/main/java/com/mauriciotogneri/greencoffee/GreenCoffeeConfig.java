@@ -31,29 +31,17 @@ import gherkin.ast.Tag;
 public class GreenCoffeeConfig
 {
     private final List<Scenario> scenarios;
-    private final Boolean screenshotOnFail;
     private final ScreenshotProvider screenshotProvider;
 
-    private GreenCoffeeConfig(List<Scenario> scenarios, Boolean screenshotOnFail, ScreenshotProvider screenshotProvider)
+    private GreenCoffeeConfig(List<Scenario> scenarios, ScreenshotProvider screenshotProvider)
     {
         this.scenarios = scenarios;
-        this.screenshotOnFail = screenshotOnFail;
         this.screenshotProvider = screenshotProvider;
-    }
-
-    public GreenCoffeeConfig(Boolean screenshotOnFail, ScreenshotProvider screenshotProvider)
-    {
-        this(new ArrayList<>(), screenshotOnFail, screenshotProvider);
-    }
-
-    public GreenCoffeeConfig(Boolean screenshotOnFail)
-    {
-        this(new ArrayList<>(), screenshotOnFail, ScreenshotProvider.getDefault());
     }
 
     public GreenCoffeeConfig()
     {
-        this(false, ScreenshotProvider.getDefault());
+        this(new ArrayList<>(), null);
     }
 
     public List<ScenarioConfig> scenarios(Locale... locales)
@@ -72,12 +60,21 @@ public class GreenCoffeeConfig
         {
             for (Scenario scenario : scenarios)
             {
-                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotOnFail,
-                        screenshotProvider));
+                scenarioConfigs.add(new ScenarioConfig(scenario, locale, screenshotProvider));
             }
         }
 
         return scenarioConfigs;
+    }
+
+    public GreenCoffeeConfig takeScreenshotOnFail()
+    {
+        return new GreenCoffeeConfig(scenarios, ScreenshotProvider.getDefault());
+    }
+
+    public GreenCoffeeConfig takeScreenshotOnFail(ScreenshotProvider screenshotProvider)
+    {
+        return new GreenCoffeeConfig(scenarios, screenshotProvider);
     }
 
     public GreenCoffeeConfig withTags(String firstTag, String... restTags)
@@ -96,12 +93,12 @@ public class GreenCoffeeConfig
             }
         }
 
-        return new GreenCoffeeConfig(filtered, screenshotOnFail, screenshotProvider);
+        return new GreenCoffeeConfig(filtered, screenshotProvider);
     }
 
     public GreenCoffeeConfig withFeatureFromString(String featureSource)
     {
-        return new GreenCoffeeConfig(scenarios(featureSource), screenshotOnFail, screenshotProvider);
+        return new GreenCoffeeConfig(scenarios(featureSource), screenshotProvider);
     }
 
     public GreenCoffeeConfig withFeatureFromAssets(String featurePath) throws IOException
@@ -133,8 +130,7 @@ public class GreenCoffeeConfig
 
         reader.close();
 
-        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotOnFail,
-                screenshotProvider);
+        return new GreenCoffeeConfig(scenarios(builder.toString()), screenshotProvider);
     }
 
     private List<Scenario> scenarios(String featureSource)

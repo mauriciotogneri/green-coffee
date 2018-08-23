@@ -1,25 +1,38 @@
 package com.mauriciotogneri.greencoffee;
 
 import java.io.File;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public interface ScreenshotProvider {
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 
-    static ScreenshotProvider getDefault() {
+public interface ScreenshotProvider
+{
+    static ScreenshotProvider getDefault()
+    {
         return new DefaultScreenshotProvider();
     }
 
-    void takeScreenshot(File file);
+    void takeScreenshot(Scenario scenario);
 
-    class DefaultScreenshotProvider implements ScreenshotProvider {
-
+    class DefaultScreenshotProvider implements ScreenshotProvider
+    {
         private final ScreenCapture screenCapture;
 
-        DefaultScreenshotProvider() {
+        DefaultScreenshotProvider()
+        {
             screenCapture = new ScreenCapture();
         }
 
         @Override
-        public void takeScreenshot(File file) {
+        public void takeScreenshot(Scenario scenario)
+        {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+            String fileName = String.format("%s - %s.jpg", scenario.name(), dateFormat.format(new Date()));
+            File file = new File(getTargetContext().getExternalFilesDir("screenshots"), fileName);
+
             screenCapture.takeScreenshot(file);
         }
     }

@@ -3,7 +3,7 @@ All notable changes to this project are documented in this file.
 
 ## [3.3.0] - 2018-08-23
 ### Changed
-- ???
+- Updated screenshot interface to allow to pass a custom screenshot provider
 
 ## [3.2.1] - 2018-04-13
 ### Changed
