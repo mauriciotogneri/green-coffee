@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project are documented in this file.
 
+## [3.4.0] - 2018-09-24
+### Changed
+- Updated dependencies and build tools
+
 ## [3.3.0] - 2018-08-23
 ### Changed
 - Updated screenshot interface to allow to pass a custom screenshot provider

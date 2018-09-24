@@ -1,14 +1,14 @@
 package com.mauriciotogneri.greencoffee.interactions;
 
-import android.support.annotation.IdRes;
-import android.support.test.espresso.DataInteraction;
-import android.support.test.espresso.matcher.BoundedMatcher;
+import androidx.annotation.IdRes;
+import androidx.test.espresso.DataInteraction;
+import androidx.test.espresso.matcher.BoundedMatcher;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 
-import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.Espresso.onData;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 public class DataMatcher<T, C>
 {
