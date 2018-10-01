@@ -3,9 +3,9 @@ package com.mauriciotogneri.greencoffee;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
-import androidx.test.runner.lifecycle.Stage;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
+import android.support.test.runner.lifecycle.Stage;
 import android.view.View;
 
 import java.io.File;
@@ -18,24 +18,24 @@ class ScreenCapture
     void takeScreenshot(File file)
     {
         InstrumentationRegistry.getInstrumentation().runOnMainSync(() ->
-        {
-            Collection<Activity> resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
-            Iterator<Activity> iterator = resumedActivities.iterator();
+                                                                   {
+                                                                       Collection<Activity> resumedActivities = ActivityLifecycleMonitorRegistry.getInstance().getActivitiesInStage(Stage.RESUMED);
+                                                                       Iterator<Activity> iterator = resumedActivities.iterator();
 
-            if (iterator.hasNext())
-            {
-                Activity activity = iterator.next();
+                                                                       if (iterator.hasNext())
+                                                                       {
+                                                                           Activity activity = iterator.next();
 
-                try
-                {
-                    takeScreenshot(activity, file);
-                }
-                catch (Exception e)
-                {
-                    // ignore
-                }
-            }
-        });
+                                                                           try
+                                                                           {
+                                                                               takeScreenshot(activity, file);
+                                                                           }
+                                                                           catch (Exception e)
+                                                                           {
+                                                                               // ignore
+                                                                           }
+                                                                       }
+                                                                   });
     }
 
     private void takeScreenshot(Activity activity, File file) throws Exception

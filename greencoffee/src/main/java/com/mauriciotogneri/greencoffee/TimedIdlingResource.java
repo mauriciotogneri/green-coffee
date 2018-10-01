@@ -1,7 +1,7 @@
 package com.mauriciotogneri.greencoffee;
 
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.IdlingResource;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 
 import java.util.concurrent.TimeUnit;
 

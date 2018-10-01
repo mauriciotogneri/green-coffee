@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import static androidx.test.InstrumentationRegistry.getTargetContext;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 import gherkin.ast.Node;
 import gherkin.ast.Step;
 

@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import static androidx.test.InstrumentationRegistry.getTargetContext;
+import static android.support.test.InstrumentationRegistry.getTargetContext;
 
 public interface ScreenshotProvider
 {

@@ -1,12 +1,12 @@
 package com.mauriciotogneri.greencoffee;
 
-import androidx.annotation.IdRes;
-import androidx.annotation.StringRes;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.Espresso;
-import androidx.test.espresso.UiController;
-import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.matcher.ViewMatchers;
+import android.support.annotation.IdRes;
+import android.support.annotation.StringRes;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.UiController;
+import android.support.test.espresso.ViewAction;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,10 +33,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-import static androidx.test.espresso.Espresso.onData;
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.Espresso.onData;
+import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.matcher.ViewMatchers.isRoot;
+import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static org.hamcrest.Matchers.allOf;
 
 public class GreenCoffeeSteps

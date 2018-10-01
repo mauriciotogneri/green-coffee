@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project are documented in this file.
 
-## [3.4.0] - 2018-09-24
+## [3.5.0] - 2018-10-01
 ### Changed
 - Updated dependencies and build tools
 
