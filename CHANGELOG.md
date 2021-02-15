@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project are documented in this file.
 
+## [3.6.0] - 2021-02-15
+### Changed
+- Removed JCenter support
+
 ## [3.5.0] - 2018-10-01
 ### Changed
 - Updated dependencies and build tools

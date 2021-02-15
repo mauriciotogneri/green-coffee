@@ -1,5 +1,4 @@
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](https://github.com/mauriciotogneri/green-coffee/blob/master/LICENSE.md)
-[![Download](https://api.bintray.com/packages/mauriciotogneri/maven/greencoffee/images/download.svg)](https://bintray.com/mauriciotogneri/maven/greencoffee/_latestVersion)
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-green--coffee-green.svg?style=true)](https://android-arsenal.com/details/1/4313)
 
 # Green Coffee
@@ -99,13 +98,30 @@ And that's it, now you can create your own tests using Green Coffee. This is how
 You can see an example applied to a full app [here](https://github.com/vndly/green-coffee-example).
 
 ## Installation
-In order to use Green Coffee, add the following dependency to your `build.gradle` file:
+
+Add the following code to your root `build.gradle`:
+
+```groovy
+allprojects
+{
+    repositories
+    {
+        maven
+        {
+            url 'https://jitpack.io'
+        }
+    }
+}
+```
+
+Add the following code to your module `build.gradle` file:
 
 ```groovy
 dependencies
 {
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.mauriciotogneri:greencoffee:3.5.0'
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test:rules:1.3.0'
+    androidTestImplementation 'com.github.mauriciotogneri:green-coffee:3.6.0'
 }
 ```
 
@@ -113,30 +129,6 @@ And the following test instrumentation runner:
 ```groovy
 defaultConfig
 {
-    testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 }
 ```
-
-## License
-
-    MIT License
-
-    Copyright (c) 2017 Mauricio Togneri
-
-    Permission is hereby granted, free of charge, to any person obtaining a copy
-    of this software and associated documentation files (the "Software"), to deal
-    in the Software without restriction, including without limitation the rights
-    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-    copies of the Software, and to permit persons to whom the Software is
-    furnished to do so, subject to the following conditions:
-
-    The above copyright notice and this permission notice shall be included in all
-    copies or substantial portions of the Software.
-
-    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-    SOFTWARE.

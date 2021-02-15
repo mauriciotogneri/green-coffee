@@ -1,27 +1,22 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-def releaseVersion = '3.5.0'
-def bintrayUser = hasProperty('bintray_user') ? bintray_user : ''
-def bintrayApiKey = hasProperty('bintray_apikey') ? bintray_apikey : ''
 
 android
 {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
-
-    dexOptions
-    {
-        javaMaxHeapSize '2g'
-    }
+    compileSdkVersion 30
+    buildToolsVersion '30.0.3'
 
     defaultConfig
     {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
-        versionName releaseVersion
+        versionName '3.6.0'
+    }
+
+    dexOptions
+    {
+        javaMaxHeapSize '2g'
+        preDexLibraries true
     }
 
     compileOptions
@@ -31,50 +26,8 @@ android
     }
 }
 
-group = 'com.mauriciotogneri'
-version = releaseVersion
-
-bintray
-{
-    user = bintrayUser
-    key = bintrayApiKey
-    configurations = ['archives']
-    pkg
-    {
-        repo = 'maven'
-        name = 'greencoffee'
-        licenses = ['MIT']
-        publish = true
-        version
-        {
-            name = releaseVersion
-            vcsTag = releaseVersion
-        }
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
 dependencies
 {
-    implementation 'io.cucumber:gherkin-jvm-deps:1.0.4'
+    implementation 'io.cucumber:gherkin-jvm-deps:1.0.6'
     implementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
